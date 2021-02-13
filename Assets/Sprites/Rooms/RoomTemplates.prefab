@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6743119213479664545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6743119213479664547}
+  - component: {fileID: 4524126249084449318}
+  m_Layer: 0
+  m_Name: RoomTemplates
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6743119213479664547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6743119213479664545}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4524126249084449318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6743119213479664545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad9720e56c6d0bc418c8852a249f97c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oneDoor:
+  - {fileID: 2838187043947405106, guid: b9331647e71b9554a94f3ff835064569, type: 3}
+  - {fileID: 3804185769372413289, guid: 755e801bfc66dae4bbd4f93b305f21f5, type: 3}
+  - {fileID: 5416125362619737223, guid: 83571e399290caf4ba58d0d82135d6fc, type: 3}
+  - {fileID: 1701563359498078944, guid: ef401d69f835d5641bb876348e552012, type: 3}
+  twoDoors:
+  - {fileID: 446419369354442138, guid: 23c554fe3b7e0ba4d883bdf2fb4a67cf, type: 3}
+  - {fileID: 2006210627488053826, guid: cda56892b65796f4b9bf96d1b73cf108, type: 3}
+  - {fileID: 7508533368155896000, guid: dd654fa46ddc8ed448a398fe10c43028, type: 3}
+  - {fileID: 5200064460476452107, guid: 5f8fd4613495dab418bf1e37dfa0dfa8, type: 3}
+  - {fileID: 2977519873504478240, guid: 89c9314d932e1b64c8b317cecd54acf7, type: 3}
+  - {fileID: 4851687559842759102, guid: 0ed5422764b3ada4aab21dcc8832473a, type: 3}
+  threeDoors:
+  - {fileID: 5132393258851092404, guid: f4b49e120e88c4247afbfd91898ce49e, type: 3}
+  - {fileID: 759208602596236606, guid: 517ff2226b8332e44a390a3e31d7deec, type: 3}
+  - {fileID: 5953756100236844366, guid: 963fbaf62179cf643ab52a44ade31272, type: 3}
+  - {fileID: 7093436558343173171, guid: 7f98b71764e38b2459bb275ef5114321, type: 3}
+  fourDoors:
+  - {fileID: 7928233947617079388, guid: c3bfdcd74d98c084d926fb2b78f6de58, type: 3}
