@@ -4,12 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - SpawnPoint
-  - TopWall
-  - DownWall
-  - LeftWall
-  - RightWall
   - Rooms
+  - RoomGenerator
   layers:
   - Default
   - TransparentFX

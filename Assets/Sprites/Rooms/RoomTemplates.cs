@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class RoomTemplates : MonoBehaviour
 {
-    public GameObject[] oneDoor;
-    public GameObject[] twoDoors;
-    public GameObject[] threeDoors;
-    public GameObject[] fourDoors;
+    public GameObject[] setOfRooms; //contains every room
+
 }

@@ -900,7 +900,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aed4b5d6d0050a47bf216ef0ff724bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doors: 0000000001000000
+  doors: 1010
+  L: 0
+  R: 0
+  D: 0
+  T: 0
+  position: 0000000000000000
+  start: 0
+  deadEnd: 0
 --- !u!1 &446419369370136973
 GameObject:
   m_ObjectHideFlags: 0

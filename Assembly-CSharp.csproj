@@ -67,10 +67,11 @@
     <Compile Include="Assets\Scripts\Dungeon_Generator\DungeonGenerator.cs" />
     <Compile Include="Assets\Sprites\Rooms\FloorGenerator.cs" />
     <Compile Include="Assets\Sprites\Rooms\FloorGeneratorEditor.cs" />
+    <Compile Include="Assets\Sprites\Rooms\NextLevel.cs" />
+    <Compile Include="Assets\Sprites\Rooms\PlayerMovement.cs" />
     <Compile Include="Assets\Sprites\Rooms\RoomDoors.cs" />
-    <Compile Include="Assets\Sprites\Rooms\RoomSpawner.cs" />
     <Compile Include="Assets\Sprites\Rooms\RoomTemplates.cs" />
-    <Compile Include="Assets\Sprites\Rooms\WallColisions.cs" />
+    <Compile Include="Assets\Sprites\Rooms\TeamWorldInteraction.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/UdG/TFG/Pawn Sacrifice/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

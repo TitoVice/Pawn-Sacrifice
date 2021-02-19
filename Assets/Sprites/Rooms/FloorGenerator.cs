@@ -6,17 +6,24 @@ public class FloorGenerator : MonoBehaviour
 {
     public GameObject basicRoom;
     public GameObject roomTemplates;
-    
+    public GameObject start;
+    public GameObject end;
+    public TeamWorldInteraction team;
+
     private RoomTemplates rooms;
 
+    private RoomDoors[,] preRoomGrid;
     private GameObject[,] roomGrid;
 
     private int[] initialRoom = { 2, 2 };
     private int[] finalRoom = { 0, 0 };
+    private List <RoomDoors> possibleEndRooms;
 
     private int maxRooms = 13;
     private int minRooms = 8;
+    private int minDeadEnds = 1;
     private int generatedRooms;
+    private int level = 1;
     private bool ready;
 
     [SerializeField]
@@ -26,19 +33,59 @@ public class FloorGenerator : MonoBehaviour
         Create();
     }
 
-    private void generate(int x, int y)
+    private bool generate(int x, int y, int[] prevPos)
     {
         //Pre: position x and y of the grid
-        //Post: generates a room in the grid
+        //Post: generates a room in the grid and returns if a room is generated
 
+        int[] pos = { x, y };
+        
         if (generatedRooms == 0)
         {//generates the initial room
-            generation(x, y);
+            
+            preRoomGrid[x, y].getPositionSpecial(pos, true, false, prevPos);
+            generatedRooms += 1;
+
+            int randomNumber = Random.Range(0, 4);
+
+            switch (randomNumber)//only one door for the starting room
+            {
+                case 0:
+                    if(generate(x - 1, y, pos)) 
+                    {
+                        int[] aux = { x - 1, y };
+                        preRoomGrid[x, y].openDoor(aux); 
+                    }
+                    break;
+                case 1:
+                    if (generate(x + 1, y, pos))
+                    {
+                        int[] aux = { x + 1, y };
+                        preRoomGrid[x, y].openDoor(aux);
+                    }
+                    break;
+                case 2:
+                    if (generate(x, y - 1, pos))
+                    {
+                        int[] aux = { x, y - 1 };
+                        preRoomGrid[x, y].openDoor(aux);
+                    }
+                    break;
+                case 3:
+                    if (generate(x, y + 1, pos))
+                    {
+                        int[] aux = { x, y + 1 };
+                        preRoomGrid[x, y].openDoor(aux);
+                    }
+                    break;
+            }
+
+            return true;
         }
         else if(generatedRooms < maxRooms)
         {
-            if (!isInside(x, y)) { } // off limits 
-            else if (roomGrid[x, y] != null) { } //already there's a room
+            if (!isInside(x, y)) { return false; } // off limits 
+            else if (preRoomGrid[x, y].used) { return false; } //already there's a room
             else
             {
                 int random = Random.Range(0, 4);
@@ -47,31 +94,56 @@ public class FloorGenerator : MonoBehaviour
                     random = Random.Range(0, 5);
                     if (random != 0)//if 0 generate dead end room
                     {
-                        generation(x, y);
+                        generation(x, y, preRoomGrid[x, y], prevPos); 
+                        return true;
                     }
                     else
                     {
-                        roomGrid[x, y] = basicRoom;
-                        generatedRooms++;
+                        preRoomGrid[x, y].getPositionSpecial(pos, false, true, prevPos);
+                        preRoomGrid[x, y].openDoor(prevPos);
+                        generatedRooms += 1;
+                        if (preRoomGrid[x, y].deadEnd) { possibleEndRooms.Add(preRoomGrid[x, y]); }
+
+                        return true;
                     }
                 }
+                else { return false; }
             }
         }
-
+        else { return false; }
     }
 
-    private void generation(int x, int y)
+    private void generation(int x, int y, RoomDoors preRoom, int[] prevPos)
     {
         //Pre: valid position of the grid
         //Post: room in the grid, and neighbours generation
 
-        roomGrid[x, y] = basicRoom;
-        generatedRooms++;
+        int[] pos = { x, y };
 
-        generate(x - 1, y);
-        generate(x + 1, y);
-        generate(x, y - 1);
-        generate(x, y + 1);
+        preRoom.getPositionSpecial(pos, false, false, prevPos);
+        preRoom.openDoor(prevPos);
+        generatedRooms += 1;
+
+        if(generate(x - 1, y, pos))
+        {
+            int[] aux = { x - 1, y };
+            preRoom.openDoor(aux);
+        }
+        if (generate(x + 1, y, pos))
+        {
+            int[] aux = { x + 1, y };
+            preRoom.openDoor(aux);
+        }
+        if (generate(x, y - 1, pos))
+        {
+            int[] aux = { x, y - 1 };
+            preRoom.openDoor(aux);
+        }
+        if (generate(x, y + 1, pos))
+        {
+            int[] aux = { x, y + 1 };
+            preRoom.openDoor(aux);
+        }
     }
 
     private void initializeGrid()
@@ -83,7 +155,11 @@ public class FloorGenerator : MonoBehaviour
         {
             for (int j = 0; j < roomGrid.GetLength(1); j++)
             {
+                possibleEndRooms = new List<RoomDoors>();
                 roomGrid[i, j] = null;
+                GameObject auxRoom = new GameObject("auxRoom", typeof(RoomDoors));
+                auxRoom.transform.parent = transform;
+                preRoomGrid[i, j] = auxRoom.GetComponent<RoomDoors>();
             }
         }
     }
@@ -97,108 +173,72 @@ public class FloorGenerator : MonoBehaviour
         {
             for (int j = 0; j < roomGrid.GetLength(1); j++)
             {
-                if (roomGrid[i, j] != null)
+                if (preRoomGrid[i, j].used)
                 {
-                    int[] doorsNeeded = { -1, -1, -1, -1 }; //0: need left door 1: need down door 2: need right door 3: need top door
-                    int doors = 0;
-                    for (int x = -1; x < 2; x+=2)//left and right rooms
-                    {
-                        if (isInside(i + x, j))//not off limits
-                        {
-                            if (roomGrid[i + x, j] != null)//theres a room
-                            {
-                                doorsNeeded[doors] = x + 1; //sums 1 to get 0=left, 2=right
-                                doors += 1;
-                            }
-                        }
-                        
-                    }
-                    for (int y = -1; y < 2; y += 2)//top and down rooms
-                    {
-                        if (isInside(i, j + y))//not off limits
-                        {
-                            if (roomGrid[i, j + y] != null)//theres a room
-                            {
-                                doorsNeeded[doors] = y + 2; //sums 1 to get 1=down, 3=top
-                                doors += 1;
-                            }
-                        }
+                    string doorsNeeded = ""; //format: XXXX -> LRDT, 0 if it does not need that door, 1 if it does
+                    roomRevision(i, j);
+                    doorsNeeded = preRoomGrid[i, j].getDoors();
 
-                    }
+                    GameObject auxRoom = findAndCreateRoom(doorsNeeded, i, j);
+                    preRoomGrid[i, j].getValues(auxRoom.GetComponent<RoomDoors>());
+                    
+                    roomGrid[i, j] = auxRoom;
+                }
+            }
+        }
+    }
+    
+    private void roomRevision(int x, int y)
+    {
+        int[] pos = { x, y };
 
-                    switch (doors)
-                    {
-                        case 1:
-                            roomGrid[i, j] = findAndCreateRoom(rooms.oneDoor, doorsNeeded, doors, i, j);
-                            break;
-                        case 2:
-                            roomGrid[i, j] = findAndCreateRoom(rooms.twoDoors, doorsNeeded, doors, i, j);
-                            break;
-                        case 3:
-                            roomGrid[i, j] = findAndCreateRoom(rooms.threeDoors, doorsNeeded, doors, i, j);
-                            break;
-                        case 4:
-                            roomGrid[i, j] = findAndCreateRoom(rooms.fourDoors, doorsNeeded, doors, i, j);
-                            break;
-                    }
+        if (!preRoomGrid[x, y].start && !preRoomGrid[x, y].deadEnd)//it's not the start and it's not a dead end
+        {
+            if (isInside(x - 1, y)) { openDoor(preRoomGrid[x, y], preRoomGrid[x - 1, y], x - 1, y, pos); }//left
+            if (isInside(x + 1, y)) { openDoor(preRoomGrid[x, y], preRoomGrid[x + 1, y], x + 1, y, pos); }//right
+            if (isInside(x, y - 1)) { openDoor(preRoomGrid[x, y], preRoomGrid[x, y - 1], x, y - 1, pos); }//down
+            if (isInside(x, y + 1)) { openDoor(preRoomGrid[x, y], preRoomGrid[x, y + 1], x, y + 1, pos); }//top
+        }
+    }
 
-                    //aqui es on crees l'habitacio, busques a la llista que tingui numPortes==doors, dintre busques la que tingui les portes necessaries.
-                    //instancies gracies a la variable size i la pos a la matriu
+    private void openDoor(RoomDoors actualRoom, RoomDoors sideRoom, int sideX, int sideY, int[] pos)
+    {
+        if (sideRoom.used && !sideRoom.start && !sideRoom.deadEnd)//there's a room but it's not the start or a dead end room
+        {
+            int probability = Random.Range(0, 3);
+            if (probability == 0)
+            {
+                int[] sidePos = { sideX, sideY };
+                actualRoom.openDoor(sidePos);
+                sideRoom.openDoor(pos);
 
+                if (roomGrid[sideX, sideY] != null)
+                {
+                    Destroy(roomGrid[sideX, sideY]);
+                
+                    GameObject auxRoom = findAndCreateRoom(sideRoom.getDoors(), sideX, sideY);
+                    sideRoom.getValues(auxRoom.GetComponent<RoomDoors>());
+
+                    roomGrid[sideX, sideY] = auxRoom;
                 }
             }
         }
     }
 
-    /// <summary>
-    /// fa coso
-    /// </summary>
-    /// <param name="setOfRooms"></param>
-    /// <param name="doorsNeeded"></param>
-    /// <param name="doors"></param>
-    /// <param name="x"></param>
-    /// <param name="y"></param>
-    /// <returns></returns>
-    private GameObject findAndCreateRoom(GameObject[] setOfRooms, int[] doorsNeeded, int doors, int x, int y)
+    private GameObject findAndCreateRoom(string doorsNeeded,int x, int y)
     {
-        //Pre: array of doors needed by the room, quantity of doors needed, position x and y in the grid
+        //Pre: string of doors needed by the room,position x and y in the grid
         //Post: has found the adequate room and instantiated it in the game
 
-        bool finish = false;
-        int z = 0;
-
-        while (!finish && z < setOfRooms.Length)
+        for (int i = 0; i < rooms.setOfRooms.Length; i++)
         {
-            int[] auxDoors = setOfRooms[z].GetComponent<RoomDoors>().doors;
-            int p = 0;
-            bool notThis = false;
-            while (p < doors && !notThis)
+            string doors = rooms.setOfRooms[i].GetComponent<RoomDoors>().doors;
+            if (string.Equals(doors, doorsNeeded))
             {
-                int n = 0;
-                bool found = false;
-                while (n < auxDoors.Length && !found)
-                {
-                    if (doorsNeeded[p] == auxDoors[n])
-                    {
-                        found = true;
-                    }
-                    n++;
-                }
-                if (!found)
-                {
-                    notThis = true;
-                }
-                p++;
+                return Instantiate(rooms.setOfRooms[i], new Vector3(x * size, y * size, 0), Quaternion.identity, transform);
             }
-            if (!notThis)//room founded
-            {
-                finish = true;
-            }
-            else { z++; }
         }
-
-        Instantiate(setOfRooms[z], new Vector3(x * size, y * size, 0), Quaternion.identity, transform);
-        return setOfRooms[z];
+        return null;
     }
     private bool isInside(int x, int y)
     {
@@ -209,25 +249,25 @@ public class FloorGenerator : MonoBehaviour
         {
             return false;
         }
-        else
-        {
-            return true;
-        }
+        else { return true; }
     }
 
     public void Clear()
     {
-        initializeGrid();
         generatedRooms = 0;
 
         int children = transform.childCount;
         for (int i = 0; i < children; ++i)
-            DestroyImmediate(transform.GetChild(0).gameObject);
+        {
+            Destroy(transform.GetChild(i).gameObject);//use (0) if its not in execution
+        }
     }
 
     public void Create()
     {
+        Clear();
         roomGrid = new GameObject[5, 5];
+        preRoomGrid = new RoomDoors[5, 5];
         generatedRooms = 0;
         ready = false;
 
@@ -238,14 +278,28 @@ public class FloorGenerator : MonoBehaviour
             initializeGrid();
             generatedRooms = 0;
 
-            generate(initialRoom[0], initialRoom[1]);
-            if (generatedRooms >= minRooms && generatedRooms <= maxRooms)
+            generate(initialRoom[0], initialRoom[1], initialRoom);
+
+            if (generatedRooms >= minRooms && generatedRooms <= maxRooms && minDeadEnds <= possibleEndRooms.Count)
             {
                 ready = true;
             }
         }
 
         instantiateRooms();
-    }
 
+        int endPos = Random.Range(0, possibleEndRooms.Count);
+        RoomDoors endRoom = possibleEndRooms[endPos];            //l'haure d'utilitzar en un futur
+        finalRoom[0] = endRoom.position[0];
+        finalRoom[1] = endRoom.position[1];
+
+        Instantiate(start, new Vector3(initialRoom[0] * size, initialRoom[1] * size, 0), Quaternion.identity, transform);
+        Instantiate(end, new Vector3(finalRoom[0] * size, finalRoom[1] * size, 0), Quaternion.identity, transform);
+
+        team.spawn(initialRoom[0] * size, initialRoom[1] * size);
+
+        level += 1;
+        initialRoom[0] = finalRoom[0];
+        initialRoom[1] = finalRoom[1];
+    }
 }
