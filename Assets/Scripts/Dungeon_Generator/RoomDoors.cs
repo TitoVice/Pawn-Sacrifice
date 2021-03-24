@@ -18,6 +18,7 @@ public class RoomDoors : MonoBehaviour
     public bool used = false;
     public bool inRoom = false;
     public bool visited = false;
+    public bool bigger = false;
 
     public void getPositionSpecial(int[] pos, bool isStart, bool isDeadEnd, int size)
     {

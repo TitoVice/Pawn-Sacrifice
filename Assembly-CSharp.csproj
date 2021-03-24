@@ -65,9 +65,10 @@
     <Compile Include="Assets\Scripts\Characters\TeamWorldInteraction.cs" />
     <Compile Include="Assets\Scripts\Dungeon_Generator\FloorGeneratorEditor.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonSacrifice.cs" />
+    <Compile Include="Assets\Scripts\Dungeon_Generator\DoorsInteraction.cs" />
     <Compile Include="Assets\Scripts\UI\PopUp_Sacrifice.cs" />
     <Compile Include="Assets\Scripts\Characters\SpawnCharacter.cs" />
-    <Compile Include="Assets\Scripts\Dungeon_Generator\DoorsInteraction.cs" />
+    <Compile Include="Assets\Scripts\Dungeon_Generator\BiggerRoomCapacity.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
