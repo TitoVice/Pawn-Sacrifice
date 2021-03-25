@@ -28,6 +28,7 @@ public class FloorGenerator : MonoBehaviour
 
     [SerializeField]
     private int size = 10; //size of the rooms that multiplies with the position in the grid
+
     void Start()
     {
         Create();
@@ -43,7 +44,7 @@ public class FloorGenerator : MonoBehaviour
         if (generatedRooms == 0)
         {//generates the initial room
             
-            preRoomGrid[x, y].getPositionSpecial(pos, true, false, size);
+            preRoomGrid[x, y].getPositionSpecial(pos, true, false, false, size);
             generatedRooms += 1;
 
             int randomNumber = Random.Range(0, 4);
@@ -97,9 +98,13 @@ public class FloorGenerator : MonoBehaviour
                         generation(x, y, preRoomGrid[x, y], prevPos); 
                         return true;
                     }
+                    else if ((random == 1 || random == 2) && generatedRooms < maxRooms - 1)//try to generate big room, needs 2 rooms  
+                    {
+                        return generateBigRoom(pos, prevPos);
+                    }
                     else
                     {
-                        preRoomGrid[x, y].getPositionSpecial(pos, false, true, size);
+                        preRoomGrid[x, y].getPositionSpecial(pos, false, true, false, size);
                         preRoomGrid[x, y].openDoor(prevPos);
                         generatedRooms += 1;
                         if (preRoomGrid[x, y].deadEnd) { possibleEndRooms.Add(preRoomGrid[x, y]); }
@@ -120,7 +125,7 @@ public class FloorGenerator : MonoBehaviour
 
         int[] pos = { x, y };
 
-        preRoom.getPositionSpecial(pos, false, false, size);
+        preRoom.getPositionSpecial(pos, false, false, false, size);
         preRoom.openDoor(prevPos);
         generatedRooms += 1;
 
@@ -151,11 +156,12 @@ public class FloorGenerator : MonoBehaviour
         //Pre: --
         //Post: initialize the grid of nulls
 
+        possibleEndRooms = new List<RoomDoors>();
+
         for (int i = 0; i < roomGrid.GetLength(0); i++)
         {
             for (int j = 0; j < roomGrid.GetLength(1); j++)
             {
-                possibleEndRooms = new List<RoomDoors>();
                 roomGrid[i, j] = null;
                 GameObject auxRoom = new GameObject("auxRoom", typeof(RoomDoors));
                 auxRoom.transform.parent = transform;
@@ -192,7 +198,7 @@ public class FloorGenerator : MonoBehaviour
     {
         int[] pos = { x, y };
 
-        if (!preRoomGrid[x, y].start && !preRoomGrid[x, y].deadEnd)//it's not the start and it's not a dead end
+        if (!preRoomGrid[x, y].start && !preRoomGrid[x, y].deadEnd && !preRoomGrid[x, y].bigger)//it's not the start and it's not a dead end and not a big room
         {
             if (isInside(x - 1, y)) { openDoor(preRoomGrid[x, y], preRoomGrid[x - 1, y], x - 1, y, pos); }//left
             if (isInside(x + 1, y)) { openDoor(preRoomGrid[x, y], preRoomGrid[x + 1, y], x + 1, y, pos); }//right
@@ -203,7 +209,7 @@ public class FloorGenerator : MonoBehaviour
 
     private void openDoor(RoomDoors actualRoom, RoomDoors sideRoom, int sideX, int sideY, int[] pos)
     {
-        if (sideRoom.used && !sideRoom.start && !sideRoom.deadEnd)//there's a room but it's not the start or a dead end room
+        if (sideRoom.used && !sideRoom.start && !sideRoom.deadEnd && !sideRoom.bigger)//there's a room but it's not the start or a dead end room
         {
             int probability = Random.Range(0, 3);
             if (probability == 0)
@@ -240,6 +246,133 @@ public class FloorGenerator : MonoBehaviour
         }
         return null;
     }
+
+    //big rooms generation
+    private bool generateBigRoom(int[] pos, int[] prevPos)
+    {
+        //Pre: valid position in the grid, has to validate the others
+        //Post: if possible generates a big room and return true, else false
+
+        int x = pos[0] - prevPos[0];
+        int y = pos[1] - prevPos[1];
+        int L = 0, R = 0, D = 0, T = 0;
+
+        if (x == 1) { L = 1; }
+        else if(x == -1) { R = 1; }
+        else
+        {
+            if(y == 1) { D = 1; }
+            else if(y == -1) { T = 1; }
+        }
+
+        if (L == 1)
+        {
+            for (int i = 0; i < rooms.setOfBigRooms.Length; i++)
+            {
+                if (rooms.setOfBigRooms[i].GetComponent<RoomDoors>().L == 1)
+                {
+                    if(validateSize(rooms.setOfBigRooms[i], pos, 'L', ref x, ref y))//it fits
+                    {
+                        generatedRooms += 1;
+                        generation(x, y, preRoomGrid[x, y], prevPos);
+                        return true;
+                    }
+                }
+            }
+        }
+        else if (R == 1)
+        {
+            for (int i = 0; i < rooms.setOfBigRooms.Length; i++)
+            {
+                if (rooms.setOfBigRooms[i].GetComponent<RoomDoors>().R == 1)
+                {
+                    if(validateSize(rooms.setOfBigRooms[i], pos, 'R', ref x, ref y))//it fits
+                    {
+                        generatedRooms += 1;
+                        generation(x, y, preRoomGrid[x, y], prevPos);
+                        return true;
+                    }
+                }
+            }
+        }
+        else if (D == 1)
+        {
+            for (int i = 0; i < rooms.setOfBigRooms.Length; i++)
+            {
+                if (rooms.setOfBigRooms[i].GetComponent<RoomDoors>().D == 1)
+                {
+                    if(validateSize(rooms.setOfBigRooms[i], pos, 'D', ref x, ref y))//it fits
+                    {
+                        generatedRooms += 1;
+                        generation(x, y, preRoomGrid[x, y], prevPos);
+                        return true;
+                    }
+                }
+            }
+        }
+        else if (T == 1)
+        {
+            for (int i = 0; i < rooms.setOfBigRooms.Length; i++)
+            {
+                if (rooms.setOfBigRooms[i].GetComponent<RoomDoors>().T == 1)
+                {
+                    if(validateSize(rooms.setOfBigRooms[i], pos, 'T', ref x, ref y))//it fits
+                    {
+                        generatedRooms += 1;
+                        generation(x, y, preRoomGrid[x, y], prevPos);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private bool validateSize(GameObject bigRoom, int[] pos, char side, ref int x, ref int y)
+    {
+        //Pre: ----
+        //Post: if the room fits return true and marks the grids where it's needed, if not return false
+
+        bool validated = true;
+        Vector2[] neededGrids = bigRoom.GetComponent<BiggerRoomCapacity>().getCapacity(side);
+
+        for (int i = 0; i < neededGrids.Length; i++)//sees if the grids are used o inside the grid
+        {
+            int posX = pos[0]+(int)neededGrids[i].x;
+            int posY = pos[1]+(int)neededGrids[i].y;
+
+            if (isInside(posX, posY))
+            {
+                if (preRoomGrid[posX, posY].used)
+                {
+                    validated = false;
+                    break;
+                }
+            }
+            else
+            {
+                validated = false;
+                break;
+            }
+        }
+
+        if(validated)
+        {
+            for (int i = 0; i < neededGrids.Length; i++)
+            {
+                int posX = pos[0]+(int)neededGrids[i].x;
+                int posY = pos[1]+(int)neededGrids[i].y;
+                preRoomGrid[posX, posY].getPositionSpecial(pos, false, false, true, 0);
+                if (i == 0) { preRoomGrid[posX, posY].getName_Spawn(bigRoom.GetComponent<BiggerRoomCapacity>().name); }
+            }
+            x = (int)neededGrids[neededGrids.Length - 1].x;
+            y = (int)neededGrids[neededGrids.Length - 1].y;
+        }
+
+        return validated;
+    }
+
+
     private bool isInside(int x, int y)
     {
         //Pre: x and y are a position
@@ -287,8 +420,6 @@ public class FloorGenerator : MonoBehaviour
         }
 
         instantiateRooms();
-
-        //navmesh.BuildNavMesh(); //building of level navmesh
 
         int endPos = Random.Range(0, possibleEndRooms.Count);
         RoomDoors endRoom = possibleEndRooms[endPos];            

@@ -18,18 +18,30 @@ public class RoomDoors : MonoBehaviour
     public bool used = false;
     public bool inRoom = false;
     public bool visited = false;
-    public bool bigger = false;
 
-    public void getPositionSpecial(int[] pos, bool isStart, bool isDeadEnd, int size)
+    //variables for big rooms
+    public bool bigger = false;
+    public string bigName = "";
+    public bool bigToSpawn = false;
+
+    public void getPositionSpecial(int[] pos, bool isStart, bool isDeadEnd, bool isBigger, int size)
     {
         position[0] = pos[0];
         position[1] = pos[1];
         start = isStart;
         deadEnd = isDeadEnd;
+        bigger = isBigger;
         used = true;
-        roomSize = size;
+
+        if (!bigger){ roomSize = size; }
 
         if (start) { inRoom = true; visited = true; }
+    }
+
+    public void getName_Spawn(string name)
+    {
+        bigName = name;
+        spawn = true;
     }
 
     public void openDoor(int[] pos)
@@ -54,7 +66,9 @@ public class RoomDoors : MonoBehaviour
         copyRoom.T = T;
         copyRoom.start = start;
         copyRoom.deadEnd = deadEnd;
+        copyRoom.bigger = bigger;
         copyRoom.used = used;
+        copyRoom.roomSize = roomSize;
     }
     public string getDoors()
     {

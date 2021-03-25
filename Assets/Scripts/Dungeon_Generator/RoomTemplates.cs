@@ -5,5 +5,5 @@ using UnityEngine;
 public class RoomTemplates : MonoBehaviour
 {
     public GameObject[] setOfRooms; //contains every room
-
+    public GameObject[] setOfBigRooms; //contains every big room
 }
