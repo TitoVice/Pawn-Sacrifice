@@ -4562,7 +4562,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4319737458005209094}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1584005508020971331}
@@ -8744,7 +8744,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7799506443863149847}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7608200173253126914}
@@ -9254,8 +9254,8 @@ MonoBehaviour:
   - {x: -1, y: 1}
   - {x: -2, y: 1}
   name: quad
-  LTentranceCell: 0000000000000000
-  RDentranceCell: 0000000000000000
+  LTentranceCell: 05000000fbffffff
+  RDentranceCell: fbffffff05000000
 --- !u!1 &8097820909524801534
 GameObject:
   m_ObjectHideFlags: 0

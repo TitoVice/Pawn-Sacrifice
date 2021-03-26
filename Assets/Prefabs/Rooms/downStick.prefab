@@ -921,7 +921,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2412152206724590990}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1537718705003552694}
@@ -2340,7 +2340,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5351304920200844351}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6475294455812094647}
@@ -2969,8 +2969,8 @@ MonoBehaviour:
   - {x: -1, y: 0}
   - {x: -2, y: 0}
   name: downStick
-  LTentranceCell: 0000000000000000
-  RDentranceCell: 0000000000000000
+  LTentranceCell: 0500000000000000
+  RDentranceCell: fbffffff00000000
 --- !u!1 &6475294453969697418
 GameObject:
   m_ObjectHideFlags: 0

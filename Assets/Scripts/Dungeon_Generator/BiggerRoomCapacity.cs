@@ -8,8 +8,8 @@ public class BiggerRoomCapacity : MonoBehaviour
     public Vector2[] LTentrance = {};
     public Vector2[] RDentrance = {};
     public string name = "";
-    public int[] LTentranceCell = {0, 0};
-    public int[] RDentranceCell = {0, 0};
+    public int[] LTentranceCell;
+    public int[] RDentranceCell;
 
 
     public Vector2[] getCapacity(char side)
