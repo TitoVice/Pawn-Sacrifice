@@ -93,22 +93,22 @@ public class FloorGenerator : MonoBehaviour
                 if (random != 0) //if 0 don't generate room
                 {
                     random = Random.Range(0, 5);
-                    if (random == 3 || random == 4 || random == 5)//if 0 generate dead end room
-                    {
-                        generation(x, y, preRoomGrid[x, y], prevPos); 
-                        return true;
-                    }
-                    else if ((random == 1 || random == 2) && generatedRooms < maxRooms - 1)//try to generate big room, needs 2 rooms  
+                    if ((random == 0) && generatedRooms < maxRooms - 1)//try to generate big room, needs 2 rooms  
                     {
                         return generateBigRoom(pos, prevPos);
                     }
-                    else
+                    else if (random == 1)//if 1 generate dead end room
                     {
                         preRoomGrid[x, y].getPositionSpecial(pos, false, true, false, size);
                         preRoomGrid[x, y].openDoor(prevPos);
                         generatedRooms += 1;
                         if (preRoomGrid[x, y].deadEnd) { possibleEndRooms.Add(preRoomGrid[x, y]); }
 
+                        return true;
+                    }
+                    else
+                    {
+                        generation(x, y, preRoomGrid[x, y], prevPos); 
                         return true;
                     }
                 }
@@ -451,13 +451,15 @@ public class FloorGenerator : MonoBehaviour
 
         instantiateRooms();
 
-        /*for (int i = 0; i < preRoomGrid.GetLength(0); i++)
+        //deletes som rubbish
+        foreach(Transform t in transform)
         {
-            for (int j = 0; j < preRoomGrid.GetLength(1); j++)
+            if (t.name == "auxRoom")
             {
-                Destroy(preRoomGrid[i, j]);
+                Destroy(t.gameObject);
             }
-        }*/
+        }
+
 
         int endPos = Random.Range(0, possibleEndRooms.Count);
         RoomDoors endRoom = possibleEndRooms[endPos];            
