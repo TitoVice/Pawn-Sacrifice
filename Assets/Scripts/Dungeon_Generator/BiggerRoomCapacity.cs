@@ -8,12 +8,12 @@ public class BiggerRoomCapacity : MonoBehaviour
     public Vector2[] LTentrance = {};
     public Vector2[] RDentrance = {};
     public string name = "";
+    public int[] LTentranceCell = {0, 0};
+    public int[] RDentranceCell = {0, 0};
 
 
     public Vector2[] getCapacity(char side)
     {
-        Vector2[] solution;
-
         if (side == 'L' || side == 'T')
         {
             return LTentrance;
@@ -22,6 +22,21 @@ public class BiggerRoomCapacity : MonoBehaviour
         else if (side == 'R' || side == 'D')
         {
             return RDentrance;
+        }
+        
+        return null;
+    }
+
+    public int[] getCentralPoint(char side)
+    {
+        if (side == 'L' || side == 'T')
+        {
+            return LTentranceCell;
+        }
+
+        else if (side == 'R' || side == 'D')
+        {
+            return RDentranceCell;
         }
         
         return null;

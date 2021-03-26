@@ -9226,6 +9226,9 @@ MonoBehaviour:
   inRoom: 0
   visited: 0
   bigger: 1
+  bigName: 
+  bigToSpawn: 0
+  bigRoomSide: 32
 --- !u!114 &5780424505896450124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9250,6 +9253,9 @@ MonoBehaviour:
   - {x: 0, y: 1}
   - {x: -1, y: 1}
   - {x: -2, y: 1}
+  name: quad
+  LTentranceCell: 0000000000000000
+  RDentranceCell: 0000000000000000
 --- !u!1 &8097820909524801534
 GameObject:
   m_ObjectHideFlags: 0

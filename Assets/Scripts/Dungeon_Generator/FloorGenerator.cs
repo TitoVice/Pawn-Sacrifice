@@ -93,13 +93,14 @@ public class FloorGenerator : MonoBehaviour
                 if (random != 0) //if 0 don't generate room
                 {
                     random = Random.Range(0, 5);
-                    if (random != 0)//if 0 generate dead end room
+                    if (random == 3 || random == 4 || random == 5)//if 0 generate dead end room
                     {
                         generation(x, y, preRoomGrid[x, y], prevPos); 
                         return true;
                     }
                     else if ((random == 1 || random == 2) && generatedRooms < maxRooms - 1)//try to generate big room, needs 2 rooms  
                     {
+                        Debug.Log("Tan sols ho prova?");
                         return generateBigRoom(pos, prevPos);
                     }
                     else
@@ -181,14 +182,24 @@ public class FloorGenerator : MonoBehaviour
             {
                 if (preRoomGrid[i, j].used)
                 {
-                    string doorsNeeded = ""; //format: XXXX -> LRDT, 0 if it does not need that door, 1 if it does
-                    roomRevision(i, j);
-                    doorsNeeded = preRoomGrid[i, j].getDoors();
+                    if (!preRoomGrid[i, j].bigger)
+                    {
+                        string doorsNeeded = ""; //format: XXXX -> LRDT, 0 if it does not need that door, 1 if it does
+                        roomRevision(i, j);
+                        doorsNeeded = preRoomGrid[i, j].getDoors();
 
-                    GameObject auxRoom = findAndCreateRoom(doorsNeeded, i, j);
-                    preRoomGrid[i, j].getValues(auxRoom.GetComponent<RoomDoors>());
-                    
-                    roomGrid[i, j] = auxRoom;
+                        GameObject auxRoom = findAndCreateRoom(doorsNeeded, i, j);
+                        preRoomGrid[i, j].getValues(auxRoom.GetComponent<RoomDoors>());
+                        
+                        roomGrid[i, j] = auxRoom;
+                    }
+                    else if (preRoomGrid[i, j].bigToSpawn)//it's a bigger room
+                    {
+                        GameObject auxRoom = findAndCreateBigRoom(preRoomGrid[i, j].bigName, preRoomGrid[i, j].bigRoomSide, i, j);
+                        preRoomGrid[i, j].getValues(auxRoom.GetComponent<RoomDoors>());
+                        
+                        roomGrid[i, j] = auxRoom;
+                    }
                 }
             }
         }
@@ -256,7 +267,7 @@ public class FloorGenerator : MonoBehaviour
         int x = pos[0] - prevPos[0];
         int y = pos[1] - prevPos[1];
         int L = 0, R = 0, D = 0, T = 0;
-
+        Debug.Log("Big Room Incoming");
         if (x == 1) { L = 1; }
         else if(x == -1) { R = 1; }
         else
@@ -274,6 +285,7 @@ public class FloorGenerator : MonoBehaviour
                     if(validateSize(rooms.setOfBigRooms[i], pos, 'L', ref x, ref y))//it fits
                     {
                         generatedRooms += 1;
+                        Debug.Log(x+", "+y);
                         generation(x, y, preRoomGrid[x, y], prevPos);
                         return true;
                     }
@@ -333,6 +345,7 @@ public class FloorGenerator : MonoBehaviour
         //Pre: ----
         //Post: if the room fits return true and marks the grids where it's needed, if not return false
 
+        Debug.Log("Big Room Validating");
         bool validated = true;
         Vector2[] neededGrids = bigRoom.GetComponent<BiggerRoomCapacity>().getCapacity(side);
 
@@ -358,20 +371,39 @@ public class FloorGenerator : MonoBehaviour
 
         if(validated)
         {
+            Debug.Log("Big Room Validated");
             for (int i = 0; i < neededGrids.Length; i++)
             {
                 int posX = pos[0]+(int)neededGrids[i].x;
                 int posY = pos[1]+(int)neededGrids[i].y;
                 preRoomGrid[posX, posY].getPositionSpecial(pos, false, false, true, 0);
-                if (i == 0) { preRoomGrid[posX, posY].getName_Spawn(bigRoom.GetComponent<BiggerRoomCapacity>().name); }
+                if (i == 0) { preRoomGrid[posX, posY].getName_Spawn(bigRoom.GetComponent<BiggerRoomCapacity>().name, side); }
             }
-            x = (int)neededGrids[neededGrids.Length - 1].x;
-            y = (int)neededGrids[neededGrids.Length - 1].y;
+            x = (int)neededGrids[neededGrids.Length - 1].x + pos[0];
+            y = (int)neededGrids[neededGrids.Length - 1].y + pos[1];
+            Debug.Log("Big Room Donete");
         }
 
         return validated;
     }
-
+    
+    private GameObject findAndCreateBigRoom(string name, char side, int x, int y)
+    {
+        //Pre: name of the big room, char that says where's the enrtrance, position x and y in the grid
+        //Post: has found the adequate big room and instantiated it in the game
+        Debug.Log("Big Room Trying");
+        for (int i = 0; i < rooms.setOfBigRooms.Length; i++)
+        {
+            string bigRoomName = rooms.setOfBigRooms[i].GetComponent<BiggerRoomCapacity>().name;
+            if (string.Equals(name, bigRoomName))
+            {
+                int[] center = rooms.setOfBigRooms[i].GetComponent<BiggerRoomCapacity>().getCentralPoint(side);
+                Debug.Log("Big Room Created");
+                return Instantiate(rooms.setOfBigRooms[i], new Vector3(x * size + center[0], y * size + center[1], 0), Quaternion.identity, transform);
+            }
+        }
+        return null;
+    }
 
     private bool isInside(int x, int y)
     {
@@ -399,8 +431,8 @@ public class FloorGenerator : MonoBehaviour
     public void Create()
     {
         Clear();
-        roomGrid = new GameObject[5, 5];
-        preRoomGrid = new RoomDoors[5, 5];
+        roomGrid = new GameObject[9, 9];
+        preRoomGrid = new RoomDoors[9, 9];
         generatedRooms = 0;
         ready = false;
 
@@ -420,6 +452,14 @@ public class FloorGenerator : MonoBehaviour
         }
 
         instantiateRooms();
+
+        /*for (int i = 0; i < preRoomGrid.GetLength(0); i++)
+        {
+            for (int j = 0; j < preRoomGrid.GetLength(1); j++)
+            {
+                Destroy(preRoomGrid[i, j]);
+            }
+        }*/
 
         int endPos = Random.Range(0, possibleEndRooms.Count);
         RoomDoors endRoom = possibleEndRooms[endPos];            

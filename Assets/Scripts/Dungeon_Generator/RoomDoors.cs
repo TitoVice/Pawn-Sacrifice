@@ -23,6 +23,7 @@ public class RoomDoors : MonoBehaviour
     public bool bigger = false;
     public string bigName = "";
     public bool bigToSpawn = false;
+    public char bigRoomSide = ' ';
 
     public void getPositionSpecial(int[] pos, bool isStart, bool isDeadEnd, bool isBigger, int size)
     {
@@ -38,10 +39,11 @@ public class RoomDoors : MonoBehaviour
         if (start) { inRoom = true; visited = true; }
     }
 
-    public void getName_Spawn(string name)
+    public void getName_Spawn(string name, char side)
     {
         bigName = name;
-        spawn = true;
+        bigToSpawn = true;
+        bigRoomSide = side;
     }
 
     public void openDoor(int[] pos)
