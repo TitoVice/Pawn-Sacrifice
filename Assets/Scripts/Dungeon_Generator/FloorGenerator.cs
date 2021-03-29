@@ -460,7 +460,6 @@ public class FloorGenerator : MonoBehaviour
             }
         }
 
-
         int endPos = Random.Range(0, possibleEndRooms.Count);
         RoomDoors endRoom = possibleEndRooms[endPos];            
         finalRoom[0] = endRoom.position[0];
