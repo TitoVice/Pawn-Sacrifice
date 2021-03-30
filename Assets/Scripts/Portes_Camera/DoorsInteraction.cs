@@ -8,7 +8,9 @@ public class DoorsInteraction : MonoBehaviour
     private RoomDoors parent;
     private PlayerMovement player = null;
     private CameraFreeMovement cameraScript;
+    private TeamWorldInteraction team;
     private bool isVertical;
+    private bool isRight, isTop; //if the value is false, it's the opposite direction
 
     private bool hasToMove = false;
     private bool freeCamera = false;
@@ -27,14 +29,20 @@ public class DoorsInteraction : MonoBehaviour
         camera = GameObject.FindGameObjectWithTag("MainCamera");
         cameraScript = camera.GetComponent<CameraFreeMovement>();
         parent = transform.parent.transform.parent.GetComponent<RoomDoors>();
+        team = GameObject.Find("Team").GetComponent<TeamWorldInteraction>();
+
 
         if (gameObject.name[0] == 'D' || gameObject.name[0] == 'T')
         {
             isVertical = false;
+            if (gameObject.name[0] == 'D') { isTop = false; }
+            else { isTop = true; }
         }
         else if (gameObject.name[0] == 'L' || gameObject.name[0] == 'R')
         {
             isVertical = true;
+            if (gameObject.name[0] == 'L') { isRight = false; }
+            else { isRight = true; }
         }
     }
 
@@ -44,7 +52,6 @@ public class DoorsInteraction : MonoBehaviour
         {
             t += Time.fixedDeltaTime * rateMoving;
             camera.transform.position = Vector3.Lerp(startPos, endPos, t);
-            //camera.transform.position = Vector3.Lerp(camera.transform.position, endPos, Time.fixedDeltaTime * rateMoving);
         }
         else if (t >= 1.0f) 
         { 
@@ -106,6 +113,11 @@ public class DoorsInteraction : MonoBehaviour
         else //the camera is still
         { 
             endPos = new Vector3(parent.transform.position.x, parent.transform.position.y, camera.transform.position.z);
+        }
+
+        if (parent.inRoom)//when enters another room move the partners
+        {
+            team.roomPass(transform.position, isVertical, isTop, isRight);
         }
     }
 

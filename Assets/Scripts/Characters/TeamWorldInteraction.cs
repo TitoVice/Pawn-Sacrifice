@@ -8,6 +8,7 @@ public class TeamWorldInteraction : MonoBehaviour
     public GameObject[] team; //every member of the team
     public List<GameObject> teamList;
     private int spawnSeparation = 1;
+    private int tpDistance = 2;
 
     void Start()
     {
@@ -17,7 +18,6 @@ public class TeamWorldInteraction : MonoBehaviour
         {
             teamList.Add(Instantiate(team[i], new Vector3(0, 0, 0), Quaternion.identity, transform));
         }
-        //Debug.Log(teamList.Count + "-----------");
     }
     public void spawn(int x, int y)
     {
@@ -50,23 +50,35 @@ public class TeamWorldInteraction : MonoBehaviour
 
     public void Reorganize(GameObject characterToDelete)
     {
-        /*GameObject[] aux = new GameObject[team.Length - 1];
-        for (int i = 0; i < teamList.Count; i++)
-        {
-            if (team[i] == null)
-            {
-                if (i + 1 < team.Length)
-                {
-                    team[i] = team[i + 1];
-                    team[i + 1] = null;
-                }
-            }
-            if (i < team.Length - 1) { aux[i] = team[i]; }
-        }
-        team = aux;*/
-
         teamList.Remove(characterToDelete);
         Destroy(characterToDelete);
-        //Debug.Log(teamList[1]);
+    }
+
+    public void roomPass(Vector3 doorPos, bool isVertical, bool isTop, bool isRight)
+    {
+        //Pre: valid position
+        //Post: transports the companions to another room
+        
+        int side = 1, order = 1;
+        if (isTop || isRight) { side *= -1; }
+
+        for (int i = 0; i < teamList.Count; i++)
+        {
+            if (!team[i].CompareTag("Player"))
+            {
+                Vector3 newPos;
+                teamList[i].GetComponent<AgentScript>().Immobilize(); //desactivate the navmeshAgent in order to transport the companion
+
+                if (i%2 == 0) { order *= -1; }
+
+                if (isVertical) { newPos = new Vector3(doorPos.x + (tpDistance*side), doorPos.y + ((i+1)*0.7f*order), 0); }
+                else { newPos = new Vector3(doorPos.x + ((i+1)*0.7f*order), doorPos.y + (tpDistance*side), 0); }
+
+                teamList[i].transform.position = newPos;
+                teamList[i].GetComponent<AgentScript>().Mobilize();
+            }
+
+            
+        }
     }
 }
