@@ -42,14 +42,16 @@
      <Compile Include="Assets\Scripts\Rooms\BiggerRoomCapacity.cs" />
      <Compile Include="Assets\Scripts\Dungeon_Generator\RoomTemplates.cs" />
      <Compile Include="Assets\Scripts\Characters\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\Weapons\WeaponAttack.cs" />
      <Compile Include="Assets\Scripts\Rooms\RoomDoors.cs" />
      <Compile Include="Assets\Scripts\Characters\TeamWorldInteraction.cs" />
      <Compile Include="Assets\Scripts\Dungeon_Generator\FloorGeneratorEditor.cs" />
      <Compile Include="Assets\Scripts\UI\ButtonSacrifice.cs" />
      <Compile Include="Assets\Scripts\Portes_Camera\DoorsInteraction.cs" />
+     <Compile Include="Assets\Scripts\Portes_Camera\CameraFreeMovement.cs" />
      <Compile Include="Assets\Scripts\UI\PopUp_Sacrifice.cs" />
      <Compile Include="Assets\Scripts\Characters\SpawnCharacter.cs" />
-     <Compile Include="Assets\Scripts\Portes_Camera\CameraFreeMovement.cs" />
+     <Compile Include="Assets\Scripts\Weapons\WeaponMovement.cs" />
     <Reference Include="UnityEngine">
         <HintPath>Z:/Unity/Unity/2020.2.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
