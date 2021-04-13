@@ -15,7 +15,7 @@ public class WeaponAttack : MonoBehaviour
 
     public bool distanceAttack = false;
     public GameObject projectile;
-    public Dictionary<string, bool> projectileStats = new Dictionary<string, bool>{ {"arrow", false}, {"stun", false}, {"burn", false} };
+    private Dictionary<string, bool> projectileStats = new Dictionary<string, bool>{ {"arrow", false}, {"stun", false}, {"burn", false} };
 
     void Start()
     {
@@ -48,7 +48,7 @@ public class WeaponAttack : MonoBehaviour
         //Post: instanciates the projectile and shoots it
 
         GameObject element = Instantiate(projectile, transform.position, transform.parent.rotation);
-        element.GetComponent<ProjectileHit>().getStats(projectileStats);
+        element.GetComponent<ProjectileHit>().getStats(projectileStats, damage);
         element.GetComponent<ProjectileMovement>().getShotDirection((transform.position - transform.parent.position).normalized);
         
     }
