@@ -14,7 +14,7 @@ public class DoorsInteraction : MonoBehaviour
 
     private bool hasToMove = false;
     private bool freeCamera = false;
-    private float rateMoving = 1.0f/0.5f;
+    private float rateMoving = 4.0f;
     private float t = 0f;
 
     private Vector3 startPos;//camera positions

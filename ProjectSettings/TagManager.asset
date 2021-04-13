@@ -7,6 +7,8 @@ TagManager:
   - Rooms
   - RoomGenerator
   - End
+  - Enemy
+  - Background
   layers:
   - Default
   - TransparentFX
