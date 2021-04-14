@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TeamWorldInteraction : MonoBehaviour
 {
 
-    public GameObject[] team; //every member of the team
+    public List<GameObject> team; //every member of the team
+    private List<GameObject> selectedTeam = new List<GameObject>();
     public List<GameObject> teamList;
     private int spawnSeparation = 1;
     private int tpDistance = 2;
@@ -13,12 +15,42 @@ public class TeamWorldInteraction : MonoBehaviour
     void Start()
     {
         teamList = new List<GameObject>();
+        chosenTeam();
 
-        for (int i = 0; i < team.Length; i++)
+        for (int i = 0; i < selectedTeam.Count; i++)
         {
-            teamList.Add(Instantiate(team[i], new Vector3(0, 0, 0), Quaternion.identity, transform));
+            teamList.Add(Instantiate(selectedTeam[i], new Vector3(0, 0, 0), Quaternion.identity, transform));
+            if (i == 0)
+            {
+                teamList[i].tag = "Player";
+                DestroyImmediate(teamList[i].GetComponent<AgentScript>());
+                DestroyImmediate(teamList[i].GetComponent<NavMeshAgent>());
+            }
+            else
+            {
+                teamList[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                DestroyImmediate(teamList[i].GetComponent<PlayerMovement>());
+            }
         }
     }
+
+    private void chosenTeam()
+    {
+        //Pre:---
+        //Post: selects the team members and choose the player one
+
+        for (int i = 0; i < 4; i++) //4 members
+        {
+            int random = Random.Range(0, team.Count);
+            Debug.Log(random);
+            selectedTeam.Add(team[random]);
+
+            
+
+            team.RemoveAt(random);
+        }
+    }
+
     public void spawn(int x, int y)
     {
         int[] pos1 = { x, y + spawnSeparation };
@@ -28,7 +60,7 @@ public class TeamWorldInteraction : MonoBehaviour
         
         for (int i = 0; i < teamList.Count; i++)
         {
-            if (!team[i].CompareTag("Player"))
+            if (!teamList[i].CompareTag("Player"))
             {
                 teamList[i].GetComponent<AgentScript>().Immobilize(); //desactivate the navmeshAgent in order to transport the companion
             }
@@ -64,7 +96,7 @@ public class TeamWorldInteraction : MonoBehaviour
 
         for (int i = 0; i < teamList.Count; i++)
         {
-            if (!team[i].CompareTag("Player"))
+            if (!teamList[i].CompareTag("Player"))
             {
                 Vector3 newPos;
                 teamList[i].GetComponent<AgentScript>().Immobilize(); //desactivate the navmeshAgent in order to transport the companion
@@ -77,8 +109,6 @@ public class TeamWorldInteraction : MonoBehaviour
                 teamList[i].transform.position = newPos;
                 teamList[i].GetComponent<AgentScript>().Mobilize();
             }
-
-            
         }
     }
 }

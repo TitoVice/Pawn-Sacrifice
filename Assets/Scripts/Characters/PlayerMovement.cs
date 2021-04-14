@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else { animator.SetBool("moving", false); }
         }
+        transform.rotation = new Quaternion(0, 0, 0, 0);
     }
 
     void FixedUpdate()
