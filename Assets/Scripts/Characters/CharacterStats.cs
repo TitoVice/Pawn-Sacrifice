@@ -15,6 +15,8 @@ public class CharacterStats : MonoBehaviour
     [Header("Special Abilities")]
     public auxDictionary[] dictionary;
     public Dictionary<string, bool> playerAbilities = new Dictionary<string, bool>{ {"vision", false}, {"revive", false}, {"backprotect", false}, {"shield", false}, {"spawner", false} };
+
+    public GameObject backProtect; public GameObject shield;
     
     void Start()
     {
@@ -23,11 +25,29 @@ public class CharacterStats : MonoBehaviour
             if (playerAbilities.ContainsKey(dictionary[i].name))
             {
                 playerAbilities[dictionary[i].name] = dictionary[i].used;
+                if (dictionary[i].used) { AddAbilities(dictionary[i].name); }
             }
         }
     }
-    void Update()
+
+    public void AddAbilities(string ability)
     {
-        
+        //Pre: valid ability name
+        //Post: add the ability to the character
+
+        if (ability == "vision") { gameObject.AddComponent<VisionBehaviour>(); playerAbilities[ability] = true; }
+        else if (ability == "revive") { gameObject.AddComponent<ReviveBehaviour>(); playerAbilities[ability] = true; }
+        else if (ability == "spawner") { gameObject.AddComponent<ReviveBehaviour>(); playerAbilities[ability] = true; }
+        else if (ability == "backprotect") 
+        { 
+            foreach (Transform child in transform){
+                if (!child.CompareTag("Shield"))
+                {
+                    Instantiate(backProtect, child);
+                    playerAbilities[ability] = true; 
+                }
+            }
+        }
+        else if (ability == "shield") { Instantiate(shield, transform); playerAbilities[ability] = true; }
     }
 }

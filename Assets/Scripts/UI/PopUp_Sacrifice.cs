@@ -8,6 +8,7 @@ public class PopUp_Sacrifice : MonoBehaviour
     public GameObject ui;
     public GameObject team;
     public GameObject buttonPrefab;
+    public GameObject buttonPrefabStats;
 
     private Transform panel;
     private GameObject[] elections;
@@ -56,7 +57,27 @@ public class PopUp_Sacrifice : MonoBehaviour
         moveCharacters();
 
         GameObject end = GameObject.FindGameObjectsWithTag("End")[0];
-        end.GetComponent<NextLevel>().passLevel();
+        end.GetComponent<NextLevel>().passLevel();//-------------------------------------------------------------------------        descomentar quan acabis
+    }
+
+    public void getStats(string perk1, string perk2)
+    {
+        //Pre: valid habilities/projectile mods
+        //Post: 
+
+        string[] perks = {perk1, perk2};
+
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            Destroy(buttons[i]);
+        }
+
+        for (int i = 0; i < 2; i++)
+        {
+            buttons[i] = Instantiate(buttonPrefabStats, panel);
+            buttons[i].GetComponent<SelectStat>().buttonStat(elections[0], perks[i], GetComponent<PopUp_Sacrifice>()); //elections[0] = player
+        }
+        fitButtons();
     }
 
     private void stopCharacters()
@@ -77,13 +98,16 @@ public class PopUp_Sacrifice : MonoBehaviour
     {
         for (int i = 0; i < elections.Length; i++)
         {
-            if (elections[i].CompareTag("Player"))
+            if (elections[i] != null)
             {
-                elections[i].GetComponent<PlayerMovement>().Mobilize();
-            }
-            else
-            {
-                elections[i].GetComponent<AgentScript>().Mobilize();
+                if (elections[i].CompareTag("Player"))
+                {
+                    elections[i].GetComponent<PlayerMovement>().Mobilize();
+                }
+                else
+                {
+                    elections[i].GetComponent<AgentScript>().Mobilize();
+                }
             }
         }
     }

@@ -43,6 +43,14 @@ public class MeleeWeaponAttack : MonoBehaviour
         meleeDamage = damage;
     }
 
+    public void updateStats (Dictionary<string, bool> weaponStats)
+    {
+        //Pre: ---
+        //Post: updates the stats
+
+        stats = weaponStats;
+    }
+
     void OnTriggerEnter2D(Collider2D collision)
     {
         //Pre:---

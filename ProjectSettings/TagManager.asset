@@ -9,6 +9,7 @@ TagManager:
   - End
   - Enemy
   - Background
+  - Shield
   layers:
   - Default
   - TransparentFX

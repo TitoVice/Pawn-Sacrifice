@@ -44,9 +44,6 @@ public class TeamWorldInteraction : MonoBehaviour
             int random = Random.Range(0, team.Count);
             Debug.Log(random);
             selectedTeam.Add(team[random]);
-
-            
-
             team.RemoveAt(random);
         }
     }

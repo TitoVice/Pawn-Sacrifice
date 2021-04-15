@@ -17,7 +17,7 @@ public class WeaponAttack : MonoBehaviour
     public bool distanceAttack = false;
     public GameObject projectile;
     public GameObject player;
-    private Dictionary<string, bool> projectileStats = new Dictionary<string, bool>{ {"arrow", false}, {"stun", false}, {"burn", false} };
+    public Dictionary<string, bool> projectileStats = new Dictionary<string, bool>{ {"arrow", false}, {"stun", false}, {"burn", false} };
 
     private bool shooted = false;
     private float timer = 0.0f;
@@ -114,5 +114,21 @@ public class WeaponAttack : MonoBehaviour
         //Post: make the weapon to return with the player
 
         going = false;
+    }
+
+    public void AddProjectileStat(string type)
+    {
+        //Pre: ---
+        //Post: adds a new projectile stat
+        Debug.Log(type);
+        if (projectileStats.ContainsKey(type)) 
+        { 
+            projectileStats[type] = true;  
+            Debug.Log(projectileStats[type]);
+            if (GetComponent<MeleeWeaponAttack>() != null) 
+            {
+                GetComponent<MeleeWeaponAttack>().updateStats(projectileStats);
+            }
+        }
     }
 }

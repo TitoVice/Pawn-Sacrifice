@@ -779,6 +779,8 @@ MonoBehaviour:
   team: {fileID: 1440708673}
   buttonPrefab: {fileID: 5260634143078032903, guid: 7decfbe199708f8408c81e06894af268,
     type: 3}
+  buttonPrefabStats: {fileID: 5334766873979275278, guid: 88193b803af240b4f8eec5d65fbd6082,
+    type: 3}
 --- !u!4 &1073689529
 Transform:
   m_ObjectHideFlags: 0

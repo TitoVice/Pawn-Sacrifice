@@ -240,6 +240,9 @@ MonoBehaviour:
     used: 0
   - name: spawner
     used: 0
+  backProtect: {fileID: 1391387181929442508, guid: 00fd0bca299e12c4e8d7ac94a396a67c,
+    type: 3}
+  shield: {fileID: 5963723408898304411, guid: c701886257ecd9645a8911a6458f11df, type: 3}
 --- !u!195 &-9091677525227794864
 NavMeshAgent:
   m_ObjectHideFlags: 0
