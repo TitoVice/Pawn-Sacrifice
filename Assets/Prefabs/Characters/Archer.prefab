@@ -284,6 +284,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1983741091152727108, guid: 24619d75cbee3394f84c092ecfb64651,
         type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 8738929633791017998}
+    - target: {fileID: 1983741091152727108, guid: 24619d75cbee3394f84c092ecfb64651,
+        type: 3}
       propertyPath: dictionary.Array.data[0].used
       value: 1
       objectReference: {fileID: 0}

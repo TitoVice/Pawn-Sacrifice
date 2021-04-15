@@ -6,6 +6,13 @@ public class WeaponMovement : MonoBehaviour
 {
     public float angle;
 
+    private SpriteRenderer sprite;
+
+    void Start()
+    {
+        sprite = GetComponent<SpriteRenderer>();
+    }
+
     void Update()
     {
         Vector3 mouse_pos = Input.mousePosition;

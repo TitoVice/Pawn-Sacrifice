@@ -36,7 +36,7 @@ public class EnemyGetHit : MonoBehaviour
 
         if (burned)
         {
-            sprite.color = gradient.Evaluate(Mathf.Sin(Time.time)); //blinks the color of the enemy
+            sprite.color = gradient.Evaluate((Mathf.Sin(Time.time)+1)/2); //blinks the color of the enemy
             burnTimer += Time.deltaTime; 
             if (burnTimer >= burnTick) 
             {  

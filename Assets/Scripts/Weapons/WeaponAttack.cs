@@ -15,7 +15,15 @@ public class WeaponAttack : MonoBehaviour
 
     public bool distanceAttack = false;
     public GameObject projectile;
+    public GameObject player;
     private Dictionary<string, bool> projectileStats = new Dictionary<string, bool>{ {"arrow", false}, {"stun", false}, {"burn", false} };
+
+    private bool shooted = false;
+    private float timer = 0.0f;
+    private bool ableToAttack = true;
+    private bool going = true;
+    public Transform initialPos;
+    public Transform finalPos;
 
     void Start()
     {
@@ -35,10 +43,27 @@ public class WeaponAttack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && (!shooted && ableToAttack) && player.CompareTag("Player"))
         {
-            if (distanceAttack) { shoot(); }
-            else { meleeAttack(); }
+            if (distanceAttack) { shoot(); shooted = true;}
+            else { meleeAttack();  ableToAttack = false; }
+        }
+
+        if (shooted && timer < attackSpeed) 
+        { 
+            timer += Time.time; 
+            if (timer >= attackSpeed) { shooted = false; timer = 0.0f; }
+        }
+
+        if (!ableToAttack)
+        {
+            if (Vector3.Distance(transform.position, finalPos.position) <= 0.02f || !going)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, initialPos.position, Time.deltaTime*7);
+                going = false;
+                if (Vector3.Distance(transform.position, initialPos.position) <= 0.02f) { ableToAttack = true; going = true; transform.position = initialPos.position; }
+            }
+            else { transform.position = Vector3.MoveTowards(transform.position, finalPos.position, Time.deltaTime*7); }
         }
     }
 
@@ -57,6 +82,7 @@ public class WeaponAttack : MonoBehaviour
     {
         //Pre: angle of the direction to attack
         //Post: does a melee attack
+
 
     }
 }
