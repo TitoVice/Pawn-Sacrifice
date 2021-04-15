@@ -340,6 +340,7 @@ GameObject:
   - component: {fileID: 4050949954875138039}
   - component: {fileID: 3463064842029063236}
   - component: {fileID: 3102534078830535297}
+  - component: {fileID: 4446059722006663143}
   m_Layer: 0
   m_Name: sword
   m_TagString: Untagged
@@ -373,7 +374,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a8f7dcd533cca47990222307fdf5cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dictionary: []
+  dictionary:
+  - name: arrow
+    used: 0
+  - name: stun
+    used: 0
+  - name: burn
+    used: 0
   distanceAttack: 0
   projectile: {fileID: 0}
   player: {fileID: 1680169443956348005}
@@ -469,3 +476,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.04040166, y: 0.119783126}
   m_EdgeRadius: 0
+--- !u!114 &4446059722006663143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7170276582116478308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 068fa1e45e54f1f4181bdbb3af7cb89b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

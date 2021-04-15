@@ -10,6 +10,7 @@ public class WeaponAttack : MonoBehaviour
 
     private CharacterStats playerStats;
     private WeaponMovement movement;
+    private BoxCollider2D meleeCollider;
     private float damage;
     private float attackSpeed;
 
@@ -22,6 +23,7 @@ public class WeaponAttack : MonoBehaviour
     private float timer = 0.0f;
     private bool ableToAttack = true;
     private bool going = true;
+    private bool cooldown = false;
     public Transform initialPos;
     public Transform finalPos;
 
@@ -39,31 +41,51 @@ public class WeaponAttack : MonoBehaviour
                 projectileStats[dictionary[i].name] = dictionary[i].used;
             }
         }
+
+        if (GetComponent<MeleeWeaponAttack>() != null) 
+        { 
+            meleeCollider = GetComponent<BoxCollider2D>();
+            meleeCollider.enabled = false;
+            GetComponent<MeleeWeaponAttack>().getVariables(projectileStats, damage); 
+        }
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && (!shooted && ableToAttack) && player.CompareTag("Player"))
+        if (Input.GetButtonDown("Fire1") && (!shooted && ableToAttack && !cooldown) && player.CompareTag("Player"))
         {
             if (distanceAttack) { shoot(); shooted = true;}
-            else { meleeAttack();  ableToAttack = false; }
+            else { meleeAttack();  ableToAttack = false;}
         }
 
         if (shooted && timer < attackSpeed) 
         { 
-            timer += Time.time; 
+            timer += Time.deltaTime; 
             if (timer >= attackSpeed) { shooted = false; timer = 0.0f; }
+        }
+
+        if (cooldown)
+        {
+            timer += Time.deltaTime; 
+            if (timer >= attackSpeed) { cooldown = false; timer = 0.0f; }
         }
 
         if (!ableToAttack)
         {
-            if (Vector3.Distance(transform.position, finalPos.position) <= 0.02f || !going)
+            if (Vector3.Distance(transform.position, finalPos.position) <= 0.02f || !going) //melee returning
             {
                 transform.position = Vector3.MoveTowards(transform.position, initialPos.position, Time.deltaTime*7);
                 going = false;
-                if (Vector3.Distance(transform.position, initialPos.position) <= 0.02f) { ableToAttack = true; going = true; transform.position = initialPos.position; }
+                if (Vector3.Distance(transform.position, initialPos.position) <= 0.02f) //arrived to initial pos
+                    { 
+                        ableToAttack = true; 
+                        going = true; 
+                        transform.position = initialPos.position; 
+                        cooldown = true; 
+                        meleeCollider.enabled = false;
+                    } 
             }
-            else { transform.position = Vector3.MoveTowards(transform.position, finalPos.position, Time.deltaTime*7); }
+            else { transform.position = Vector3.MoveTowards(transform.position, finalPos.position, Time.deltaTime*7); } //melle going to the end
         }
     }
 
@@ -81,8 +103,16 @@ public class WeaponAttack : MonoBehaviour
     private void meleeAttack()
     {
         //Pre: angle of the direction to attack
-        //Post: does a melee attack
+        //Post: lets the weapon make damage
 
+        meleeCollider.enabled = true;
+    }
 
+    public void returnMeleeWeapon()
+    {
+        //Pre: ---
+        //Post: make the weapon to return with the player
+
+        going = false;
     }
 }
