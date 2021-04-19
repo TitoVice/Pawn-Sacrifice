@@ -36,8 +36,11 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Abilities\SpawnMinionBehaviour.cs" />
      <Compile Include="Assets\Scripts\Characters\AgentScript.cs" />
+     <Compile Include="Assets\Scripts\Abilities\ShieldBehaviour.cs" />
      <Compile Include="Assets\Scripts\Dungeon_Generator\NextLevel.cs" />
+     <Compile Include="Assets\Scripts\Abilities\ReviveBehaviour.cs" />
      <Compile Include="Assets\Scripts\Characters\CharacterStats.cs" />
      <Compile Include="Assets\Scripts\Dungeon_Generator\FloorGenerator.cs" />
      <Compile Include="Assets\Scripts\Rooms\BiggerRoomCapacity.cs" />
@@ -49,19 +52,17 @@
      <Compile Include="Assets\Scripts\Characters\TeamWorldInteraction.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyGetHit.cs" />
      <Compile Include="Assets\Scripts\Dungeon_Generator\FloorGeneratorEditor.cs" />
+     <Compile Include="Assets\Scripts\Abilities\VisionBehaviour.cs" />
      <Compile Include="Assets\Scripts\UI\ButtonSacrifice.cs" />
      <Compile Include="Assets\Scripts\Portes_Camera\DoorsInteraction.cs" />
      <Compile Include="Assets\Scripts\Portes_Camera\CameraFreeMovement.cs" />
+     <Compile Include="Assets\Prefabs\UI\SelectStat.cs" />
      <Compile Include="Assets\Scripts\UI\PopUp_Sacrifice.cs" />
      <Compile Include="Assets\Scripts\Weapons\WeaponMovement.cs" />
      <Compile Include="Assets\Scripts\Characters\SpawnCharacter.cs" />
      <Compile Include="Assets\Scripts\Weapons\Projectiles\ProjectileHit.cs" />
      <Compile Include="Assets\Scripts\Weapons\Projectiles\ProjectileMovement.cs" />
-     <Compile Include="Assets\Scripts\Abilities\ShieldBehaviour.cs" />
-     <Compile Include="Assets\Scripts\Abilities\VisionBehaviour.cs" />
-     <Compile Include="Assets\Scripts\Abilities\SpawnMinionBehaviour.cs" />
-     <Compile Include="Assets\Scripts\Abilities\ReviveBehaviour.cs" />
-     <Compile Include="Assets\Prefabs\UI\SelectStat.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyMoveScript.cs" />
     <Reference Include="UnityEngine">
         <HintPath>Z:/Unity/Unity/2020.2.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
