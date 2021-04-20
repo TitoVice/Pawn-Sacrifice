@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyGetHit : MonoBehaviour
 {
     private SpriteRenderer sprite;
-    private float life = 5.0f;
+    public float life = 5.0f;
     private float stunTime = 2.0f;
 
     private float cooldown = 7.0f;
@@ -25,7 +25,6 @@ public class EnemyGetHit : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (startCooldown) 
@@ -42,9 +41,17 @@ public class EnemyGetHit : MonoBehaviour
             {  
                 life -= burnDamage; 
                 burnTimer = 0.0f; 
-                if (life <= 0) { Destroy(gameObject); }
+                if (life <= 0) { Death(); }
             } 
         }
+
+        extraAction(Time.deltaTime);
+    }
+
+    public virtual void extraAction(float deltaTime)
+    {
+        //Pre:---
+        //Post: function to do extra things
     }
 
     public void hit(float damage)
@@ -54,7 +61,7 @@ public class EnemyGetHit : MonoBehaviour
         
         life -= damage;
 
-        if (life <= 0) { Destroy(gameObject); }
+        if (life <= 0) { Death(); }
         else
         {
             StartCoroutine("Flash");
@@ -67,7 +74,7 @@ public class EnemyGetHit : MonoBehaviour
         //Post: damage the enemy and stuns it
 
         life -= damage;
-        if (life <= 0) { Destroy(gameObject); }
+        if (life <= 0) { Death(); }
         else
         {
             if (!startCooldown)
@@ -85,7 +92,7 @@ public class EnemyGetHit : MonoBehaviour
         //Post: damage the enemy and burns it
 
         life -= damage;
-        if (life <= 0) { Destroy(gameObject); }
+        if (life <= 0) { Death(); }
         else
         {
             if (!burned)
@@ -93,6 +100,14 @@ public class EnemyGetHit : MonoBehaviour
                 burned = true;
             }
         }
+    }
+
+    public virtual void Death()
+    {
+        //Pre: ---
+        //Post: destroys the gameObject
+
+        Destroy(gameObject);
     }
 
     IEnumerator Flash()

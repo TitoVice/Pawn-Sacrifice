@@ -5,13 +5,12 @@ using UnityEngine.AI;
 
 public class EnemyMoveScript : MonoBehaviour
 {
-    private Transform target;
+    public Transform target;
     private NavMeshAgent agent;
-    public string characterName;
 
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
+        if (target == null) { getTarget(null); }
 
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -22,8 +21,25 @@ public class EnemyMoveScript : MonoBehaviour
     {
         if(GetComponent<NavMeshAgent>().enabled == true)
         {
-            agent.SetDestination(target.position);
+            movement(Time.deltaTime);
         }
+    }
+
+    public void getTarget(Transform objective)
+    {
+        if (objective == null)
+        {
+            target = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+        else
+        {
+            target = objective;
+        }
+    }
+
+    public virtual void movement(float time)
+    {
+        agent.SetDestination(target.position);
     }
 
     public void Immobilize()

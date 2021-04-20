@@ -85,7 +85,7 @@ public class WeaponAttack : MonoBehaviour
                         meleeCollider.enabled = false;
                     } 
             }
-            else { transform.position = Vector3.MoveTowards(transform.position, finalPos.position, Time.deltaTime*7); } //melle going to the end
+            else { transform.position = Vector3.MoveTowards(transform.position, finalPos.position, Time.deltaTime*7); } //melee going to the end
         }
     }
 
