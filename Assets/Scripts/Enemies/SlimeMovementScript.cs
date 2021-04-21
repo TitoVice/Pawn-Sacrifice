@@ -7,7 +7,6 @@ public class SlimeMovementScript : EnemyMoveScript
     private float timer = 0.0f;
     private float launchTime = 1.0f;
     public float distance = 0.7f;
-    //public GameObject slime;
     private bool animating = false;
     public bool fusioner = false;
 
@@ -46,7 +45,14 @@ public class SlimeMovementScript : EnemyMoveScript
             GetComponent<BoxCollider2D>().enabled = false;
             target.GetComponent<BoxCollider2D>().enabled = false;
             GameObject slime = Resources.Load<GameObject>("Prefabs/Enemies/Slime");
-            Instantiate(slime, transform.position, transform.rotation);
+            GameObject bigSlime = Instantiate(slime, transform.position, transform.rotation);
+
+            SlimeGetHit getBigHit = bigSlime.GetComponent<SlimeGetHit>();
+            SlimeGetHit getHit = GetComponent<SlimeGetHit>();
+
+            getBigHit.life -= 2*(getHit.familyTree-1);
+            getBigHit.familyTree = getHit.familyTree;
+
             Destroy(gameObject);
         }
     }

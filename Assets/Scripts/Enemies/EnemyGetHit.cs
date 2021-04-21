@@ -19,6 +19,7 @@ public class EnemyGetHit : MonoBehaviour
     private float burnDamage = 1.0f;
 
     public Gradient gradient;
+    public Vector3 hitPosition;
 
     void Start()
     {
@@ -47,6 +48,14 @@ public class EnemyGetHit : MonoBehaviour
         }
 
         extraAction(Time.deltaTime);
+    }
+
+    public void colisionPosition(Vector3 pos)
+    {
+        //Pre: ---
+        //Post: gets the point where they attacked
+
+        hitPosition = pos;
     }
 
     public virtual void extraAction(float deltaTime)

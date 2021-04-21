@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e3d351055a600c4b96374bfa4cf75e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   life: 5
   gradient:
     serializedVersion: 2
@@ -178,6 +179,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  hitPosition: {x: 0, y: 0, z: 0}
   slimePrefab: {fileID: 2984949734266173827}
   canSplit: 1
 --- !u!114 &5664920810101458713
@@ -228,4 +230,4 @@ MonoBehaviour:
   target: {fileID: 0}
   animator: {fileID: 0}
   distance: 0.7
-  slime: {fileID: 2984949734266173827}
+  fusioner: 0
