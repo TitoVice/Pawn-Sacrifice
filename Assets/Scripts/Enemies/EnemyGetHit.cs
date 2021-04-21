@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyGetHit : MonoBehaviour
 {
     private SpriteRenderer sprite;
+    public Animator animator;
     public float life = 5.0f;
     private float stunTime = 2.0f;
 
@@ -22,7 +23,7 @@ public class EnemyGetHit : MonoBehaviour
     void Start()
     {
         sprite = gameObject.GetComponent<SpriteRenderer>();
-        
+        animator = gameObject.GetComponent<Animator>();
     }
 
     void Update()

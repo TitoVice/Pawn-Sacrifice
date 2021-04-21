@@ -7,6 +7,7 @@ public class MeleeWeaponAttack : MonoBehaviour
     
     private Dictionary<string, bool> stats;
     private WeaponAttack weapon;
+    private BoxCollider2D colider;
     private float meleeDamage;
     private bool noEffects = true;
 
@@ -18,6 +19,7 @@ public class MeleeWeaponAttack : MonoBehaviour
     void Start()
     {
         weapon = GetComponent<WeaponAttack>();
+        colider = GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -64,7 +66,9 @@ public class MeleeWeaponAttack : MonoBehaviour
             if (stats["burn"]) { enemyHit.hitBurn(meleeDamage); noEffects = false; }
 
             if (noEffects) { enemyHit.hit(meleeDamage); } //normal hit 
-            if (!stats["arrow"]) { colided = true; } //if it's not an arrow destroy the projectile
+            if (!stats["arrow"]) { colided = true; colider.enabled = false; } //if it's not an arrow destroy the projectile
+
+            
         }
         else if (collision.CompareTag("Background")) { colided = true; }
     }

@@ -3,7 +3,9 @@ guid: 60e06549b23c57441a3a9f8edbcb0a1f
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - target: {instanceID: 0}
+  - slime: {fileID: 2984949734266173827, guid: 13f44ddb6df3a1a4b8ef59451d9a60f8, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

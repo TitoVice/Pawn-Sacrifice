@@ -43,9 +43,11 @@
      <Compile Include="Assets\Scripts\Dungeon_Generator\NextLevel.cs" />
      <Compile Include="Assets\Scripts\Abilities\ReviveBehaviour.cs" />
      <Compile Include="Assets\Scripts\Characters\CharacterStats.cs" />
+     <Compile Include="Assets\Scripts\Enemies\SlimeGetHit.cs" />
      <Compile Include="Assets\Scripts\Dungeon_Generator\FloorGenerator.cs" />
      <Compile Include="Assets\Scripts\Rooms\BiggerRoomCapacity.cs" />
      <Compile Include="Assets\Scripts\Dungeon_Generator\RoomTemplates.cs" />
+     <Compile Include="Assets\Scripts\Enemies\SlimeMovementScript.cs" />
      <Compile Include="Assets\Scripts\Characters\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Weapons\WeaponAttack.cs" />
      <Compile Include="Assets\Scripts\Rooms\RoomDoors.cs" />
@@ -63,8 +65,6 @@
      <Compile Include="Assets\Scripts\Characters\SpawnCharacter.cs" />
      <Compile Include="Assets\Scripts\Weapons\Projectiles\ProjectileHit.cs" />
      <Compile Include="Assets\Scripts\Weapons\Projectiles\ProjectileMovement.cs" />
-     <Compile Include="Assets\Scripts\Enemies\SlimeGetHit.cs" />
-     <Compile Include="Assets\Scripts\Enemies\SlimeMovementScript.cs" />
     <Reference Include="UnityEngine">
         <HintPath>Z:/Unity/Unity/2020.2.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
