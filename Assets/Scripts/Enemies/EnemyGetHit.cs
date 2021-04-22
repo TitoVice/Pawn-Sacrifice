@@ -56,6 +56,20 @@ public class EnemyGetHit : MonoBehaviour
         //Post: gets the point where they attacked
 
         hitPosition = pos;
+        Vector3 target = GetComponent<EnemyMoveScript>().target.position;
+        //Debug.DrawLine(transform.position, target, Color.red);
+        Vector3 direction = new Vector3(transform.position.x - hitPosition.x, transform.position.y - hitPosition.y, transform.position.z).normalized;
+        int rotation = 100;
+
+        for (int i = 0; i < 3; i++)
+        {
+            Vector3 direction2 = new Vector3(Mathf.Cos(rotation)*direction.x - Mathf.Sin(rotation)*direction.y, Mathf.Sin(rotation)*direction.x + Mathf.Cos(rotation)*direction.y, direction.z);
+            direction2 = new Vector3(direction2.x*5, direction2.y*5, direction.z);
+            if (i == 0) {Debug.DrawRay(transform.position, direction2, Color.blue, 2f); rotation += 70;}
+            if (i == 1) {Debug.DrawRay(transform.position, direction2, Color.yellow, 2f); rotation -= 140;}
+            if (i == 2) {Debug.DrawRay(transform.position, direction2, Color.green, 2f);}
+
+        }
     }
 
     public virtual void extraAction(float deltaTime)
