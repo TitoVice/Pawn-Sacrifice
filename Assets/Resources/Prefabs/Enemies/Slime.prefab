@@ -197,6 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  posToGo: {x: 0, y: 0, z: 0}
   animator: {fileID: 0}
 --- !u!95 &8390441674911544647
 Animator:
@@ -230,6 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  posToGo: {x: 0, y: 0, z: 0}
   animator: {fileID: 0}
   distance: 0.7
   fusioner: 0

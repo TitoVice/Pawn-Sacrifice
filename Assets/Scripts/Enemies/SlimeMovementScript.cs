@@ -12,9 +12,9 @@ public class SlimeMovementScript : EnemyMoveScript
 
     public override void movement(float time)
     {
-        if (!animating)
-        {
-            if (target != null)
+        //if (!animating)
+        //{
+            if (target != null || !animating)
             {
                 base.movement(time);
 
@@ -28,10 +28,12 @@ public class SlimeMovementScript : EnemyMoveScript
             }
             else //in case the other slime is destroyed, it tries to attack the characters
             {
+                animator.SetBool("fusioning", false);
+                animating = false;
                 gameObject.GetComponent<EnemyMoveScript>().enabled = true;
                 gameObject.GetComponent<SlimeMovementScript>().enabled = false;
             }
-        }
+        //}
     }
 
     public void fusion()
