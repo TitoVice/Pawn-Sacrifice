@@ -12,28 +12,25 @@ public class SlimeMovementScript : EnemyMoveScript
 
     public override void movement(float time)
     {
-        //if (!animating)
-        //{
-            if (target != null || !animating)
-            {
-                base.movement(time);
+        if (target != null && !animating)
+        {
+            base.movement(time);
 
-                timer += time;
-                if (Vector3.Distance(transform.position, target.position) < distance && timer >= launchTime)
-                {
-                    animator.SetBool("fusioning", true);
-                    animating = true;
-                    if (!target.GetComponent<SlimeMovementScript>().fusioner) { fusioner = true; }
-                }
-            }
-            else //in case the other slime is destroyed, it tries to attack the characters
+            timer += time;
+            if (Vector3.Distance(transform.position, target.position) < distance && timer >= launchTime)
             {
-                animator.SetBool("fusioning", false);
-                animating = false;
-                gameObject.GetComponent<EnemyMoveScript>().enabled = true;
-                gameObject.GetComponent<SlimeMovementScript>().enabled = false;
+                animator.SetBool("fusioning", true);
+                animating = true;
+                if (!target.GetComponent<SlimeMovementScript>().fusioner) { fusioner = true; }
             }
-        //}
+        }
+        else if (target == null) //in case the other slime is destroyed, it tries to attack the characters
+        {
+            animator.SetBool("fusioning", false);
+            animating = false;
+            gameObject.GetComponent<EnemyMoveScript>().enabled = true;
+            gameObject.GetComponent<SlimeMovementScript>().enabled = false;
+        }
     }
 
     public void fusion()

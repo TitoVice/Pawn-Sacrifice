@@ -71,6 +71,7 @@ public class SlimeGetHit : EnemyGetHit
                     SlimeGetHit miniHit = miniSlime.GetComponent<SlimeGetHit>();
 
                     miniSlime.GetComponent<BoxCollider2D>().enabled = false;
+                    miniHit.AddRigidBody();
 
                     miniSlime.transform.localScale = new Vector3(miniSlime.transform.localScale.x/2, miniSlime.transform.localScale.y/2, 1.0f);
 
@@ -99,6 +100,14 @@ public class SlimeGetHit : EnemyGetHit
             }
         }
         Destroy(gameObject);
+    }
+
+    public void AddRigidBody()
+    {
+        Rigidbody2D rb2 = gameObject.AddComponent<Rigidbody2D>();
+        rb2.gravityScale = 0f;
+        rb2.bodyType.Equals("Dynamic");
+        rb2.freezeRotation = true;
     }
 
     public void Regenerator(Transform other)
