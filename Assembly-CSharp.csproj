@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\Characters\SpawnCharacter.cs" />
      <Compile Include="Assets\Scripts\Weapons\Projectiles\ProjectileHit.cs" />
      <Compile Include="Assets\Scripts\Weapons\Projectiles\ProjectileMovement.cs" />
+     <Compile Include="Assets\Scripts\Characters\CharacterGetHit.cs" />
     <Reference Include="UnityEngine">
         <HintPath>Z:/Unity/Unity/2020.2.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

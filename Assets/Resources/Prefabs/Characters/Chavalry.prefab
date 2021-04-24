@@ -14,10 +14,12 @@ GameObject:
   - component: {fileID: 1938825600641046637}
   - component: {fileID: 7778650932203434932}
   - component: {fileID: 1085374979012989422}
+  - component: {fileID: 1774685014424653686}
   - component: {fileID: 4447886410534229794}
   - component: {fileID: 7317184022574482934}
   - component: {fileID: 7317184022574482881}
   - component: {fileID: 7317184022574482894}
+  - component: {fileID: 7350933263817738009}
   m_Layer: 0
   m_Name: Chavalry
   m_TagString: Untagged
@@ -174,6 +176,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!70 &1774685014424653686
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680169443956348005}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0013477206, y: -0.051213946}
+  m_Size: {x: 0.122263454, y: 0.16757214}
+  m_Direction: 0
 --- !u!114 &4447886410534229794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,6 +265,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+--- !u!114 &7350933263817738009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680169443956348005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 858e2f891afe09345b5a28443f7cf8da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 5
+  capsColider: {fileID: 1774685014424653686}
 --- !u!1 &2904160524842439158
 GameObject:
   m_ObjectHideFlags: 0

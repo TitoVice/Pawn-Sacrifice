@@ -16,7 +16,7 @@ public class CharacterStats : MonoBehaviour
     public auxDictionary[] dictionary;
     public Dictionary<string, bool> playerAbilities = new Dictionary<string, bool>{ {"vision", false}, {"revive", false}, {"backprotect", false}, {"shield", false}, {"spawner", false} };
 
-    public GameObject backProtect; public GameObject shield;
+    public GameObject backProtect; public GameObject shield; public GameObject instantiatedShield = null;
     
     void Start()
     {
@@ -48,6 +48,6 @@ public class CharacterStats : MonoBehaviour
                 }
             }
         }
-        else if (ability == "shield") { Instantiate(shield, transform); playerAbilities[ability] = true; }
+        else if (ability == "shield") { instantiatedShield = Instantiate(shield, transform); playerAbilities[ability] = true; }
     }
 }
