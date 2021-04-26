@@ -41,7 +41,7 @@ public class CharacterStats : MonoBehaviour
         else if (ability == "backprotect") 
         { 
             foreach (Transform child in transform){
-                if (!child.CompareTag("Shield"))
+                if (!child.CompareTag("Shield") && !child.CompareTag("HitDetector"))
                 {
                     Instantiate(backProtect, child);
                     playerAbilities[ability] = true; 

@@ -28,6 +28,7 @@ public class TeamWorldInteraction : MonoBehaviour
             }
             else
             {
+                teamList[i].tag = "Companion";
                 teamList[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
                 DestroyImmediate(teamList[i].GetComponent<PlayerMovement>());
             }

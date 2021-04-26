@@ -10,6 +10,8 @@ TagManager:
   - Enemy
   - Background
   - Shield
+  - Companion
+  - HitDetector
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - 
   - 
   - Ground
-  - 
+  - CharacterHitDetector
   - 
   - 
   - 
