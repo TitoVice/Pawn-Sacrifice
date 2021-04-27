@@ -5,6 +5,7 @@ using UnityEngine;
 public class BomberExplode : MonoBehaviour
 {
     private SpriteRenderer sprite;
+    private Animator animator;
     private CircleCollider2D radius;
     private float intialAlpha, finalAlpha;
     private bool inRadius = false;
@@ -19,6 +20,7 @@ public class BomberExplode : MonoBehaviour
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
+        animator = transform.parent.GetComponent<Animator>();
         radius = GetComponent<CircleCollider2D>();
         intialAlpha = 0.3f;
         finalAlpha = 1f;
@@ -30,10 +32,10 @@ public class BomberExplode : MonoBehaviour
         {
             StartExplosion(Time.deltaTime);
         }
-        if (exploded) {                             //canviar aixo per fer la funcio despres de l'animacio
+        /*if (exploded) {                             //canviar aixo per fer la funcio despres de l'animacio
             ti +=Time.deltaTime;
             if (ti >= xd) { AutoDestroy();}
-        }
+        }*/
     }
 
     private void StartExplosion(float deltaTime)
@@ -42,7 +44,7 @@ public class BomberExplode : MonoBehaviour
         //Post: starts the countdown for the explosion
 
         timer += deltaTime;
-        if (timer >= explodeTime)
+        if (timer >= explodeTime && !exploded)
         {
             Explode();
         }
@@ -60,6 +62,9 @@ public class BomberExplode : MonoBehaviour
         //Post: does damage to whom is in the radius and kills himself
 
         exploded = true;
+        transform.parent.GetComponent<EnemyMoveScript>().Immobilize();
+        transform.parent.GetComponent<Collider2D>().enabled = false;
+        animator.SetBool("explode", true);
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -74,15 +79,11 @@ public class BomberExplode : MonoBehaviour
     {
         if (exploded)
         {
+            print("damage");
             if (collider.CompareTag("HitDetector"))
             {
                 collider.GetComponent<CharacterGetHit>().getHit();
             }
         }
-    }
-
-    public void AutoDestroy()
-    {
-        Destroy(transform.parent.gameObject);
     }
 }
