@@ -39,6 +39,7 @@
      <Compile Include="Assets\Scripts\Abilities\SpawnMinionBehaviour.cs" />
      <Compile Include="Assets\Scripts\Characters\AgentScript.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyMoveScript.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Bomber\BomberExplode.cs" />
      <Compile Include="Assets\Scripts\Abilities\ShieldBehaviour.cs" />
      <Compile Include="Assets\Scripts\Dungeon_Generator\NextLevel.cs" />
      <Compile Include="Assets\Scripts\Abilities\ReviveBehaviour.cs" />
@@ -67,7 +68,7 @@
      <Compile Include="Assets\Scripts\Characters\SpawnCharacter.cs" />
      <Compile Include="Assets\Scripts\Weapons\Projectiles\ProjectileHit.cs" />
      <Compile Include="Assets\Scripts\Weapons\Projectiles\ProjectileMovement.cs" />
-     <Compile Include="Assets\Scripts\Enemies\Bomber\BomberExplode.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Charger\ChargerMovementScript.cs" />
     <Reference Include="UnityEngine">
         <HintPath>Z:/Unity/Unity/2020.2.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

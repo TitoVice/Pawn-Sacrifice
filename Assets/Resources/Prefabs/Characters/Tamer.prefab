@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 8297254067933643112}
   - component: {fileID: 8297254067933643115}
   - component: {fileID: 8297254067933643114}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tamer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

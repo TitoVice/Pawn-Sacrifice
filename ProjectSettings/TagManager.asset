@@ -20,12 +20,12 @@ TagManager:
   - Water
   - UI
   - 
-  - 
+  - Background
   - Ground
   - CharacterHitDetector
-  - 
-  - 
-  - 
+  - Enemy
+  - Character
+  - EnemyHit
   - 
   - 
   - 

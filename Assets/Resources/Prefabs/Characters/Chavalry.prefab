@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7317184022574482934}
   - component: {fileID: 7317184022574482881}
   - component: {fileID: 7317184022574482894}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Chavalry
   m_TagString: Untagged
   m_Icon: {fileID: 0}

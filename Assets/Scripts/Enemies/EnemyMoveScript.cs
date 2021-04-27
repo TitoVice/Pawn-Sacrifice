@@ -7,7 +7,7 @@ public class EnemyMoveScript : MonoBehaviour
 {
     public Transform target = null;
     public Vector3 posToGo;
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
     public Animator animator;
     private SpriteRenderer sprite;
 
@@ -31,7 +31,7 @@ public class EnemyMoveScript : MonoBehaviour
         }
     }
 
-    public void getTarget(Transform objective)
+    public virtual void getTarget(Transform objective)
     {
         //Pre: known true if the position is where it has to go, false if it's has to be searched an objective
         //Post: search the nearest target
@@ -51,8 +51,15 @@ public class EnemyMoveScript : MonoBehaviour
         if (target == null) { getTarget(null); }
         agent.SetDestination(target.position);
 
-        
-        float direction = getDirection(transform.position, target.position);
+        lookDirection(target.position);
+    }
+
+    public void lookDirection(Vector3 look)
+    {
+        //Pre: ---
+        //Post: sets the sprite looking right or left
+
+        float direction = getDirection(transform.position, look);
         
         if (direction > 0) { sprite.flipX = false; } //enemy looking to right
         else if (direction < 0) { sprite.flipX = true; } //enemy looking to left
