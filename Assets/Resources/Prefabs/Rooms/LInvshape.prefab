@@ -8151,6 +8151,7 @@ MonoBehaviour:
   position: 0000000000000000
   roomSize: 0
   start: 0
+  end: 0
   deadEnd: 0
   used: 0
   inRoom: 0
@@ -8184,7 +8185,7 @@ MonoBehaviour:
   - {x: 0, y: 1}
   - {x: -1, y: 1}
   - {x: -2, y: 1}
-  name: linvshape
+  roomName: LInvshape
   LTentranceCell: 0a00000000000000
   RDentranceCell: 000000000a000000
 --- !u!1 &9133690584126827021

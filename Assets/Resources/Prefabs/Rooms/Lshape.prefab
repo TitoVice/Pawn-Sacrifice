@@ -4890,6 +4890,7 @@ MonoBehaviour:
   position: 0000000000000000
   roomSize: 0
   start: 0
+  end: 0
   deadEnd: 0
   used: 0
   inRoom: 0
@@ -4923,7 +4924,7 @@ MonoBehaviour:
   - {x: -1, y: 0}
   - {x: -1, y: 1}
   - {x: -1, y: 2}
-  name: lshape
+  roomName: Lshape
   LTentranceCell: 00000000f6ffffff
   RDentranceCell: f6ffffff00000000
 --- !u!1 &6741960490970162173

@@ -46,6 +46,7 @@ public class FloorGenerator : MonoBehaviour
         {//generates the initial room
             
             preRoomGrid[x, y].getPositionSpecial(pos, true, false, false, size);
+            miniMap.getNormalRoom(preRoomGrid[x, y], pos);
             generatedRooms += 1;
 
             int randomNumber = Random.Range(0, 4);
@@ -102,6 +103,7 @@ public class FloorGenerator : MonoBehaviour
                     {
                         preRoomGrid[x, y].getPositionSpecial(pos, false, true, false, size);
                         preRoomGrid[x, y].openDoor(prevPos);
+                        miniMap.getNormalRoom(preRoomGrid[x, y], pos);
                         generatedRooms += 1;
                         if (preRoomGrid[x, y].deadEnd) { possibleEndRooms.Add(preRoomGrid[x, y]); }
 
@@ -128,6 +130,7 @@ public class FloorGenerator : MonoBehaviour
 
         preRoom.getPositionSpecial(pos, false, false, false, size);
         preRoom.openDoor(prevPos);
+        miniMap.getNormalRoom(preRoom, pos);
         generatedRooms += 1;
 
         if(generate(x - 1, y, pos))
@@ -158,6 +161,7 @@ public class FloorGenerator : MonoBehaviour
         //Post: initialize the grid of nulls
 
         possibleEndRooms = new List<RoomDoors>();
+        miniMap.Clear();
 
         for (int i = 0; i < roomGrid.GetLength(0); i++)
         {
@@ -392,33 +396,19 @@ public class FloorGenerator : MonoBehaviour
         //Pre: name of the big room, char that says where's the enrtrance, position x and y in the grid
         //Post: has found the adequate big room and instantiated it in the game
 
+        int[] pos = {x, y};
+
         for (int i = 0; i < rooms.setOfBigRooms.Length; i++)
         {
             string bigRoomName = rooms.setOfBigRooms[i].GetComponent<BiggerRoomCapacity>().roomName;
             if (string.Equals(name, bigRoomName))
             {
                 int[] center = rooms.setOfBigRooms[i].GetComponent<BiggerRoomCapacity>().getCentralPoint(side);
+                miniMap.getBigRoom(rooms.setOfBigRooms[i].GetComponent<BiggerRoomCapacity>(), pos, center);
                 return Instantiate(rooms.setOfBigRooms[i], new Vector3(x * size + center[0], y * size + center[1], 0), Quaternion.identity, transform);
             }
         }
         return null;
-    }
-
-    private void getRoomInMinimap(bool bigRoom, GameObject room, int x, int y)
-    {
-        //Pre: indicate if it's a big or normal room, a valid room, position in the matrix
-        //Post: the function in the minimap which creates an image of the room
-
-        int[] pos = {x, y};
-
-        if (!bigRoom)//normal size room
-        {
-            miniMap.getNormalRoom(room.GetComponent<RoomDoors>(), pos);
-        }
-        else
-        {
-            miniMap.getBigRoom(room.GetComponent<BiggerRoomCapacity>(), pos);
-        }
     }
 
 
@@ -470,7 +460,7 @@ public class FloorGenerator : MonoBehaviour
 
         instantiateRooms();
 
-        //deletes som rubbish
+        //deletes some rubbish
         foreach(Transform t in transform)
         {
             if (t.name == "auxRoom")
@@ -480,7 +470,15 @@ public class FloorGenerator : MonoBehaviour
         }
 
         int endPos = Random.Range(0, possibleEndRooms.Count);
-        RoomDoors endRoom = possibleEndRooms[endPos];            
+        RoomDoors endRoom = possibleEndRooms[endPos];       
+
+        //minimap end room part
+        int[] endPosition = {endRoom.position[0], endRoom.position[1]};
+        RoomDoors auxEndRoom = roomGrid[endPosition[0], endPosition[1]].GetComponent<RoomDoors>();
+        auxEndRoom.isEnd();
+        miniMap.getNormalRoom(auxEndRoom, endPosition);
+        //---------------------
+
         finalRoom[0] = endRoom.position[0];
         finalRoom[1] = endRoom.position[1];
 

@@ -120,11 +120,11 @@ public class WeaponAttack : MonoBehaviour
     {
         //Pre: ---
         //Post: adds a new projectile stat
-        Debug.Log(type);
+        //Debug.Log(type);
         if (projectileStats.ContainsKey(type)) 
         { 
             projectileStats[type] = true;  
-            Debug.Log(projectileStats[type]);
+            //Debug.Log(projectileStats[type]);
             if (GetComponent<MeleeWeaponAttack>() != null) 
             {
                 GetComponent<MeleeWeaponAttack>().updateStats(projectileStats);

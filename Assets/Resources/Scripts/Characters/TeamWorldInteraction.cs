@@ -43,7 +43,7 @@ public class TeamWorldInteraction : MonoBehaviour
         for (int i = 0; i < 4; i++) //4 members
         {
             int random = Random.Range(0, team.Count);
-            Debug.Log(random);
+            //Debug.Log(random);
             selectedTeam.Add(team[random]);
             team.RemoveAt(random);
         }

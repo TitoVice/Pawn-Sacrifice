@@ -14,10 +14,13 @@ public class RoomDoors : MonoBehaviour
     public int roomSize;
 
     public bool start = false;
+    public bool end = false;
     public bool deadEnd = false;
     public bool used = false;
     public bool inRoom = false;
     public bool visited = false;
+    public MiniMapCamera miniMap = null;
+    private MiniMapDisplayer miniMapDisplayer = null;
 
     //  variables for big rooms
     [Header("Big Room Data")]
@@ -41,6 +44,11 @@ public class RoomDoors : MonoBehaviour
         if (!bigger){ roomSize = size; }
 
         if (start) { inRoom = true; visited = true; }
+    }
+
+    public void isEnd()
+    {
+        end = true;
     }
 
     public void getName_Spawn(string name, char side)
@@ -71,12 +79,15 @@ public class RoomDoors : MonoBehaviour
         copyRoom.D = D;
         copyRoom.T = T;
         copyRoom.start = start;
+        copyRoom.end = end;
         copyRoom.deadEnd = deadEnd;
         copyRoom.bigger = bigger;
         copyRoom.used = used;
         copyRoom.roomSize = roomSize;
         copyRoom.inRoom = inRoom;
         copyRoom.visited = visited;
+        copyRoom.position = position;
+        copyRoom.doors = doors;
 
         if (inRoom) { copyRoom.showRoom(); }
         else { copyRoom.hideRoom(); }
@@ -91,6 +102,16 @@ public class RoomDoors : MonoBehaviour
     {
         //Pre: ---
         //Post: determines if the player is in the room or has left it
+
+        if (miniMapDisplayer == null)
+        {
+            miniMapDisplayer = transform.parent.GetComponent<FloorGenerator>().miniMap;
+            miniMap = miniMapDisplayer.transform.GetChild(0).GetComponent<MiniMapCamera>();
+        }
+
+        miniMapDisplayer.getDoors(position, L.ToString() + R.ToString() + D.ToString() + T.ToString());
+        miniMapDisplayer.roomToShow(position);
+        miniMap.focusRoom(transform.position);
 
         visited = true;
         return inRoom;

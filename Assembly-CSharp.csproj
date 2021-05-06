@@ -59,6 +59,7 @@
      <Compile Include="Assets\Resources\Scripts\Dungeon_Generator\FloorGeneratorEditor.cs" />
      <Compile Include="Assets\Resources\Scripts\Abilities\VisionBehaviour.cs" />
      <Compile Include="Assets\Resources\Scripts\UI\ButtonSacrifice.cs" />
+     <Compile Include="Assets\Resources\Scripts\UI\MiniMapDisplayer.cs" />
      <Compile Include="Assets\Resources\Scripts\Portes_Camera\DoorsInteraction.cs" />
      <Compile Include="Assets\Resources\Scripts\Characters\CharacterGetHit.cs" />
      <Compile Include="Assets\Resources\Scripts\Portes_Camera\CameraFreeMovement.cs" />
@@ -69,7 +70,7 @@
      <Compile Include="Assets\Resources\Scripts\Enemies\Charger\ChargerMovementScript.cs" />
      <Compile Include="Assets\Resources\Scripts\Weapons\Projectiles\ProjectileHit.cs" />
      <Compile Include="Assets\Resources\Scripts\Weapons\Projectiles\ProjectileMovement.cs" />
-     <Compile Include="Assets\Resources\Scripts\UI\MiniMapDisplayer.cs" />
+     <Compile Include="Assets\Resources\Scripts\UI\MiniMapCamera.cs" />
     <Reference Include="UnityEngine">
         <HintPath>Z:/Unity/Unity/2020.2.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
