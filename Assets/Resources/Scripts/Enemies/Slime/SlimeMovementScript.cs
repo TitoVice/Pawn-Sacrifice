@@ -9,13 +9,17 @@ public class SlimeMovementScript : EnemyMoveScript
     public float distance = 0.7f;
     private bool animating = false;
     public bool fusioner = false;
+    public bool launching = true;
+    private bool charAttack = false;
 
     public override void movement(float time)
     {
+        if (charAttack) { base.movement(time); }
+        else if (!charAttack && target != null) { agent.SetDestination(target.position); }
+
+        lookDirection(target.position);
         if (target != null && !animating)
         {
-            base.movement(time);
-
             fusionTimer += time;
             if (Vector3.Distance(transform.position, target.position) < distance && fusionTimer >= launchTime)
             {
@@ -24,14 +28,21 @@ public class SlimeMovementScript : EnemyMoveScript
                 if (!target.GetComponent<SlimeMovementScript>().fusioner) { fusioner = true; }
             }
         }
-        else if (target == null) //in case the other slime is destroyed, it tries to attack the characters
+        else if (target == null && !launching) //in case the other slime is destroyed, it tries to attack the characters
         {
             animator.SetBool("fusioning", false);
             animating = false;
+            charAttack = true;
             gameObject.GetComponent<EnemyMoveScript>().enabled = true;
             gameObject.GetComponent<SlimeMovementScript>().enabled = false;
         }
     }
+
+    /*public override void getTarget(Transform objective)
+    {
+        print("ho intenta, "+objective.name);
+        target = objective;
+    }*/
 
     public void fusion()
     {
@@ -45,6 +56,7 @@ public class SlimeMovementScript : EnemyMoveScript
             target.GetComponent<BoxCollider2D>().enabled = false;
             GameObject slime = Resources.Load<GameObject>("Prefabs/Enemies/Slime");
             GameObject bigSlime = Instantiate(slime, transform.position, transform.rotation);
+            bigSlime.GetComponent<EnemyMoveScript>().characters = characters;
 
             SlimeGetHit getBigHit = bigSlime.GetComponent<SlimeGetHit>();
             SlimeGetHit getHit = GetComponent<SlimeGetHit>();

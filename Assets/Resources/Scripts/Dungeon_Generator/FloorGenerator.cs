@@ -6,7 +6,6 @@ public class FloorGenerator : MonoBehaviour
 {
     public GameObject basicRoom;
     public GameObject roomTemplates;
-    public GameObject start;
     public GameObject end;
     public TeamWorldInteraction team;
     public MiniMapDisplayer miniMap;
@@ -192,7 +191,7 @@ public class FloorGenerator : MonoBehaviour
                         roomRevision(i, j);
                         doorsNeeded = preRoomGrid[i, j].getDoors();
 
-                        GameObject auxRoom = findAndCreateRoom(doorsNeeded, i, j);
+                        GameObject auxRoom = findAndCreateRoom(doorsNeeded, i, j, false);
                         preRoomGrid[i, j].getValues(auxRoom.GetComponent<RoomDoors>());
                         
                         roomGrid[i, j] = auxRoom;
@@ -237,7 +236,7 @@ public class FloorGenerator : MonoBehaviour
                 {
                     Destroy(roomGrid[sideX, sideY]);
                 
-                    GameObject auxRoom = findAndCreateRoom(sideRoom.getDoors(), sideX, sideY);
+                    GameObject auxRoom = findAndCreateRoom(sideRoom.getDoors(), sideX, sideY, false);
                     sideRoom.getValues(auxRoom.GetComponent<RoomDoors>());
 
                     roomGrid[sideX, sideY] = auxRoom;
@@ -246,7 +245,7 @@ public class FloorGenerator : MonoBehaviour
         }
     }
 
-    private GameObject findAndCreateRoom(string doorsNeeded,int x, int y)
+    private GameObject findAndCreateRoom(string doorsNeeded,int x, int y, bool special)
     {
         //Pre: string of doors needed by the room,position x and y in the grid
         //Post: has found the adequate room and instantiated it in the game
@@ -256,7 +255,7 @@ public class FloorGenerator : MonoBehaviour
             string doors = rooms.setOfRooms[i].GetComponent<RoomDoors>().doors;
             if (string.Equals(doors, doorsNeeded))
             {
-                return Instantiate(rooms.setOfRooms[i], new Vector3(x * size, y * size, 0), Quaternion.identity, transform);
+                return Instantiate(rooms.setOfRooms[i].GetComponent<RoomSelector>().selectRoom(special), new Vector3(x * size, y * size, 0), Quaternion.identity, transform);
             }
         }
         return null;
@@ -405,7 +404,7 @@ public class FloorGenerator : MonoBehaviour
             {
                 int[] center = rooms.setOfBigRooms[i].GetComponent<BiggerRoomCapacity>().getCentralPoint(side);
                 miniMap.getBigRoom(rooms.setOfBigRooms[i].GetComponent<BiggerRoomCapacity>(), pos, center);
-                return Instantiate(rooms.setOfBigRooms[i], new Vector3(x * size + center[0], y * size + center[1], 0), Quaternion.identity, transform);
+                return Instantiate(rooms.setOfBigRooms[i].GetComponent<RoomSelector>().selectRoom(false), new Vector3(x * size + center[0], y * size + center[1], 0), Quaternion.identity, transform);
             }
         }
         return null;
@@ -475,6 +474,7 @@ public class FloorGenerator : MonoBehaviour
         //minimap end room part
         int[] endPosition = {endRoom.position[0], endRoom.position[1]};
         RoomDoors auxEndRoom = roomGrid[endPosition[0], endPosition[1]].GetComponent<RoomDoors>();
+
         auxEndRoom.isEnd();
         miniMap.getNormalRoom(auxEndRoom, endPosition);
         //---------------------
@@ -482,7 +482,18 @@ public class FloorGenerator : MonoBehaviour
         finalRoom[0] = endRoom.position[0];
         finalRoom[1] = endRoom.position[1];
 
-        Instantiate(start, new Vector3(initialRoom[0] * size, initialRoom[1] * size, 0), Quaternion.identity, transform);
+        //re instantiate initial and end room
+        RoomDoors initialDoors = roomGrid[initialRoom[0], initialRoom[1]].GetComponent<RoomDoors>();
+        Destroy(roomGrid[initialRoom[0], initialRoom[1]]);
+        roomGrid[initialRoom[0], initialRoom[1]] = findAndCreateRoom(initialDoors.getDoors(), initialRoom[0], initialRoom[1], true);
+        initialDoors.getValues(roomGrid[initialRoom[0], initialRoom[1]].GetComponent<RoomDoors>());
+
+        RoomDoors endDoors = roomGrid[finalRoom[0], finalRoom[1]].GetComponent<RoomDoors>();
+        Destroy(roomGrid[finalRoom[0], finalRoom[1]]);
+        roomGrid[finalRoom[0], finalRoom[1]] = findAndCreateRoom(endDoors.getDoors(), finalRoom[0], finalRoom[1], true);
+        endDoors.getValues(roomGrid[finalRoom[0], finalRoom[1]].GetComponent<RoomDoors>());
+        //----------------------
+
         Instantiate(end, new Vector3(finalRoom[0] * size, finalRoom[1] * size, 0), Quaternion.identity, transform);
 
         team.spawn(initialRoom[0] * size, initialRoom[1] * size);

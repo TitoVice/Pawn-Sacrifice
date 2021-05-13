@@ -86,16 +86,14 @@ public class DoorsInteraction : MonoBehaviour
             {
                 if (Mathf.Abs(exitPosition.x - enterPosition.x) > offset)//change of room
                 {
-                    if (parent.leaveRoom()){ moveCamera(collision); collision.transform.parent.parent = transform.parent; inroomBehaviour.TeamInRoom(collision.transform.parent.gameObject); }
-                    else { collision.transform.parent.parent = null; }
+                    if (parent.leaveRoom()){ moveCamera(collision); inroomBehaviour.TeamInRoom(collision.transform.parent.gameObject); }
                 }
             }
             else
             {
                 if (Mathf.Abs(exitPosition.y - enterPosition.y) > offset)//change of room
                 {
-                    if (parent.leaveRoom()){ moveCamera(collision); collision.transform.parent.parent = transform.parent; inroomBehaviour.TeamInRoom(collision.transform.parent.gameObject); }
-                    else { collision.transform.parent.parent = null; }
+                    if (parent.leaveRoom()){ moveCamera(collision); inroomBehaviour.TeamInRoom(collision.transform.parent.gameObject); }
                 }
             }
         }

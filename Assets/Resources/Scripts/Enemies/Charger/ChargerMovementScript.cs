@@ -15,27 +15,30 @@ public class ChargerMovementScript : EnemyMoveScript
 
     public override void movement(float time)
     {
-        if (walking)
+        if (characters.Count > 0)
         {
-            agent.speed = walkingSpeed;
-            agent.SetDestination(selectedPosition);
-            getTarget(null);
-            if (Vector3.Distance(transform.position, selectedPosition) < 1f) { walking = false; }
-        }
-        else if (charging)
-        {
-            agent.speed = chargingSpeed;
-            agent.SetDestination(selectedPosition);
-            if (Vector3.Distance(transform.position, selectedPosition) < 1f) { charging = false; }
-        }
+            if (walking)
+            {
+                agent.speed = walkingSpeed;
+                agent.SetDestination(selectedPosition);
+                getTarget(null);
+                if (Vector3.Distance(transform.position, selectedPosition) < 1f) { walking = false; }
+            }
+            else if (charging)
+            {
+                agent.speed = chargingSpeed;
+                agent.SetDestination(selectedPosition);
+                if (Vector3.Distance(transform.position, selectedPosition) < 1f) { charging = false; }
+            }
 
-        if (!walking && !charging) 
-        { 
-            waitTimer += time;
-            if (waitTimer >= waitTime) { waitTimer = 0.0f; getTarget(null);  }
-        }
+            if (!walking && !charging) 
+            { 
+                waitTimer += time;
+                if (waitTimer >= waitTime) { waitTimer = 0.0f; getTarget(null);  }
+            }
 
-        lookDirection(selectedPosition);
+            lookDirection(selectedPosition);
+        }
     }
 
     public override void getTarget(Transform objective)
@@ -44,52 +47,55 @@ public class ChargerMovementScript : EnemyMoveScript
         bool selected = false;
         target = null;
 
-        foreach (GameObject player in characters)
+        if (characters.Count > 0)
         {
-            foreach (Transform child in player.transform)
+            foreach (GameObject player in characters)
             {
-                if (child.CompareTag("HitDetector") && !child.GetComponent<CharacterGetHit>().dead)
+                foreach (Transform child in player.transform)
                 {
-                    float distance = Vector3.Distance(transform.position, player.transform.position);
-                    if (distance < minDistance) 
+                    if (child.CompareTag("HitDetector") && !child.GetComponent<CharacterGetHit>().dead)
                     {
-                        RaycastHit2D hit;
-                        hit = Physics2D.Raycast(transform.position, (player.transform.position - transform.position), Mathf.Infinity, layerMask);
-                        
-                        if (hit.collider != null && !hit.transform.CompareTag("Background") && !hit.transform.CompareTag("Enemy"))//raycasts directly to a player or companion
+                        float distance = Vector3.Distance(transform.position, player.transform.position);
+                        if (distance < minDistance) 
                         {
-                            selected = true;
-                            charging = true;
-                            walking = false;
-                            selectedPosition = new Vector3(player.transform.position.x*1.2f, player.transform.position.y*1.2f, player.transform.position.z);
-                            minDistance = distance;
+                            RaycastHit2D hit;
+                            hit = Physics2D.Raycast(transform.position, (player.transform.position - transform.position), Mathf.Infinity, layerMask);
+                            
+                            if (hit.collider != null && !hit.transform.CompareTag("Background") && !hit.transform.CompareTag("Enemy"))//raycasts directly to a player or companion
+                            {
+                                selected = true;
+                                charging = true;
+                                walking = false;
+                                selectedPosition = new Vector3(player.transform.position.x*1.2f, player.transform.position.y*1.2f, player.transform.position.z);
+                                minDistance = distance;
+                            }
                         }
                     }
-                }
-                else if (child.CompareTag("Minion") && !child.GetComponent<MinionGetHit>().dead)
-                {
-                    float distance = Vector3.Distance(transform.position, player.transform.position);
-                    if (distance < minDistance) 
+                    else if (child.CompareTag("Minion") && !child.GetComponent<MinionGetHit>().dead)
                     {
-                        RaycastHit2D hit;
-                        hit = Physics2D.Raycast(transform.position, (player.transform.position - transform.position), Mathf.Infinity, layerMask);
-                        
-                        if (hit.collider != null && !hit.transform.CompareTag("Background") && !hit.transform.CompareTag("Enemy"))//raycasts directly to a player or companion
+                        float distance = Vector3.Distance(transform.position, player.transform.position);
+                        if (distance < minDistance) 
                         {
-                            selected = true;
-                            charging = true;
-                            walking = false;
-                            selectedPosition = new Vector3(player.transform.position.x*1.2f, player.transform.position.y*1.2f, player.transform.position.z);
-                            minDistance = distance;
+                            RaycastHit2D hit;
+                            hit = Physics2D.Raycast(transform.position, (player.transform.position - transform.position), Mathf.Infinity, layerMask);
+                            
+                            if (hit.collider != null && !hit.transform.CompareTag("Background") && !hit.transform.CompareTag("Enemy"))//raycasts directly to a player or companion
+                            {
+                                selected = true;
+                                charging = true;
+                                walking = false;
+                                selectedPosition = new Vector3(player.transform.position.x*1.2f, player.transform.position.y*1.2f, player.transform.position.z);
+                                minDistance = distance;
+                            }
                         }
                     }
                 }
             }
-        }
-        if (!selected && !walking) 
-        {
-            selectedPosition = RandomPosition();
-            walking = true;
+            if (!selected && !walking) 
+            {
+                selectedPosition = RandomPosition();
+                walking = true;
+            }
         }
     }
 

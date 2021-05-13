@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9074151408976837587}
   - component: {fileID: 9074151408976837586}
   - component: {fileID: 9074151408976837597}
+  - component: {fileID: 113639461075655215}
   m_Layer: 10
   m_Name: Bomber
   m_TagString: Enemy
@@ -216,6 +217,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.072242126, y: 0.0823406}
   m_EdgeRadius: 0
+--- !u!114 &113639461075655215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9074151408976837596}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e6fe5a9725a7e4eaa964187eeda2d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveScript: {fileID: 9074151408976837584}
+  chargerMovementScript: {fileID: 0}
 --- !u!1 &9074151409091196210
 GameObject:
   m_ObjectHideFlags: 0

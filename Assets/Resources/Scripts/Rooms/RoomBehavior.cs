@@ -18,9 +18,12 @@ public class RoomBehavior : MonoBehaviour
             {
                 child.GetComponent<InRoomBehaviour>().OpenDoor();
             }
-            foreach (Transform child in team.transform)
+            if (team != null)
             {
-                if (child.GetComponent<SpawnMinionBehaviour>()) { child.GetComponent<SpawnMinionBehaviour>().Kill(); }
+                foreach (Transform child in team.transform)
+                {
+                    if (child.GetComponent<SpawnMinionBehaviour>()) { child.GetComponent<SpawnMinionBehaviour>().Kill(); }
+                }
             }
         }
     }

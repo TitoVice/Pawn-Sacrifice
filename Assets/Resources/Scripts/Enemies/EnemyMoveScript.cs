@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyMoveScript : MonoBehaviour
 {
-    public GameObject[] characters; //al final sera l'objecte team passat per les portes, agafa els fills(jugadors)
+    public List<GameObject> characters; //al final sera l'objecte team passat per les portes, agafa els fills(jugadors)
     public Transform target = null;
     private Vector3 posToGo;
     public NavMeshAgent agent;
@@ -29,6 +29,7 @@ public class EnemyMoveScript : MonoBehaviour
 
     void Update()
     {
+        transform.rotation = new Quaternion(0, 0, 0, 0);
         if(GetComponent<NavMeshAgent>().enabled == true)
         {
             movement(Time.deltaTime);
@@ -40,48 +41,53 @@ public class EnemyMoveScript : MonoBehaviour
         //Pre: known true if the position is where it has to go, false if it's has to be searched an objective
         //Post: search the nearest target or gets the objective
         
-        if (objective == null)
+        if (characters.Count > 0)
         {
-            float minDistance = 1000.0f;
-
-            foreach (GameObject player in characters)
+            if (objective == null)
             {
-                foreach (Transform child in player.transform)
+                float minDistance = 1000.0f;
+
+                foreach (GameObject player in characters)
                 {
-                    if (child.CompareTag("HitDetector") && !child.GetComponent<CharacterGetHit>().dead)
+                    foreach (Transform child in player.transform)
                     {
-                        float distance = Vector3.Distance(transform.position, player.transform.position);
-                        if (distance < minDistance) 
+                        if (child.CompareTag("HitDetector") && !child.GetComponent<CharacterGetHit>().dead)
                         {
-                            minDistance = distance;
-                            target = player.transform;
+                            float distance = Vector3.Distance(transform.position, player.transform.position);
+                            if (distance < minDistance) 
+                            {
+                                minDistance = distance;
+                                target = player.transform;
+                            }
                         }
-                    }
-                    else if (child.CompareTag("Minion") && !child.GetComponent<MinionGetHit>().dead)
-                    {
-                        float distance = Vector3.Distance(transform.position, player.transform.position);
-                        if (distance < minDistance) 
+                        else if (child.CompareTag("Minion") && !child.GetComponent<MinionGetHit>().dead)
                         {
-                            minDistance = distance;
-                            target = player.transform;
+                            float distance = Vector3.Distance(transform.position, player.transform.position);
+                            if (distance < minDistance) 
+                            {
+                                minDistance = distance;
+                                target = player.transform;
+                            }
                         }
                     }
                 }
             }
-        }
-        else
-        {
-            target = objective;
+            else
+            {
+                target = objective;
+            }
         }
     }
 
     public virtual void movement(float time)
     {
+        if (characters.Count > 0)
+        {
+            if (timer >= targetTimer) { getTarget(null); }
+            agent.SetDestination(target.position);
 
-        if (timer >= targetTimer) { getTarget(null); }
-        agent.SetDestination(target.position);
-
-        lookDirection(target.position);
+            lookDirection(target.position);
+        }
     }
 
     public void lookDirection(Vector3 look)
@@ -115,11 +121,9 @@ public class EnemyMoveScript : MonoBehaviour
 
     public void getCharacters(GameObject team)
     {
-        int i = 0;
         foreach (Transform child in team.transform)
         {
-            characters[i] = child.gameObject;
-            i++;
+            characters.Add(child.gameObject);
         }
     }
 }

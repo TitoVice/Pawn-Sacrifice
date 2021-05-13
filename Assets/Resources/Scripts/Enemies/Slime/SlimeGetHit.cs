@@ -39,7 +39,7 @@ public class SlimeGetHit : EnemyGetHit
                 splited = false; 
                 GetComponent<BoxCollider2D>().enabled = true;
 
-                if (GetComponent<SlimeMovementScript>().enabled) { GetComponent<SlimeMovementScript>().getTarget(toFollow); }
+                if (GetComponent<SlimeMovementScript>().enabled) { GetComponent<SlimeMovementScript>().getTarget(toFollow); GetComponent<SlimeMovementScript>().launching = false; }
                 else if (GetComponent<EnemyMoveScript>().enabled) { GetComponent<EnemyMoveScript>().getTarget(null); }
                 
                 DestroyImmediate(GetComponent<Rigidbody2D>());
@@ -60,18 +60,19 @@ public class SlimeGetHit : EnemyGetHit
             slimePrefab = Resources.Load<GameObject>("Prefabs/Enemies/Slime");
             if (slimePrefab.GetComponent<SlimeGetHit>().life-2*familyTree > 0)//limit of times a slime can fuse
             {
-                Vector3 target = GetComponent<EnemyMoveScript>().target.position;
+                //Vector3 target = GetComponent<EnemyMoveScript>().target.position;
                 Vector3 direction = new Vector3(transform.position.x - hitPosition.x, transform.position.y - hitPosition.y, transform.position.z).normalized;
                 int rotation = 100;
                 GameObject firstRegenerator = null;
 
                 for (int i = 0; i < 3; i++)
                 {
-                    GameObject miniSlime = Instantiate(slimePrefab, transform.position, transform.rotation);
+                    GameObject miniSlime = Instantiate(slimePrefab, transform.position, transform.rotation, transform.parent);
                     SlimeGetHit miniHit = miniSlime.GetComponent<SlimeGetHit>();
 
                     miniSlime.GetComponent<BoxCollider2D>().enabled = false;
                     miniHit.AddRigidBody();
+                    miniSlime.GetComponent<EnemyMoveScript>().characters = GetComponent<EnemyMoveScript>().characters;
 
                     miniSlime.transform.localScale = new Vector3(miniSlime.transform.localScale.x/2, miniSlime.transform.localScale.y/2, 1.0f);
 
@@ -96,6 +97,7 @@ public class SlimeGetHit : EnemyGetHit
                         }
                         else { firstRegenerator = miniSlime; } //gets the first slime who wants wants to generate a bigger slime
                     }
+                    //else { miniSlime.GetComponent<EnemyMoveScript>().getTarget(null); }
                 }
             }
         }
@@ -114,11 +116,12 @@ public class SlimeGetHit : EnemyGetHit
     {
         //Pre: ---
         //Post: tries to make a bigger slime 
-
-        GetComponent<EnemyMoveScript>().enabled = false;
+        
         SlimeMovementScript SMscript = GetComponent<SlimeMovementScript>();
         SMscript.enabled = true;
         SMscript.characters = GetComponent<EnemyMoveScript>().characters;
+        //SMscript.getTarget(other);
+        GetComponent<EnemyMoveScript>().enabled = false;
         toFollow = other;
     }
 }

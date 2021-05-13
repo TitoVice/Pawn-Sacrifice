@@ -16,13 +16,13 @@ public class InRoomBehaviour : MonoBehaviour
     public void OpenDoor()
     {
         animator.SetBool("opening", true);
-        colid.enabled = false;
+        colid.isTrigger = true;
     }
 
     public void CloseDoor()
     {
         animator.SetBool("closing", true);
-        colid.enabled = true;
+        colid.isTrigger = false;
     }
 
     public void Closed()
@@ -36,6 +36,7 @@ public class InRoomBehaviour : MonoBehaviour
         CloseDoor();
         foreach (Transform child in enemies.transform)
         {
+            child.GetComponent<EnemyWaiting>().stopWaiting();
             if (child.GetComponent<EnemyMoveScript>() != null) { child.GetComponent<EnemyMoveScript>().getCharacters(team); }
             else if (child.GetComponent<ChargerMovementScript>() != null) { child.GetComponent<ChargerMovementScript>().getCharacters(team); }
         }
