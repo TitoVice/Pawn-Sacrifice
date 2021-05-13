@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CharacterGetHit : MonoBehaviour
 {
+    public int initialLife = 5;
     public int life = 5;
     public CapsuleCollider2D capsColider;
+    public GameObject winLoseMenu;
     private CharacterStats stats;
     private SpriteRenderer sprite;
 
@@ -20,16 +22,26 @@ public class CharacterGetHit : MonoBehaviour
     {
         stats = transform.parent.GetComponent<CharacterStats>();
         sprite = transform.parent.GetComponent<SpriteRenderer>();
+        winLoseMenu = GameObject.Find("DeathWinMenu");
     }
 
     void Update()
     {
-        if (dead && gameObject.transform.parent.CompareTag("Player")) //a la funcio de reviure posar deadtimer a 0
+        if (dead && gameObject.transform.parent.CompareTag("Player"))
         {
             deadTimer += Time.deltaTime;
             if (deadTimer >= deadLapsus) //time to let the revive ability be used, also to have a pause time for the next game
             {
-                //print("GAME OVER!!");
+                winLoseMenu.SetActive(true);
+                winLoseMenu.GetComponent<DeathWinMenu>().Death();
+            }
+        }
+        else if (dead && gameObject.transform.parent.CompareTag("Companion"))
+        {
+            deadTimer += Time.deltaTime;
+            if (deadTimer >= deadLapsus) //time to let the revive ability be used, also to have a pause time for the next game
+            {
+                transform.parent.GetComponent<AgentScript>().Immobilize();//----------------------------------------------------  reviure al X habitacions, no permetre que es mogui d'on ha mort (freeze position?), desactivar coliders
             }
         }
         else if (damaged)
@@ -46,10 +58,9 @@ public class CharacterGetHit : MonoBehaviour
 
         if (!damaged)
         {
-            if (stats.instantiatedShield != null && stats.instantiatedShield.activeSelf) //s'haura de canviar un cop fet el codi de l'escut -----------------------------
+            if (stats.instantiatedShield != null && stats.instantiatedShield.GetComponent<ShieldBehaviour>().active)
             {
-                //stats.instantiatedShield.Desactivate();
-                stats.instantiatedShield.SetActive(false);
+                stats.instantiatedShield.GetComponent<ShieldBehaviour>().Desactivate();
             }
             else
             {
@@ -59,6 +70,18 @@ public class CharacterGetHit : MonoBehaviour
             }
             damaged = true;
         }
+    }
+
+    public void CureHealth()
+    {
+        life = initialLife;
+    }
+
+    public void Revived()
+    {
+        dead = false;
+        life = initialLife/2;
+        deadTimer = 0.0f;
     }
 
     IEnumerator Flash()

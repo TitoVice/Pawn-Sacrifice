@@ -5,14 +5,12 @@ using UnityEngine.AI;
 
 public class ChargerMovementScript : EnemyMoveScript
 {
-
-    public GameObject[] characters; //al final sera l'objecte team passat per les portes, agafa els fills(jugadors)
     public float walkingSpeed = 4.0f;
     public float chargingSpeed = 15.0f;
     private Vector3 selectedPosition;
     private bool charging = false, walking = false;
     public LayerMask layerMask;
-    private float timer = 0.0f;
+    private float waitTimer = 0.0f;
     private float waitTime = 1.0f;
 
     public override void movement(float time)
@@ -33,8 +31,8 @@ public class ChargerMovementScript : EnemyMoveScript
 
         if (!walking && !charging) 
         { 
-            timer += time;
-            if (timer >= waitTime) { timer = 0.0f; getTarget(null);  }
+            waitTimer += time;
+            if (waitTimer >= waitTime) { waitTimer = 0.0f; getTarget(null);  }
         }
 
         lookDirection(selectedPosition);
@@ -48,18 +46,43 @@ public class ChargerMovementScript : EnemyMoveScript
 
         foreach (GameObject player in characters)
         {
-            if (Vector3.Distance(transform.position, player.transform.position) < minDistance)
+            foreach (Transform child in player.transform)
             {
-                RaycastHit2D hit;
-                hit = Physics2D.Raycast(transform.position, (player.transform.position - transform.position), Mathf.Infinity, layerMask);
-                
-                if (hit.collider != null && !hit.transform.CompareTag("Background") && !hit.transform.CompareTag("Enemy"))//raycasts directly to a player or companion
+                if (child.CompareTag("HitDetector") && !child.GetComponent<CharacterGetHit>().dead)
                 {
-                    selected = true;
-                    charging = true;
-                    walking = false;
-                    selectedPosition = new Vector3(player.transform.position.x*1.2f, player.transform.position.y*1.2f, player.transform.position.z);
-                    //Debug.DrawLine(transform.position, selectedPosition, Color.red, 5.0f);
+                    float distance = Vector3.Distance(transform.position, player.transform.position);
+                    if (distance < minDistance) 
+                    {
+                        RaycastHit2D hit;
+                        hit = Physics2D.Raycast(transform.position, (player.transform.position - transform.position), Mathf.Infinity, layerMask);
+                        
+                        if (hit.collider != null && !hit.transform.CompareTag("Background") && !hit.transform.CompareTag("Enemy"))//raycasts directly to a player or companion
+                        {
+                            selected = true;
+                            charging = true;
+                            walking = false;
+                            selectedPosition = new Vector3(player.transform.position.x*1.2f, player.transform.position.y*1.2f, player.transform.position.z);
+                            minDistance = distance;
+                        }
+                    }
+                }
+                else if (child.CompareTag("Minion") && !child.GetComponent<MinionGetHit>().dead)
+                {
+                    float distance = Vector3.Distance(transform.position, player.transform.position);
+                    if (distance < minDistance) 
+                    {
+                        RaycastHit2D hit;
+                        hit = Physics2D.Raycast(transform.position, (player.transform.position - transform.position), Mathf.Infinity, layerMask);
+                        
+                        if (hit.collider != null && !hit.transform.CompareTag("Background") && !hit.transform.CompareTag("Enemy"))//raycasts directly to a player or companion
+                        {
+                            selected = true;
+                            charging = true;
+                            walking = false;
+                            selectedPosition = new Vector3(player.transform.position.x*1.2f, player.transform.position.y*1.2f, player.transform.position.z);
+                            minDistance = distance;
+                        }
+                    }
                 }
             }
         }

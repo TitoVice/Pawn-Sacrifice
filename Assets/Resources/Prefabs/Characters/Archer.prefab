@@ -60,8 +60,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 858e2f891afe09345b5a28443f7cf8da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialLife: 5
   life: 5
   capsColider: {fileID: 4644923069113432155}
+  winLoseMenu: {fileID: 0}
   dead: 0
   deadTimer: 1.5
 --- !u!1 &3260507868912268768
@@ -175,7 +177,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: -1358288041335446548, guid: 48fa6d8ff0dc53c44a2e1466cf24cfb8,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -440,6 +442,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1983741091152727111, guid: 24619d75cbee3394f84c092ecfb64651,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1983741091152727992, guid: 24619d75cbee3394f84c092ecfb64651,
         type: 3}

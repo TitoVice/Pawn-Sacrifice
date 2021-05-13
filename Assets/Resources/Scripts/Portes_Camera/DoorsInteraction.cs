@@ -9,6 +9,7 @@ public class DoorsInteraction : MonoBehaviour
     private PlayerMovement player = null;
     private CameraFreeMovement cameraScript;
     private TeamWorldInteraction team;
+    private InRoomBehaviour inroomBehaviour;
     private bool isVertical;
     private bool isRight, isTop; //if the value is false, it's the opposite direction
 
@@ -30,7 +31,7 @@ public class DoorsInteraction : MonoBehaviour
         cameraScript = camera.GetComponent<CameraFreeMovement>();
         parent = transform.parent.transform.parent.GetComponent<RoomDoors>();
         team = GameObject.Find("Team").GetComponent<TeamWorldInteraction>();
-
+        inroomBehaviour = GetComponent<InRoomBehaviour>();
 
         if (gameObject.name[0] == 'D' || gameObject.name[0] == 'T')
         {
@@ -85,14 +86,16 @@ public class DoorsInteraction : MonoBehaviour
             {
                 if (Mathf.Abs(exitPosition.x - enterPosition.x) > offset)//change of room
                 {
-                    if (parent.leaveRoom()){ moveCamera(collision); }
+                    if (parent.leaveRoom()){ moveCamera(collision); collision.transform.parent.parent = transform.parent; inroomBehaviour.TeamInRoom(collision.transform.parent.gameObject); }
+                    else { collision.transform.parent.parent = null; }
                 }
             }
             else
             {
                 if (Mathf.Abs(exitPosition.y - enterPosition.y) > offset)//change of room
                 {
-                    if (parent.leaveRoom()){ moveCamera(collision); }
+                    if (parent.leaveRoom()){ moveCamera(collision); collision.transform.parent.parent = transform.parent; inroomBehaviour.TeamInRoom(collision.transform.parent.gameObject); }
+                    else { collision.transform.parent.parent = null; }
                 }
             }
         }

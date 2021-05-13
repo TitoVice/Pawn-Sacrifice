@@ -69,7 +69,7 @@ public class BomberExplode : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.CompareTag("HitDetector"))
+        if (collider.CompareTag("HitDetector") || collider.CompareTag("Minion"))
         {
             inRadius = true;
         }
@@ -79,11 +79,16 @@ public class BomberExplode : MonoBehaviour
     {
         if (exploded)
         {
-            print("damage");
             if (collider.CompareTag("HitDetector"))
             {
                 collider.GetComponent<CharacterGetHit>().getHit();
             }
+            else if (collider.CompareTag("Minion"))
+        {
+            MinionGetHit minion = collider.gameObject.GetComponent<MinionGetHit>();
+
+            minion.getHit();
+        }
         }
     }
 }

@@ -102,7 +102,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 7259597191629325265, guid: d6fc6ae7dea079a41bcd979b3bd6d703,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -212,13 +212,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b7df0d92312964e80be7a160a01f0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  posToGo: {x: 0, y: 0, z: 0}
-  agent: {fileID: 0}
-  animator: {fileID: 0}
   characters:
   - {fileID: 0}
   - {fileID: 0}
+  target: {fileID: 0}
+  agent: {fileID: 0}
+  animator: {fileID: 0}
   walkingSpeed: 4
   chargingSpeed: 15
   layerMask:

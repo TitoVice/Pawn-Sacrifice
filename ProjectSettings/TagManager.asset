@@ -12,6 +12,7 @@ TagManager:
   - Shield
   - Companion
   - HitDetector
+  - Minion
   layers:
   - Default
   - TransparentFX

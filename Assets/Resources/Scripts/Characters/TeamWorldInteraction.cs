@@ -19,7 +19,7 @@ public class TeamWorldInteraction : MonoBehaviour
 
         for (int i = 0; i < selectedTeam.Count; i++)
         {
-            teamList.Add(Instantiate(selectedTeam[i], new Vector3(0, 0, 0), Quaternion.identity, transform));
+            teamList.Add(Instantiate(selectedTeam[i], new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), transform));
             if (i == 0)
             {
                 teamList[i].tag = "Player";

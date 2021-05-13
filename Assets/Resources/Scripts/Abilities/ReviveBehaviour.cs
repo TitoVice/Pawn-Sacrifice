@@ -1,18 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ReviveBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private CharacterGetHit[] characters = new CharacterGetHit[4];
+    private bool usedInFloor = false;
+
     void Start()
     {
-        
+        int i = 0;
+        foreach (Transform character in transform.parent.transform)
+        {
+            characters[i] = character.GetComponent<CharacterGetHit>();
+            i++;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (!usedInFloor)
+        {
+            foreach(CharacterGetHit character in characters)
+            {
+                if (character != null && character.dead)
+                {
+                    usedInFloor = true;
+                    character.Revived();
+                    break;
+                }
+            }
+        }
+    }
+
+    public void Refull()
+    {
+        usedInFloor = false;
     }
 }

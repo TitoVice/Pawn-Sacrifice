@@ -10,5 +10,11 @@ public class EnemyMeleeHit : MonoBehaviour
         {
             collider.GetComponent<CharacterGetHit>().getHit();
         }
+        else if (collider.CompareTag("Minion"))
+        {
+            MinionGetHit minion = collider.gameObject.GetComponent<MinionGetHit>();
+
+            minion.getHit();
+        }
     }
 }

@@ -35,9 +35,9 @@ public class CharacterStats : MonoBehaviour
         //Pre: valid ability name
         //Post: add the ability to the character
 
-        if (ability == "vision") { gameObject.AddComponent<VisionBehaviour>(); playerAbilities[ability] = true; }
+        if (ability == "vision") { playerAbilities[ability] = true; GameObject.Find("MiniMapCamera").GetComponent<MiniMapDisplayer>().showEndRoom(); }
         else if (ability == "revive") { gameObject.AddComponent<ReviveBehaviour>(); playerAbilities[ability] = true; }
-        else if (ability == "spawner") { gameObject.AddComponent<ReviveBehaviour>(); playerAbilities[ability] = true; }
+        else if (ability == "spawner") { gameObject.AddComponent<SpawnMinionBehaviour>(); playerAbilities[ability] = true; }
         else if (ability == "backprotect") 
         { 
             foreach (Transform child in transform){

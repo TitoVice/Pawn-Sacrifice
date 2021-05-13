@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SlimeMovementScript : EnemyMoveScript
 {
-    private float timer = 0.0f;
+    private float fusionTimer = 0.0f;
     private float launchTime = 1.0f;
     public float distance = 0.7f;
     private bool animating = false;
@@ -16,8 +16,8 @@ public class SlimeMovementScript : EnemyMoveScript
         {
             base.movement(time);
 
-            timer += time;
-            if (Vector3.Distance(transform.position, target.position) < distance && timer >= launchTime)
+            fusionTimer += time;
+            if (Vector3.Distance(transform.position, target.position) < distance && fusionTimer >= launchTime)
             {
                 animator.SetBool("fusioning", true);
                 animating = true;

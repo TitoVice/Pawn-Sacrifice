@@ -20,6 +20,7 @@ public class AgentScript : MonoBehaviour
 
     void Update()
     {
+        transform.rotation = new Quaternion(0, 0, 0, 0);
         if(GetComponent<NavMeshAgent>().enabled == true)
         {
             agent.SetDestination(target.position);

@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 35058749b51e40e4598461c89252a04c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - minionPrefab: {fileID: 3978958499286103945, guid: 9e089ed3e680cbd4e947467316000eb7,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

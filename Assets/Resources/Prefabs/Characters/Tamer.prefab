@@ -144,7 +144,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: -850467642412651924, guid: 18081df5936522d46b6ffec3969dad38,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -415,8 +415,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 858e2f891afe09345b5a28443f7cf8da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialLife: 5
   life: 5
   capsColider: {fileID: 2594089687171355695}
+  winLoseMenu: {fileID: 0}
   dead: 0
   deadTimer: 1.5
 --- !u!1 &8012716024423731801
@@ -530,7 +532,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 2952cd6e547c5ee4e9f414f642e1438d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -66,7 +66,7 @@ public class MeleeWeaponAttack : MonoBehaviour
             if (stats["burn"]) { enemyHit.hitBurn(meleeDamage); noEffects = false; }
 
             if (noEffects) { enemyHit.hit(meleeDamage); } //normal hit 
-            if (!stats["arrow"]) { colided = true; colider.enabled = false; } //if it's not an arrow destroy the projectile
+            if (!stats["arrow"]) { colided = true; colider.enabled = false; }
 
             enemyHit.colisionPosition(transform.position);
             
