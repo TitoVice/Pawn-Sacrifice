@@ -5,6 +5,7 @@ using UnityEngine.AI;
 public class FloorGenerator : MonoBehaviour
 {
     public GameObject basicRoom;
+    public GameObject bossRoom;
     public GameObject roomTemplates;
     public GameObject end;
     public TeamWorldInteraction team;
@@ -442,64 +443,78 @@ public class FloorGenerator : MonoBehaviour
         generatedRooms = 0;
         ready = false;
 
-        rooms = roomTemplates.GetComponent<RoomTemplates>();
-
-        while (!ready)
+        if (level < 4)
         {
-            initializeGrid();
-            generatedRooms = 0;
+            rooms = roomTemplates.GetComponent<RoomTemplates>();
 
-            generate(initialRoom[0], initialRoom[1], initialRoom);
-
-            if (generatedRooms >= minRooms && generatedRooms <= maxRooms && minDeadEnds <= possibleEndRooms.Count)
+            while (!ready)
             {
-                ready = true;
+                initializeGrid();
+                generatedRooms = 0;
+
+                generate(initialRoom[0], initialRoom[1], initialRoom);
+
+                if (generatedRooms >= minRooms && generatedRooms <= maxRooms && minDeadEnds <= possibleEndRooms.Count)
+                {
+                    ready = true;
+                }
             }
+
+            instantiateRooms();
+
+            //deletes some rubbish
+            foreach(Transform t in transform)
+            {
+                if (t.name == "auxRoom")
+                {
+                    Destroy(t.gameObject);
+                }
+            }
+
+            int endPos = Random.Range(0, possibleEndRooms.Count);
+            RoomDoors endRoom = possibleEndRooms[endPos];       
+
+            //minimap end room part
+            int[] endPosition = {endRoom.position[0], endRoom.position[1]};
+            RoomDoors auxEndRoom = roomGrid[endPosition[0], endPosition[1]].GetComponent<RoomDoors>();
+
+            auxEndRoom.isEnd();
+            miniMap.getNormalRoom(auxEndRoom, endPosition);
+            //---------------------
+
+            finalRoom[0] = endRoom.position[0];
+            finalRoom[1] = endRoom.position[1];
+
+            //re instantiate initial and end room
+            RoomDoors initialDoors = roomGrid[initialRoom[0], initialRoom[1]].GetComponent<RoomDoors>();
+            Destroy(roomGrid[initialRoom[0], initialRoom[1]]);
+            roomGrid[initialRoom[0], initialRoom[1]] = findAndCreateRoom(initialDoors.getDoors(), initialRoom[0], initialRoom[1], true);
+            initialDoors.getValues(roomGrid[initialRoom[0], initialRoom[1]].GetComponent<RoomDoors>());
+
+            RoomDoors endDoors = roomGrid[finalRoom[0], finalRoom[1]].GetComponent<RoomDoors>();
+            Destroy(roomGrid[finalRoom[0], finalRoom[1]]);
+            roomGrid[finalRoom[0], finalRoom[1]] = findAndCreateRoom(endDoors.getDoors(), finalRoom[0], finalRoom[1], true);
+            endDoors.getValues(roomGrid[finalRoom[0], finalRoom[1]].GetComponent<RoomDoors>());
+            //----------------------
+
+            Instantiate(end, new Vector3(finalRoom[0] * size, finalRoom[1] * size, 0), Quaternion.identity, transform);
+
+            team.spawn(initialRoom[0] * size, initialRoom[1] * size);
+
+            level += 1;
+            initialRoom[0] = finalRoom[0];
+            initialRoom[1] = finalRoom[1];
         }
-
-        instantiateRooms();
-
-        //deletes some rubbish
-        foreach(Transform t in transform)
+        else if (level == 4)
         {
-            if (t.name == "auxRoom")
-            {
-                Destroy(t.gameObject);
-            }
+            GameObject cameraAux = GameObject.Find("Main Camera");
+            cameraAux.transform.position = new Vector3(20, 20, -6);
+            cameraAux.GetComponent<CameraFreeMovement>().startFreeMove();
+            roomGrid[2,2] = findAndCreateRoom("0001", 2, 2, true);
+            roomGrid[2,2].GetComponent<RoomDoors>().leaveRoom();
+            roomGrid[2,3] = Instantiate(bossRoom, new Vector3(20, 35, 0), Quaternion.identity, transform);
+            team.spawn(2 * size, 2 * size);
         }
-
-        int endPos = Random.Range(0, possibleEndRooms.Count);
-        RoomDoors endRoom = possibleEndRooms[endPos];       
-
-        //minimap end room part
-        int[] endPosition = {endRoom.position[0], endRoom.position[1]};
-        RoomDoors auxEndRoom = roomGrid[endPosition[0], endPosition[1]].GetComponent<RoomDoors>();
-
-        auxEndRoom.isEnd();
-        miniMap.getNormalRoom(auxEndRoom, endPosition);
-        //---------------------
-
-        finalRoom[0] = endRoom.position[0];
-        finalRoom[1] = endRoom.position[1];
-
-        //re instantiate initial and end room
-        RoomDoors initialDoors = roomGrid[initialRoom[0], initialRoom[1]].GetComponent<RoomDoors>();
-        Destroy(roomGrid[initialRoom[0], initialRoom[1]]);
-        roomGrid[initialRoom[0], initialRoom[1]] = findAndCreateRoom(initialDoors.getDoors(), initialRoom[0], initialRoom[1], true);
-        initialDoors.getValues(roomGrid[initialRoom[0], initialRoom[1]].GetComponent<RoomDoors>());
-
-        RoomDoors endDoors = roomGrid[finalRoom[0], finalRoom[1]].GetComponent<RoomDoors>();
-        Destroy(roomGrid[finalRoom[0], finalRoom[1]]);
-        roomGrid[finalRoom[0], finalRoom[1]] = findAndCreateRoom(endDoors.getDoors(), finalRoom[0], finalRoom[1], true);
-        endDoors.getValues(roomGrid[finalRoom[0], finalRoom[1]].GetComponent<RoomDoors>());
-        //----------------------
-
-        Instantiate(end, new Vector3(finalRoom[0] * size, finalRoom[1] * size, 0), Quaternion.identity, transform);
-
-        team.spawn(initialRoom[0] * size, initialRoom[1] * size);
-
-        level += 1;
-        initialRoom[0] = finalRoom[0];
-        initialRoom[1] = finalRoom[1];
+        
     }
 }

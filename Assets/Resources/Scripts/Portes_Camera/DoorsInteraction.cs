@@ -33,7 +33,7 @@ public class DoorsInteraction : MonoBehaviour
         team = GameObject.Find("Team").GetComponent<TeamWorldInteraction>();
         inroomBehaviour = GetComponent<InRoomBehaviour>();
 
-        if (gameObject.name[0] == 'D' || gameObject.name[0] == 'T')
+        if (gameObject.name[0] == 'D' || gameObject.name[0] == 'T')             //problema per fer tp als companys
         {
             isVertical = false;
             if (gameObject.name[0] == 'D') { isTop = false; }

@@ -10,7 +10,7 @@ public class TeamWorldInteraction : MonoBehaviour
     private List<GameObject> selectedTeam = new List<GameObject>();
     public List<GameObject> teamList;
     private int spawnSeparation = 1;
-    private int tpDistance = 2;
+    private int tpDistance = 1;
 
     void Start()
     {
