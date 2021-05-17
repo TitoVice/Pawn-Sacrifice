@@ -34,7 +34,7 @@ public class SpawnMinionBehaviour : MonoBehaviour
         //Pre: ---
         //Post: gets a valid random position in the NavMesh
 
-        Vector3 randomPos = Random.insideUnitCircle * 1;
+        Vector3 randomPos = Random.insideUnitCircle * 0.5f;
         randomPos += transform.position;
         NavMeshHit pos;
         Vector3 finalPos = Vector3.zero;

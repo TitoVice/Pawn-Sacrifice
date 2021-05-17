@@ -32,6 +32,7 @@ public class MinionMovement : MonoBehaviour
         {
             movement(Time.deltaTime);
         }
+        transform.rotation = new Quaternion(0, 0, 0, 0);
     }
 
     public virtual void getTarget()

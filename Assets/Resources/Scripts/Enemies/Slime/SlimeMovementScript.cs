@@ -55,7 +55,7 @@ public class SlimeMovementScript : EnemyMoveScript
             GetComponent<BoxCollider2D>().enabled = false;
             target.GetComponent<BoxCollider2D>().enabled = false;
             GameObject slime = Resources.Load<GameObject>("Prefabs/Enemies/Slime");
-            GameObject bigSlime = Instantiate(slime, transform.position, transform.rotation);
+            GameObject bigSlime = Instantiate(slime, transform.position, transform.rotation, transform.parent);
             bigSlime.GetComponent<EnemyMoveScript>().characters = characters;
 
             SlimeGetHit getBigHit = bigSlime.GetComponent<SlimeGetHit>();

@@ -10,8 +10,8 @@ public class DoorsInteraction : MonoBehaviour
     private CameraFreeMovement cameraScript;
     private TeamWorldInteraction team;
     private InRoomBehaviour inroomBehaviour;
-    private bool isVertical;
-    private bool isRight, isTop; //if the value is false, it's the opposite direction
+    public bool isVertical;
+    public bool isRight, isTop; //if the value is false, it's the opposite direction
 
     private bool hasToMove = false;
     private bool freeCamera = false;
@@ -33,7 +33,7 @@ public class DoorsInteraction : MonoBehaviour
         team = GameObject.Find("Team").GetComponent<TeamWorldInteraction>();
         inroomBehaviour = GetComponent<InRoomBehaviour>();
 
-        if (gameObject.name[0] == 'D' || gameObject.name[0] == 'T')             //problema per fer tp als companys
+        /*if (gameObject.name[0] == 'D' || gameObject.name[0] == 'T')             //problema per fer tp als companys
         {
             isVertical = false;
             if (gameObject.name[0] == 'D') { isTop = false; }
@@ -44,7 +44,8 @@ public class DoorsInteraction : MonoBehaviour
             isVertical = true;
             if (gameObject.name[0] == 'L') { isRight = false; }
             else { isRight = true; }
-        }
+        }*/
+
     }
 
     void FixedUpdate()

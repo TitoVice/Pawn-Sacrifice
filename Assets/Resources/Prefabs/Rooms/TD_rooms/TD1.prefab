@@ -1782,7 +1782,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 4
-      m_TileSpriteIndex: 4
+      m_TileSpriteIndex: 6
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1819,14 +1819,14 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: 8995859540617275298, guid: 85186179416564346a1a6137d495002b,
-      type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 8
     m_Data: {fileID: 1587948260798214949, guid: 85186179416564346a1a6137d495002b,
       type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: 8995859540617275298, guid: 85186179416564346a1a6137d495002b,
+      type: 3}
   - m_RefCount: 8
     m_Data: {fileID: 5151006611602158519, guid: 85186179416564346a1a6137d495002b,
       type: 3}
@@ -2147,6 +2147,11 @@ PrefabInstance:
       propertyPath: enemies
       value: 
       objectReference: {fileID: 5350340863868647668}
+    - target: {fileID: 7384717997086469835, guid: 881a28b77e19a4649929703080790f0a,
+        type: 3}
+      propertyPath: isTop
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 881a28b77e19a4649929703080790f0a, type: 3}
 --- !u!4 &2520273518891095473 stripped
