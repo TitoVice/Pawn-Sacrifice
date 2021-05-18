@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class EnemyGetHit : MonoBehaviour
 {
     private SpriteRenderer sprite;
@@ -13,10 +12,10 @@ public class EnemyGetHit : MonoBehaviour
     private float cooldownTimer = 0.0f;
     private bool startCooldown = false;
     private bool burned = false;
-    private float burnTick = 2.0f;
+    private float burnTick = 1.0f;
     private float burnTimer = 0.0f;
 
-    private float burnDamage = 1.0f;
+    private float burnDamage = 0.3f;
 
     public Gradient gradient;
     public Vector3 hitPosition;
@@ -90,9 +89,11 @@ public class EnemyGetHit : MonoBehaviour
             if (!startCooldown)
             {
                 //funcio per immobilitzar l'enemic
+                GetComponent<NavMeshAgent>().enabled = false;
                 StartCoroutine("Stuned");
                 startCooldown = true;
             }
+            else { hit(0.0f); }
         }
     }
 
@@ -137,6 +138,7 @@ public class EnemyGetHit : MonoBehaviour
         sprite.color = Color.gray;
         yield return new WaitForSeconds(stunTime);
         sprite.color = Color.white;
+        GetComponent<NavMeshAgent>().enabled = true;
         yield return new WaitForSeconds(0.0f);  
     }
 }

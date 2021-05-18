@@ -3,32 +3,38 @@ guid: 68ae7c16572f693439ee85e01229a4ee
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5299644666417627312
-    second: cavaller_0
+      213: 2585080740319369760
+    second: chavalry_0
   - first:
-      213: -7107342727146993718
-    second: cavaller_1
+      213: 3370594828718041015
+    second: chavalry_1
   - first:
-      213: 6811387545421751566
-    second: cavaller_2
+      213: -1377982356864705553
+    second: chavalry_2
   - first:
-      213: -6034157019520514089
-    second: cavaller_3
+      213: -7432995916355820374
+    second: chavalry_3
   - first:
-      213: -8280275277607017665
-    second: cavaller_4
+      213: 4670509581513483899
+    second: chavalry_4
   - first:
-      213: -8029184409585022317
-    second: cavaller_5
+      213: -6734812861035160008
+    second: chavalry_5
   - first:
-      213: 9222972361540635072
-    second: cavaller_6
+      213: -4259273739442689467
+    second: chavalry_6
   - first:
-      213: -8242893114541114723
-    second: cavaller_7
+      213: 7978823175542385940
+    second: chavalry_7
   - first:
-      213: -3775710499826605058
-    second: cavaller_8
+      213: -583992788385594829
+    second: chavalry_8
+  - first:
+      213: 2576009082816509897
+    second: chavalry_9
+  - first:
+      213: -1850519493614509623
+    second: chavalry_10
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -95,7 +101,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -107,7 +113,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -119,7 +125,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -130,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cavaller_0
+      name: chavalry_0
       rect:
         serializedVersion: 2
         x: 0
@@ -144,14 +150,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b0cd91debe1c8940800000000000000
-      internalID: 5299644666417627312
+      spriteID: 02a907aac3d00e320800000000000000
+      internalID: 2585080740319369760
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cavaller_1
+      name: chavalry_1
       rect:
         serializedVersion: 2
         x: 16
@@ -165,14 +171,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac7827b2275ad5d90800000000000000
-      internalID: -7107342727146993718
+      spriteID: 7b7e1877322c6ce20800000000000000
+      internalID: 3370594828718041015
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cavaller_2
+      name: chavalry_2
       rect:
         serializedVersion: 2
         x: 32
@@ -186,14 +192,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e05226062e8e68e50800000000000000
-      internalID: 6811387545421751566
+      spriteID: febd258e85c60ece0800000000000000
+      internalID: -1377982356864705553
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cavaller_3
+      name: chavalry_3
       rect:
         serializedVersion: 2
         x: 48
@@ -207,14 +213,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d7cc8c392e524ca0800000000000000
-      internalID: -6034157019520514089
+      spriteID: aa4aea48891b8d890800000000000000
+      internalID: -7432995916355820374
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cavaller_4
+      name: chavalry_4
       rect:
         serializedVersion: 2
         x: 64
@@ -228,14 +234,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f33e8cb718d861d80800000000000000
-      internalID: -8280275277607017665
+      spriteID: b766b2e08bbf0d040800000000000000
+      internalID: 4670509581513483899
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cavaller_5
+      name: chavalry_5
       rect:
         serializedVersion: 2
         x: 80
@@ -249,14 +255,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39a8496e15b929090800000000000000
-      internalID: -8029184409585022317
+      spriteID: 83e544da2632982a0800000000000000
+      internalID: -6734812861035160008
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cavaller_6
+      name: chavalry_6
       rect:
         serializedVersion: 2
         x: 96
@@ -270,14 +276,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c900e65f749eff70800000000000000
-      internalID: 9222972361540635072
+      spriteID: 54a6e5fb91504e4c0800000000000000
+      internalID: -4259273739442689467
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cavaller_7
+      name: chavalry_7
       rect:
         serializedVersion: 2
         x: 112
@@ -291,14 +297,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9a7342926c5b9d80800000000000000
-      internalID: -8242893114541114723
+      spriteID: 41dabdf87697abe60800000000000000
+      internalID: 7978823175542385940
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: cavaller_8
+      name: chavalry_8
       rect:
         serializedVersion: 2
         x: 128
@@ -312,8 +318,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef36f131e4bf99bc0800000000000000
-      internalID: -3775710499826605058
+      spriteID: 33203e037ad35e7f0800000000000000
+      internalID: -583992788385594829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chavalry_9
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 16
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c7357fcc92dfb320800000000000000
+      internalID: 2576009082816509897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: chavalry_10
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 16
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c1eb253352a156e0800000000000000
+      internalID: -1850519493614509623
       vertices: []
       indices: 
       edges: []

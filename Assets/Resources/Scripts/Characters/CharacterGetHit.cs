@@ -32,6 +32,7 @@ public class CharacterGetHit : MonoBehaviour
             deadTimer += Time.deltaTime;
             if (deadTimer >= deadLapsus) //time to let the revive ability be used, also to have a pause time for the next game
             {
+                
                 winLoseMenu.SetActive(true);
                 winLoseMenu.GetComponent<DeathWinMenu>().Death();
             }

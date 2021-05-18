@@ -36,17 +36,22 @@ public class InRoomBehaviour : MonoBehaviour
 
     public void TeamInRoom(GameObject team)
     {
-        CloseDoor();
+        int numEnemies = 0;
         foreach (Transform child in enemies.transform)
         {
+            numEnemies++;
             child.GetComponent<EnemyWaiting>().stopWaiting();
             if (child.GetComponent<EnemyMoveScript>() != null) { child.GetComponent<EnemyMoveScript>().getCharacters(team); }
             else if (child.GetComponent<ChargerMovementScript>() != null) { child.GetComponent<ChargerMovementScript>().getCharacters(team); }
         }
-        foreach (Transform child in transform.parent)
+        if (numEnemies > 0)
         {
-            child.GetComponent<InRoomBehaviour>().CloseDoor();
+            foreach (Transform child in transform.parent)
+            {
+                child.GetComponent<InRoomBehaviour>().CloseDoor();
+            }
         }
+        
         room.getTeam(team);
         room.enterRoom();
     }
