@@ -30,12 +30,16 @@ public class RoomBehavior : MonoBehaviour
 
     public void enterRoom()
     {
-        foreach (Transform child in team.transform)
+        if (!roomFinished)
         {
-            if (child.GetComponent<SpawnMinionBehaviour>()) { child.GetComponent<SpawnMinionBehaviour>().Spawn(); }
-            foreach (Transform grandchild in child.transform)
+            foreach (Transform child in team.transform)
             {
-                if (grandchild.CompareTag("Shield")) { grandchild.GetComponent<ShieldBehaviour>().enterRoom(); }
+                child.GetComponent<CharacterDeath>().PassRoom();
+                if (child.GetComponent<SpawnMinionBehaviour>()) { child.GetComponent<SpawnMinionBehaviour>().Spawn(); }
+                foreach (Transform grandchild in child.transform)
+                {
+                    if (grandchild.CompareTag("Shield")) { grandchild.GetComponent<ShieldBehaviour>().enterRoom(); }
+                }
             }
         }
     }

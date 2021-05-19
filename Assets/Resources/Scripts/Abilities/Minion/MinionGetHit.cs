@@ -6,7 +6,6 @@ public class MinionGetHit : MonoBehaviour
 {
     public int initialLife = 2;
     public int life = 2;
-    public bool dead = false;
     private SpriteRenderer sprite;
 
     private bool damaged = false;
@@ -30,12 +29,12 @@ public class MinionGetHit : MonoBehaviour
     public void getHit()
     {
         //Pre: ---
-        //Post: character received damage, if it doesn't have a shield
+        //Post: character receive damage, if life is 0 it¡s destroyed
 
         if (!damaged)
         {
             life -= 1;
-            if (life <= 0) { transform.parent.GetComponent<Animator>().SetBool("dead", true); dead = true; }
+            if (life <= 0) { transform.parent.GetComponent<Animator>().SetBool("dead", true); Destroy(gameObject); }
             else { StartCoroutine("Flash"); }
             
             damaged = true;

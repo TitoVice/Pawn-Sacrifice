@@ -51,7 +51,7 @@ public class EnemyMoveScript : MonoBehaviour
                 {
                     foreach (Transform child in player.transform)
                     {
-                        if (child.CompareTag("HitDetector") && !child.GetComponent<CharacterGetHit>().dead)
+                        if (child.CompareTag("HitDetector"))
                         {
                             float distance = Vector3.Distance(transform.position, player.transform.position);
                             if (distance < minDistance) 
@@ -60,7 +60,7 @@ public class EnemyMoveScript : MonoBehaviour
                                 target = player.transform;
                             }
                         }
-                        else if (child.CompareTag("Minion") && !child.GetComponent<MinionGetHit>().dead)
+                        else if (child.CompareTag("Minion"))
                         {
                             float distance = Vector3.Distance(transform.position, player.transform.position);
                             if (distance < minDistance) 

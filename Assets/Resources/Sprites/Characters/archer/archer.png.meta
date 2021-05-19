@@ -29,6 +29,39 @@ TextureImporter:
   - first:
       213: 7577396719038197189
     second: arquer_8
+  - first:
+      213: 5731584507761909605
+    second: archer_0
+  - first:
+      213: -7615759149648210162
+    second: archer_1
+  - first:
+      213: -1516033387003549848
+    second: archer_2
+  - first:
+      213: 4216426741142755077
+    second: archer_3
+  - first:
+      213: -4784937291257459594
+    second: archer_4
+  - first:
+      213: -2896677429709300588
+    second: archer_5
+  - first:
+      213: -1237044410232977109
+    second: archer_6
+  - first:
+      213: 4255292104823726704
+    second: archer_7
+  - first:
+      213: 2375208054730090502
+    second: archer_8
+  - first:
+      213: 480887029864472272
+    second: archer_9
+  - first:
+      213: 7135723650130993342
+    second: archer_10
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -130,7 +163,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: arquer_0
+      name: archer_0
       rect:
         serializedVersion: 2
         x: 0
@@ -144,14 +177,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce32a811934662de0800000000000000
-      internalID: -1358288041335446548
+      spriteID: 56fd7491ebdaa8f40800000000000000
+      internalID: 5731584507761909605
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: arquer_1
+      name: archer_1
       rect:
         serializedVersion: 2
         x: 16
@@ -165,14 +198,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4cea338553f132af0800000000000000
-      internalID: -422459626069184828
+      spriteID: e07994647636f4690800000000000000
+      internalID: -7615759149648210162
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: arquer_2
+      name: archer_2
       rect:
         serializedVersion: 2
         x: 32
@@ -186,14 +219,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95fe5954133b8e750800000000000000
-      internalID: 6334509900098826073
+      spriteID: 8676504baa7f5fae0800000000000000
+      internalID: -1516033387003549848
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: arquer_3
+      name: archer_3
       rect:
         serializedVersion: 2
         x: 48
@@ -207,14 +240,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f7a3b1931cc71b60800000000000000
-      internalID: 7716860870943549425
+      spriteID: 507954f08c1c38a30800000000000000
+      internalID: 4216426741142755077
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: arquer_4
+      name: archer_4
       rect:
         serializedVersion: 2
         x: 64
@@ -228,14 +261,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2dbf19a288cf67de0800000000000000
-      internalID: -1335602577708811310
+      spriteID: 67c4412a2ec789db0800000000000000
+      internalID: -4784937291257459594
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: arquer_5
+      name: archer_5
       rect:
         serializedVersion: 2
         x: 80
@@ -249,14 +282,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 175e48a230854b290800000000000000
-      internalID: -7875573077742656143
+      spriteID: 49c1945993fecc7d0800000000000000
+      internalID: -2896677429709300588
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: arquer_6
+      name: archer_6
       rect:
         serializedVersion: 2
         x: 96
@@ -270,14 +303,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ce131870f4271120800000000000000
-      internalID: 2384415142941236928
+      spriteID: b294eacb9a225dee0800000000000000
+      internalID: -1237044410232977109
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: arquer_7
+      name: archer_7
       rect:
         serializedVersion: 2
         x: 112
@@ -291,14 +324,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 058e37f4591703480800000000000000
-      internalID: -8921505975723890608
+      spriteID: 072ea83bf95dd0b30800000000000000
+      internalID: 4255292104823726704
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: arquer_8
+      name: archer_8
       rect:
         serializedVersion: 2
         x: 128
@@ -312,8 +345,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5cd6b705b22582960800000000000000
-      internalID: 7577396719038197189
+      spriteID: 60865d1342f66f020800000000000000
+      internalID: 2375208054730090502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archer_9
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 16
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0de1a20b4347ca600800000000000000
+      internalID: 480887029864472272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: archer_10
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 16
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb069656ade270360800000000000000
+      internalID: 7135723650130993342
       vertices: []
       indices: 
       edges: []

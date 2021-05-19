@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7317184022574482934}
   - component: {fileID: 7317184022574482881}
   - component: {fileID: 7317184022574482894}
+  - component: {fileID: 7872879979642852177}
   m_Layer: 11
   m_Name: Chavalry
   m_TagString: Untagged
@@ -249,6 +250,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+--- !u!114 &7872879979642852177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1680169443956348005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b158e69a92c70864686391e25222ab96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 7317184022574482934}
+  navMeshAgent: {fileID: 1938825600641046637}
+  rb2: {fileID: 1085374979012989422}
+  boxCollider2D: {fileID: 3550876066319248886}
+  isDead: 0
 --- !u!1 &2904160524842439158
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,5 +585,3 @@ MonoBehaviour:
   life: 5
   capsColider: {fileID: 840013477106948054}
   winLoseMenu: {fileID: 0}
-  dead: 0
-  deadTimer: 1.5

@@ -32,20 +32,6 @@ public class DoorsInteraction : MonoBehaviour
         parent = transform.parent.transform.parent.GetComponent<RoomDoors>();
         team = GameObject.Find("Team").GetComponent<TeamWorldInteraction>();
         inroomBehaviour = GetComponent<InRoomBehaviour>();
-
-        /*if (gameObject.name[0] == 'D' || gameObject.name[0] == 'T')             //problema per fer tp als companys
-        {
-            isVertical = false;
-            if (gameObject.name[0] == 'D') { isTop = false; }
-            else { isTop = true; }
-        }
-        else if (gameObject.name[0] == 'L' || gameObject.name[0] == 'R')
-        {
-            isVertical = true;
-            if (gameObject.name[0] == 'L') { isRight = false; }
-            else { isRight = true; }
-        }*/
-
     }
 
     void FixedUpdate()

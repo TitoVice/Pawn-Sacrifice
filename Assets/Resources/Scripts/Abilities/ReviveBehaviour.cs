@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ReviveBehaviour : MonoBehaviour
 {
-    private CharacterGetHit[] characters = new CharacterGetHit[4];
+    private CharacterDeath[] characters = new CharacterDeath[4];
     private bool usedInFloor = false;
 
     void Start()
@@ -10,7 +10,7 @@ public class ReviveBehaviour : MonoBehaviour
         int i = 0;
         foreach (Transform character in transform.parent.transform)
         {
-            characters[i] = character.GetComponent<CharacterGetHit>();
+            characters[i] = character.GetComponent<CharacterDeath>();
             i++;
         }
     }
@@ -19,9 +19,9 @@ public class ReviveBehaviour : MonoBehaviour
     {
         if (!usedInFloor)
         {
-            foreach(CharacterGetHit character in characters)
+            foreach(CharacterDeath character in characters)
             {
-                if (character != null && character.dead)
+                if (character != null && character.isDead)
                 {
                     usedInFloor = true;
                     character.Revived();

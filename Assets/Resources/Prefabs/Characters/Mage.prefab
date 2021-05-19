@@ -146,8 +146,6 @@ MonoBehaviour:
   life: 5
   capsColider: {fileID: 5886063178103219920}
   winLoseMenu: {fileID: 0}
-  dead: 0
-  deadTimer: 1.5
 --- !u!1 &2085831614752147025
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,6 +196,7 @@ GameObject:
   - component: {fileID: 3090392594980575495}
   - component: {fileID: 3090392594980575489}
   - component: {fileID: 3090392594980575494}
+  - component: {fileID: 5023722745417092258}
   m_Layer: 11
   m_Name: Mage
   m_TagString: Untagged
@@ -441,6 +440,23 @@ MonoBehaviour:
     type: 3}
   shield: {fileID: 5963723408898304411, guid: c701886257ecd9645a8911a6458f11df, type: 3}
   instantiatedShield: {fileID: 0}
+--- !u!114 &5023722745417092258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5947012417547279044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b158e69a92c70864686391e25222ab96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 3090392594980575495}
+  navMeshAgent: {fileID: 4249718971436070696}
+  rb2: {fileID: 2082695349586027600}
+  boxCollider2D: {fileID: 7615785074396812063}
+  isDead: 0
 --- !u!1 &8445601904186928900
 GameObject:
   m_ObjectHideFlags: 0

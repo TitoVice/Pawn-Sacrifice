@@ -82,6 +82,7 @@ GameObject:
   - component: {fileID: 8297254067933643112}
   - component: {fileID: 8297254067933643115}
   - component: {fileID: 8297254067933643114}
+  - component: {fileID: 2972927592432246445}
   m_Layer: 11
   m_Name: Tamer
   m_TagString: Untagged
@@ -325,6 +326,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+--- !u!114 &2972927592432246445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814741847270658414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b158e69a92c70864686391e25222ab96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 8297254067933643112}
+  navMeshAgent: {fileID: 7150744030591581314}
+  rb2: {fileID: 4981468608944566266}
+  boxCollider2D: {fileID: 3492039036454590645}
+  isDead: 0
 --- !u!1 &7373322319777775750
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,8 +437,6 @@ MonoBehaviour:
   life: 5
   capsColider: {fileID: 2594089687171355695}
   winLoseMenu: {fileID: 0}
-  dead: 0
-  deadTimer: 1.5
 --- !u!1 &8012716024423731801
 GameObject:
   m_ObjectHideFlags: 0

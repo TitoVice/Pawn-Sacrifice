@@ -53,7 +53,7 @@ public class ChargerMovementScript : EnemyMoveScript
             {
                 foreach (Transform child in player.transform)
                 {
-                    if (child.CompareTag("HitDetector") && !child.GetComponent<CharacterGetHit>().dead)
+                    if (child.CompareTag("HitDetector"))
                     {
                         float distance = Vector3.Distance(transform.position, player.transform.position);
                         if (distance < minDistance) 
@@ -71,7 +71,7 @@ public class ChargerMovementScript : EnemyMoveScript
                             }
                         }
                     }
-                    else if (child.CompareTag("Minion") && !child.GetComponent<MinionGetHit>().dead)
+                    else if (child.CompareTag("Minion"))
                     {
                         float distance = Vector3.Distance(transform.position, player.transform.position);
                         if (distance < minDistance) 

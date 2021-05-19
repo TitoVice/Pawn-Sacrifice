@@ -29,6 +29,12 @@ TextureImporter:
   - first:
       213: -1242840603470816573
     second: tamer_8
+  - first:
+      213: 4977269671137362251
+    second: tamer_9
+  - first:
+      213: -5845026738545510181
+    second: tamer_10
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -314,6 +320,48 @@ TextureImporter:
       bones: []
       spriteID: 3ca90b55e0b80cee0800000000000000
       internalID: -1242840603470816573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tamer_9
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 0
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b41c77b2560d21540800000000000000
+      internalID: 4977269671137362251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tamer_10
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd8b55a462b42eea0800000000000000
+      internalID: -5845026738545510181
       vertices: []
       indices: 
       edges: []

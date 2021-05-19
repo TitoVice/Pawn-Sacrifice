@@ -36,6 +36,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Resources\Scripts\Rooms\RoomSelector.cs" />
      <Compile Include="Assets\Resources\Scripts\Abilities\Minion\SpawnMinionBehaviour.cs" />
      <Compile Include="Assets\Resources\Scripts\Characters\AgentScript.cs" />
      <Compile Include="Assets\Resources\Scripts\Enemies\EnemyMoveScript.cs" />
@@ -63,6 +64,7 @@
      <Compile Include="Assets\Resources\Scripts\Weapons\Projectiles\BossProjectileHit.cs" />
      <Compile Include="Assets\Resources\Scripts\Weapons\WeaponAttack.cs" />
      <Compile Include="Assets\Resources\Scripts\Rooms\RoomDoors.cs" />
+     <Compile Include="Assets\Resources\Scripts\Enemies\EnemyWaiting.cs" />
      <Compile Include="Assets\Resources\Scripts\UI\Menus\DeathWinMenu.cs" />
      <Compile Include="Assets\Resources\Scripts\Abilities\Minion\MinionMovement.cs" />
      <Compile Include="Assets\Resources\Scripts\Enemies\EnemyMeleeHit.cs" />
@@ -85,8 +87,7 @@
      <Compile Include="Assets\Resources\Scripts\Weapons\Projectiles\ProjectileHit.cs" />
      <Compile Include="Assets\Resources\Scripts\Weapons\Projectiles\ProjectileMovement.cs" />
      <Compile Include="Assets\Resources\Scripts\Enemies\FinalBoss\BossMeleeAttack.cs" />
-     <Compile Include="Assets\Resources\Scripts\Rooms\RoomSelector.cs" />
-     <Compile Include="Assets\Resources\Scripts\Enemies\EnemyWaiting.cs" />
+     <Compile Include="Assets\Resources\Scripts\Characters\CharacterDeath.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
