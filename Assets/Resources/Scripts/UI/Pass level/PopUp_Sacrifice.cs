@@ -69,7 +69,7 @@ public class PopUp_Sacrifice : MonoBehaviour
         {
             Destroy(buttons[i]);
         }
-
+        buttons = new GameObject[2];
         for (int i = 0; i < 2; i++)
         {
             buttons[i] = Instantiate(buttonPrefabStats, uiPanel.transform);

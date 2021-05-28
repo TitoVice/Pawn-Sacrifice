@@ -20,7 +20,7 @@ public class CharacterGetHit : MonoBehaviour
         stats = transform.parent.GetComponent<CharacterStats>();
         sprite = transform.parent.GetComponent<SpriteRenderer>();
         characterDeath = transform.parent.GetComponent<CharacterDeath>();
-        winLoseMenu = GameObject.Find("DeathWinMenu");
+        winLoseMenu = GameObject.Find("DeathWinMenu");                      //no val aixo
     }
 
     void Update()
@@ -55,7 +55,9 @@ public class CharacterGetHit : MonoBehaviour
 
     public void CureHealth()
     {
+        print(transform.name+": "+life);
         life = initialLife;
+        print(transform.name+": "+life);
     }
 
     public void Revived()

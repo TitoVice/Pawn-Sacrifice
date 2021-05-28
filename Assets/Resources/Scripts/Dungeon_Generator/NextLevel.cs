@@ -27,7 +27,13 @@ public class NextLevel : MonoBehaviour
         GameObject team = GameObject.Find("Team");
         foreach (Transform character in team.transform)
         {
-            character.GetComponent<CharacterGetHit>().CureHealth();
+            print(character.name);
+            foreach (Transform child in character)
+            {
+                print(child.name);
+                if (child.CompareTag("HitDetector")) { child.GetComponent<CharacterGetHit>().CureHealth(); break; }
+            }
+            
             if (character.GetComponent<ReviveBehaviour>()) { character.GetComponent<ReviveBehaviour>().Refull(); } //revive ability
             if (character.GetComponent<ShieldBehaviour>()) { character.GetComponent<ShieldBehaviour>().Activate(); } //revive ability
         }

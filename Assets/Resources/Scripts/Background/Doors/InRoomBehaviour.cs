@@ -17,21 +17,18 @@ public class InRoomBehaviour : MonoBehaviour
     {
         animator.SetBool("opening", true);
         colid.isTrigger = true;
-        print("Door Opened");
     }
 
     public void CloseDoor()
     {
         animator.SetBool("closing", true);
         colid.isTrigger = false;
-        print("Closing Door");
     }
 
     public void Closed()
     {
         animator.SetBool("closing", false);
         animator.SetBool("closed", true);
-        print("Door Closed");
     }
 
     public void TeamInRoom(GameObject team)
