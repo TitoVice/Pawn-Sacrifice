@@ -319,14 +319,14 @@ NavMeshAgent:
   m_GameObject: {fileID: 8738929633791017998}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.1
+  m_Radius: 0.03
   m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 10
   m_AngularSpeed: 360
   m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 0.18
   m_BaseOffset: 0.12
@@ -344,7 +344,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028911440e683ab44b3d59e780d10ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetIsPlayer: 1
   characterName: Archer
+  ranged: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1152
 --- !u!114 &5807903000387692048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,6 +394,11 @@ PrefabInstance:
       propertyPath: dictionary.Array.data[2].used
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1983741091152727109, guid: 24619d75cbee3394f84c092ecfb64651,
+        type: 3}
+      propertyPath: agentScript
+      value: 
+      objectReference: {fileID: 670619876258213884}
     - target: {fileID: 1983741091152727110, guid: 24619d75cbee3394f84c092ecfb64651,
         type: 3}
       propertyPath: m_RootOrder

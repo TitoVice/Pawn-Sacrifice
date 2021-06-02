@@ -6,8 +6,18 @@ public class RoomBehavior : MonoBehaviour
 {
     private GameObject team;
     public GameObject enemies;
+    private List<GameObject> listEnemies = new List<GameObject>();
     public GameObject doors;
     private bool roomFinished = false;
+
+
+    void Start()
+    {
+        foreach (Transform child in enemies.transform)
+        {
+            listEnemies.Add(child.gameObject);
+        }
+    }
 
     void Update()
     {
@@ -34,6 +44,7 @@ public class RoomBehavior : MonoBehaviour
         {
             foreach (Transform child in team.transform)
             {
+                if (!child.CompareTag("Player")) { child.GetComponent<AgentScript>().getEnemies(listEnemies); }
                 child.GetComponent<CharacterDeath>().PassRoom();
                 if (child.GetComponent<SpawnMinionBehaviour>()) { child.GetComponent<SpawnMinionBehaviour>().Spawn(); }
                 foreach (Transform grandchild in child.transform)

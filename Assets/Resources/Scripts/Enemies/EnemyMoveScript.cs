@@ -51,7 +51,7 @@ public class EnemyMoveScript : MonoBehaviour
                 {
                     foreach (Transform child in player.transform)
                     {
-                        if (child.CompareTag("HitDetector"))
+                        if (child.CompareTag("HitDetector") && !player.GetComponent<CharacterDeath>().isDead)
                         {
                             float distance = Vector3.Distance(transform.position, player.transform.position);
                             if (distance < minDistance) 

@@ -205,17 +205,17 @@ NavMeshAgent:
   m_GameObject: {fileID: 814741847270658414}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.1
+  m_Radius: 0.03
   m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 10
   m_AngularSpeed: 360
   m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
-  m_Height: 0.18
-  m_BaseOffset: 0.12
+  m_Height: 0.15
+  m_BaseOffset: 0.1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &3869079000620081397
@@ -242,7 +242,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028911440e683ab44b3d59e780d10ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetIsPlayer: 1
   characterName: Tamer
+  ranged: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!50 &4981468608944566266
 Rigidbody2D:
   serializedVersion: 4
@@ -509,6 +514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   angle: 0
+  agentScript: {fileID: 7982568908541066933}
 --- !u!212 &5398008678017148985
 SpriteRenderer:
   m_ObjectHideFlags: 0

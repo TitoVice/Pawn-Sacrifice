@@ -132,7 +132,7 @@ NavMeshAgent:
   m_AngularSpeed: 360
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 0.03
   m_BaseOffset: 0
@@ -238,6 +238,7 @@ MonoBehaviour:
   animator: {fileID: 0}
   distance: 0.7
   fusioner: 0
+  launching: 1
 --- !u!114 &2193864086786803963
 MonoBehaviour:
   m_ObjectHideFlags: 0
