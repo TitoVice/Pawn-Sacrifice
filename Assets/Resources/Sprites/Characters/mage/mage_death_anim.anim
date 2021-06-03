@@ -22,10 +22,10 @@ AnimationClip:
     - time: 0
       value: {fileID: 2971653748508199937, guid: 34129ed329555d646b07b9973f05b0ce,
         type: 3}
-    - time: 0.083333336
+    - time: 0.25
       value: {fileID: -2056482287553655689, guid: 34129ed329555d646b07b9973f05b0ce,
         type: 3}
-    - time: 0.16666667
+    - time: 0.5
       value: {fileID: -8995485352130813372, guid: 34129ed329555d646b07b9973f05b0ce,
         type: 3}
     attribute: m_Sprite
@@ -55,7 +55,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.25
+    m_StopTime: 0.5833333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -74,4 +74,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.5
+    functionName: StillDead
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

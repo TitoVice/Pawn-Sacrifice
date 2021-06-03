@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76113c3897465b64d941ef9290f8a8ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterDeath: {fileID: 7872879979642852177}
 --- !u!95 &7317184022574482934
 Animator:
   serializedVersion: 3
@@ -269,6 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 7317184022574482934}
   navMeshAgent: {fileID: 1938825600641046637}
+  agentScript: {fileID: 7778650932203434932}
   rb2: {fileID: 1085374979012989422}
   boxCollider2D: {fileID: 3550876066319248886}
   isDead: 0
@@ -422,6 +424,7 @@ MonoBehaviour:
   distanceAttack: 0
   projectile: {fileID: 0}
   player: {fileID: 1680169443956348005}
+  agentScript: {fileID: 7778650932203434932}
   initialPos: {fileID: 5461938591808185013}
   finalPos: {fileID: 8642146163636913476}
 --- !u!114 &4050949954875138039

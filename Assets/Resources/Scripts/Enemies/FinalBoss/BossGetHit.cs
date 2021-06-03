@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class BossGetHit : EnemyGetHit
 {
-    public GameObject WinMenu;
-    private DeathWinMenu winScript;
+    private GameObject Menu;
+    private GameObject WinMenu;
 
     public override void Death()
     {
         //Pre: ---
         //Post: kills the boss
 
-        WinMenu = GameObject.Find("DeathWinMenu");
-        winScript = WinMenu.GetComponent<DeathWinMenu>();
+        Menu = GameObject.Find("UI"); //gets the ui
+        foreach (Transform child in Menu.transform)
+        {
+            if (child.GetComponent<DeathWinMenu>()) { WinMenu = child.gameObject; }
+        }
 
         GetComponent<EnemyMoveScript>().Immobilize();
         GetComponent<BoxCollider2D>().enabled = false;
+        foreach (Transform child in transform) { child.gameObject.SetActive(false); }
         animator.SetBool("dead", true); 
     }
 
@@ -26,6 +30,6 @@ public class BossGetHit : EnemyGetHit
         //Post: win state of the game
         
         WinMenu.SetActive(true);
-        winScript.Win();
+        WinMenu.GetComponent<DeathWinMenu>().Win();
     }
 }

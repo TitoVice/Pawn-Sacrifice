@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BomberExplode : MonoBehaviour
@@ -32,10 +30,6 @@ public class BomberExplode : MonoBehaviour
         {
             StartExplosion(Time.deltaTime);
         }
-        /*if (exploded) {                             //canviar aixo per fer la funcio despres de l'animacio
-            ti +=Time.deltaTime;
-            if (ti >= xd) { AutoDestroy();}
-        }*/
     }
 
     private void StartExplosion(float deltaTime)

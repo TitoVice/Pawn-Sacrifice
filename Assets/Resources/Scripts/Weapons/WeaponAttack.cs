@@ -17,6 +17,8 @@ public class WeaponAttack : MonoBehaviour
     public bool distanceAttack = false;
     public GameObject projectile;
     public GameObject player;
+    private bool isPlayer = false;
+    public AgentScript agentScript;
     public Dictionary<string, bool> projectileStats = new Dictionary<string, bool>{ {"arrow", false}, {"stun", false}, {"burn", false} };
 
     private bool shooted = false;
@@ -33,6 +35,7 @@ public class WeaponAttack : MonoBehaviour
         movement = GetComponent<WeaponMovement>();
         damage = playerStats.attackDamage;
         attackSpeed = playerStats.attackSpeed;
+        isPlayer = player.CompareTag("Player");
 
         for (int i = 0; i < dictionary.Length; i++)
         {
@@ -52,10 +55,10 @@ public class WeaponAttack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && (!shooted && ableToAttack && !cooldown) && player.CompareTag("Player"))
+        if (!shooted && ableToAttack && !cooldown)
         {
-            if (distanceAttack) { shoot(); shooted = true;}
-            else { meleeAttack();  ableToAttack = false;}
+            if (isPlayer) { PlayerAttack(); }
+            else { AIAttack(); }
         }
 
         if (shooted && timer < attackSpeed) 
@@ -89,6 +92,42 @@ public class WeaponAttack : MonoBehaviour
         }
     }
 
+    private void PlayerAttack()
+    {
+        //Pre: ---
+        //Post: the player tries to attack
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Attack();
+        }
+    }
+
+    private void AIAttack()
+    {
+        //Pre: ---
+        //Post: AI tries to attack
+
+        if (!agentScript.targetIsPlayer)//we don't attack the player
+        {
+            if (distanceAttack) { shoot(); shooted = true;}
+            else
+            {
+                float distanceToTarget = Vector3.Distance(agentScript.giveTarget(), finalPos.position);
+                if (distanceToTarget <= 2.0f) { meleeAttack();  ableToAttack = false; }
+            }
+        }
+    }
+
+    private void Attack()
+    {
+        //Pre: ---
+        //Post: shoots or makes a melee attack
+
+        if (distanceAttack) { shoot(); shooted = true;}
+        else { meleeAttack();  ableToAttack = false;}
+    }
+
     private void shoot()
     {
         //Pre: ---
@@ -120,11 +159,11 @@ public class WeaponAttack : MonoBehaviour
     {
         //Pre: ---
         //Post: adds a new projectile stat
-        //Debug.Log(type);
+        
         if (projectileStats.ContainsKey(type)) 
         { 
             projectileStats[type] = true;  
-            //Debug.Log(projectileStats[type]);
+            
             if (GetComponent<MeleeWeaponAttack>() != null) 
             {
                 GetComponent<MeleeWeaponAttack>().updateStats(projectileStats);

@@ -57,35 +57,27 @@ public class AgentScript : MonoBehaviour
         //Post: sets the target for te IA to follow/attack
 
         float minDistance = 99999.0f;
-        updateEnemies();
+        
         if (listEnemies == null || listEnemies.Count == 0) { target = player; targetIsPlayer = true; } //no enemies, follow player
         else //select nearest enemy
         {
             for (int i = 0; i < listEnemies.Count; i++)
             {
-                float distance = Vector3.Distance(listEnemies[i].transform.position, transform.position);
+                if (listEnemies[i] != null)
+                {
+                    float distance = Vector3.Distance(listEnemies[i].transform.position, transform.position);
                 if (distance < minDistance)
                 {
                     minDistance = distance;
                     target = listEnemies[i].transform;
                     targetIsPlayer = false;
                 }
+                }
             }
         }
 
         if (targetIsPlayer) { agent.stoppingDistance = 3; }
         else { agent.stoppingDistance = 0; }
-    }
-
-    private void updateEnemies()
-    {
-        if (listEnemies != null)
-        {
-            foreach (GameObject enemy in listEnemies)
-            {
-                if (enemy == null) { listEnemies.Remove(enemy); }
-            }
-        }
     }
 
     private void setDestination()

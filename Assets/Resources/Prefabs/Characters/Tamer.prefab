@@ -170,6 +170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76113c3897465b64d941ef9290f8a8ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterDeath: {fileID: 0}
 --- !u!61 &3492039036454590645
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -230,6 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76113c3897465b64d941ef9290f8a8ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterDeath: {fileID: 2972927592432246445}
 --- !u!114 &7982568908541066933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,6 +347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 8297254067933643112}
   navMeshAgent: {fileID: 7150744030591581314}
+  agentScript: {fileID: 7982568908541066933}
   rb2: {fileID: 4981468608944566266}
   boxCollider2D: {fileID: 3492039036454590645}
   isDead: 0
@@ -499,6 +502,7 @@ MonoBehaviour:
   distanceAttack: 0
   projectile: {fileID: 0}
   player: {fileID: 814741847270658414}
+  agentScript: {fileID: 7982568908541066933}
   initialPos: {fileID: 7499821188012362278}
   finalPos: {fileID: 6415861111801543501}
 --- !u!114 &6150801970879730693

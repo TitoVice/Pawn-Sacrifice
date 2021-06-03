@@ -9,6 +9,7 @@ public class CharacterDeath : MonoBehaviour
     private GameObject winLoseMenu;
     public Animator animator;
     public NavMeshAgent navMeshAgent;
+    public AgentScript agentScript;
     public Rigidbody2D rb2;
     public BoxCollider2D boxCollider2D;
     private CharacterGetHit getHit;
@@ -18,7 +19,6 @@ public class CharacterDeath : MonoBehaviour
     void Start()
     {
         isPlayer = gameObject.CompareTag("Player");
-        winLoseMenu = GameObject.Find("DeathWinMenu");
 
         foreach (Transform child in transform)
         {
@@ -40,6 +40,7 @@ public class CharacterDeath : MonoBehaviour
         {
             boxCollider2D.enabled = false;
             navMeshAgent.enabled = false;
+            agentScript.enabled = false;
             rb2.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
         }
     }
@@ -85,6 +86,7 @@ public class CharacterDeath : MonoBehaviour
         {
             boxCollider2D.enabled = true;
             navMeshAgent.enabled = true;
+            agentScript.enabled = true;
             rb2.constraints = RigidbodyConstraints2D.None;
         }
 
@@ -100,5 +102,10 @@ public class CharacterDeath : MonoBehaviour
             {
                 child.gameObject.SetActive(what);
             }
+    }
+
+    public void getMenu(GameObject menu)
+    {
+        winLoseMenu = menu;
     }
 }

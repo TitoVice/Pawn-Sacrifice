@@ -7,6 +7,7 @@ public class MeleeWeaponAttack : MonoBehaviour
     
     private Dictionary<string, bool> stats;
     private WeaponAttack weapon;
+    private AIweaponAttack weaponAI;
     private BoxCollider2D colider;
     private float meleeDamage;
     private bool noEffects = true;

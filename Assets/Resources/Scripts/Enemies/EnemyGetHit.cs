@@ -19,11 +19,13 @@ public class EnemyGetHit : MonoBehaviour
 
     public Gradient gradient;
     public Vector3 hitPosition;
+    //public RoomBehavior roomBehaviour;
 
     void Start()
     {
         sprite = gameObject.GetComponent<SpriteRenderer>();
         animator = gameObject.GetComponent<Animator>();
+        //roomBehaviour = transform.parent.parent.GetComponent<RoomBehavior>();
     }
 
     void Update()
@@ -118,6 +120,7 @@ public class EnemyGetHit : MonoBehaviour
         //Pre: ---
         //Post: destroys the gameObject
 
+        //roomBehaviour.EnemyListChange();
         Destroy(gameObject);
     }
 

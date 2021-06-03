@@ -441,6 +441,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &717787548 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 814741847270658414, guid: d9f3dd6f42b66b2459db1ee621bb4510,
+    type: 3}
+  m_PrefabInstance: {fileID: 8297254067235382461}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1247359743
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -993,7 +999,7 @@ PrefabInstance:
     - target: {fileID: 8738929633791017998, guid: 83c9e9889bc920c4991762703fa6e424,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8738929633791017998, guid: 83c9e9889bc920c4991762703fa6e424,
         type: 3}
@@ -1121,7 +1127,7 @@ PrefabInstance:
     - target: {fileID: 1680169443956348005, guid: c9a98d89d4123394ba6876b0bf123316,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1680169443956348005, guid: c9a98d89d4123394ba6876b0bf123316,
         type: 3}
@@ -1379,8 +1385,28 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2575091444201744205, guid: 61b4bc3b1e197034d9cbf36259e3b5af,
         type: 3}
+      propertyPath: m_Speed
+      value: 39
+      objectReference: {fileID: 0}
+    - target: {fileID: 2575091444201744205, guid: 61b4bc3b1e197034d9cbf36259e3b5af,
+        type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2575091444201744205, guid: 61b4bc3b1e197034d9cbf36259e3b5af,
+        type: 3}
+      propertyPath: m_AutoBraking
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2575091444201744205, guid: 61b4bc3b1e197034d9cbf36259e3b5af,
+        type: 3}
+      propertyPath: m_Acceleration
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2575091444201744205, guid: 61b4bc3b1e197034d9cbf36259e3b5af,
+        type: 3}
+      propertyPath: m_AngularSpeed
+      value: 360
       objectReference: {fileID: 0}
     - target: {fileID: 3766037670663534659, guid: 61b4bc3b1e197034d9cbf36259e3b5af,
         type: 3}
@@ -1449,9 +1475,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3766037670663534663, guid: 61b4bc3b1e197034d9cbf36259e3b5af,
         type: 3}
+      propertyPath: characters.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3766037670663534663, guid: 61b4bc3b1e197034d9cbf36259e3b5af,
+        type: 3}
       propertyPath: characters.Array.data[0]
       value: 
-      objectReference: {fileID: 12717128}
+      objectReference: {fileID: 717787548}
     - target: {fileID: 3766037670663534663, guid: 61b4bc3b1e197034d9cbf36259e3b5af,
         type: 3}
       propertyPath: characters.Array.data[1]

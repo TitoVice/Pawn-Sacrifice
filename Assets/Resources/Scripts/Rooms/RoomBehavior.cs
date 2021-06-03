@@ -7,6 +7,7 @@ public class RoomBehavior : MonoBehaviour
     private GameObject team;
     public GameObject enemies;
     private List<GameObject> listEnemies = new List<GameObject>();
+    private List<AgentScript> companions = new List<AgentScript>();
     public GameObject doors;
     private bool roomFinished = false;
 
@@ -42,9 +43,10 @@ public class RoomBehavior : MonoBehaviour
     {
         if (!roomFinished)
         {
+            int i = 0;
             foreach (Transform child in team.transform)
             {
-                if (!child.CompareTag("Player")) { child.GetComponent<AgentScript>().getEnemies(listEnemies); }
+                if (!child.CompareTag("Player")) {  companions.Add(child.GetComponent<AgentScript>());  companions[i].getEnemies(listEnemies); i++; }
                 child.GetComponent<CharacterDeath>().PassRoom();
                 if (child.GetComponent<SpawnMinionBehaviour>()) { child.GetComponent<SpawnMinionBehaviour>().Spawn(); }
                 foreach (Transform grandchild in child.transform)
@@ -52,6 +54,23 @@ public class RoomBehavior : MonoBehaviour
                     if (grandchild.CompareTag("Shield")) { grandchild.GetComponent<ShieldBehaviour>().enterRoom(); }
                 }
             }
+        }
+    }
+
+    public void EnemyListChange()
+    {
+        //Pre: ---
+        //Post: an enemy has died or spawned, so the list in every companion has to be uploaded
+
+        listEnemies = new List<GameObject>();
+        foreach (Transform child in enemies.transform)
+        {
+            listEnemies.Add(child.gameObject);
+        }
+
+        foreach (AgentScript agent in companions)
+        {
+            agent.getEnemies(listEnemies);
         }
     }
 

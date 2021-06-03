@@ -101,6 +101,7 @@ public class SlimeGetHit : EnemyGetHit
                 }
             }
         }
+        //roomBehaviour.EnemyListChange();
         Destroy(gameObject);
     }
 

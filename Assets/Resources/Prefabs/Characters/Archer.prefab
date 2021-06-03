@@ -261,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76113c3897465b64d941ef9290f8a8ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterDeath: {fileID: 5807903000387692048}
 --- !u!95 &3260507867922977624
 Animator:
   serializedVersion: 3
@@ -364,6 +365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 3260507867922977624}
   navMeshAgent: {fileID: -9091677525227794864}
+  agentScript: {fileID: 670619876258213884}
   rb2: {fileID: 77797840924947820}
   boxCollider2D: {fileID: 8895267481654381187}
   isDead: 0
@@ -379,6 +381,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 8738929633791017998}
+    - target: {fileID: 1983741091152727108, guid: 24619d75cbee3394f84c092ecfb64651,
+        type: 3}
+      propertyPath: agentScript
+      value: 
+      objectReference: {fileID: 670619876258213884}
     - target: {fileID: 1983741091152727108, guid: 24619d75cbee3394f84c092ecfb64651,
         type: 3}
       propertyPath: dictionary.Array.data[0].used

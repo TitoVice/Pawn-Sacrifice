@@ -27,10 +27,11 @@ public class NextLevel : MonoBehaviour
         GameObject team = GameObject.Find("Team");
         foreach (Transform character in team.transform)
         {
-            print(character.name);
+            CharacterDeath charDeath = character.GetComponent<CharacterDeath>();
+            if (charDeath.isDead) { charDeath.Revived(); }
+
             foreach (Transform child in character)
             {
-                print(child.name);
                 if (child.CompareTag("HitDetector")) { child.GetComponent<CharacterGetHit>().CureHealth(); break; }
             }
             

@@ -103,9 +103,11 @@ public class ChargerMovementScript : EnemyMoveScript
     {
         //Pre: ---
         //Post: gets a valid random position in the NavMesh
-
-        Vector3 randomPos = Random.insideUnitCircle * 0.5f;
+        
+        Vector3 randomPos = Random.insideUnitCircle;// * 0.5f;
+        
         randomPos += transform.position;
+        Debug.DrawLine(transform.position, randomPos, Color.red, 2.0f);
         NavMeshHit pos;
         Vector3 finalPos = Vector3.zero;
 

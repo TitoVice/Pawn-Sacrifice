@@ -49,6 +49,7 @@ public class SlimeMovementScript : EnemyMoveScript
         //Pre: ---
         //Post: fusions two slimes
         
+        //RoomBehavior roomBehavior = transform.parent.parent.GetComponent<RoomBehavior>();
         if (fusioner)
         {
             Destroy(target.gameObject);
@@ -63,7 +64,7 @@ public class SlimeMovementScript : EnemyMoveScript
 
             getBigHit.life -= 2*(getHit.familyTree-1);
             getBigHit.familyTree = getHit.familyTree;
-
+            //roomBehavior.EnemyListChange();
             Destroy(gameObject);
         }
     }

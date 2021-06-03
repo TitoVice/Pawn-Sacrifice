@@ -9,6 +9,7 @@ public class TeamWorldInteraction : MonoBehaviour
     public List<GameObject> team; //every member of the team
     private List<GameObject> selectedTeam = new List<GameObject>();
     public List<GameObject> teamList;
+    public GameObject deathWinMenu;
     private int spawnSeparation = 1;
     private int tpDistance = 1;
 
@@ -23,6 +24,7 @@ public class TeamWorldInteraction : MonoBehaviour
             if (i == 0)
             {
                 teamList[i].tag = "Player";
+                teamList[i].GetComponent<CharacterDeath>().getMenu(deathWinMenu);
                 DestroyImmediate(teamList[i].GetComponent<AgentScript>());
                 DestroyImmediate(teamList[i].GetComponent<NavMeshAgent>());
             }
@@ -93,7 +95,7 @@ public class TeamWorldInteraction : MonoBehaviour
 
         for (int i = 0; i < teamList.Count; i++)
         {
-            if (!teamList[i].CompareTag("Player"))
+            if (!teamList[i].CompareTag("Player") && !teamList[i].GetComponent<CharacterDeath>().isDead)
             {
                 Vector3 newPos;
                 teamList[i].GetComponent<AgentScript>().Immobilize(); //desactivate the navmeshAgent in order to transport the companion
