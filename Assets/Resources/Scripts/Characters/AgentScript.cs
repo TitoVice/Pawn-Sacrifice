@@ -58,6 +58,7 @@ public class AgentScript : MonoBehaviour
 
         float minDistance = 99999.0f;
         
+        if (target == null) { target = transform; }
         if (listEnemies == null || listEnemies.Count == 0) { target = player; targetIsPlayer = true; } //no enemies, follow player
         else //select nearest enemy
         {
@@ -85,27 +86,31 @@ public class AgentScript : MonoBehaviour
         //Pre: ---
         //Post: sets the destination
 
-        Vector3 destiny = transform.position;
-
-        if (!ranged) { destiny = target.position; }
-        else
+        if (target != null)
         {
-            RaycastHit2D hit;
-            hit = Physics2D.Raycast(transform.position, (target.position - transform.position), Mathf.Infinity, layerMask);
-            
-            if (hit.collider != null && !hit.transform.CompareTag("Enemy"))//raycasts to the target, if the path is clear to shoot stay still, if not, move
+            Vector3 destiny = transform.position;
+
+            if (!ranged) { destiny = target.position; }
+            else
             {
-                destiny = target.position;//it will be moving for the next searchCooldown period
+                RaycastHit2D hit;
+                hit = Physics2D.Raycast(transform.position, (target.position - transform.position), Mathf.Infinity, layerMask);
+                
+                if (hit.collider != null && !hit.transform.CompareTag("Enemy"))//raycasts to the target, if the path is clear to shoot stay still, if not, move
+                {
+                    destiny = target.position;//it will be moving for the next searchCooldown period
+                }
             }
+            if (Vector3.Distance(transform.position, target.position) <= 1 && !targetIsPlayer) //flees from the enemy
+            {  
+                Vector3 dirToEnemy = transform.position - target.transform.position;
+                Vector3 newPos = transform.position + dirToEnemy;
+                newPos.z = transform.position.z;
+                destiny = newPos;
+            }
+            agent.SetDestination(destiny);
         }
-        if (Vector3.Distance(transform.position, target.position) <= 1 && !targetIsPlayer) //flees from the enemy
-        {  
-            Vector3 dirToEnemy = transform.position - target.transform.position;
-            Vector3 newPos = transform.position + dirToEnemy;
-            newPos.z = transform.position.z;
-            destiny = newPos;
-        }
-        agent.SetDestination(destiny);
+        
     }
 
     public void getEnemies(List<GameObject> enemies)
@@ -119,7 +124,8 @@ public class AgentScript : MonoBehaviour
 
     public Vector3 giveTarget()
     {
-        return target.position;
+        if (target != null){ return target.position; }
+        else { return transform.position; }
     }
 
     public void Immobilize()

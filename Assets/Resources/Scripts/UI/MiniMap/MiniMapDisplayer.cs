@@ -71,12 +71,12 @@ public class MiniMapDisplayer : MonoBehaviour
 
     public void roomToShow(int[] pos)
     {
-        show(miniMapGrid[pos[0], pos[1]], pos);
+        if (miniMapGrid[pos[0], pos[1]] != null) { show(miniMapGrid[pos[0], pos[1]], pos); }
     }
 
     public void getDoors(int[] pos, string doors)
     {
-        miniMapGrid[pos[0], pos[1]].doors = doors;
+        if (miniMapGrid[pos[0], pos[1]] != null) { miniMapGrid[pos[0], pos[1]].doors = doors; }
     }
 
     private void show(miniRoom room, int[] pos)

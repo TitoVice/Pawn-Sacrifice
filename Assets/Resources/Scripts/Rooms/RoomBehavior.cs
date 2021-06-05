@@ -79,7 +79,11 @@ public class RoomBehavior : MonoBehaviour
 
         foreach (GameObject agent in companions)
         {
-            if (agent.GetComponent<AgentScript>()) { agent.GetComponent<AgentScript>().getEnemies(listEnemies); }
+            if (agent != null)
+            {
+                if (agent.GetComponent<AgentScript>()) { agent.GetComponent<AgentScript>().getEnemies(listEnemies); }
+            }
+            
         }
     }
 

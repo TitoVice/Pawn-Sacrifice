@@ -38,6 +38,7 @@ public class MinionMovement : MonoBehaviour
         //Post: search the nearest target or gets the objective
         
         float minDistance = 1000.0f;
+        target = transform;
 
         if (listEnemies == null || listEnemies.Count == 0) { target = transform; }
         else

@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyMoveScript : MonoBehaviour
 {
-    public List<GameObject> characters; //al final sera l'objecte team passat per les portes, agafa els fills(jugadors)
+    public List<GameObject> characters;
     public Transform target = null;
     private Vector3 posToGo;
     public NavMeshAgent agent;
@@ -49,24 +49,27 @@ public class EnemyMoveScript : MonoBehaviour
 
                 foreach (GameObject player in characters)
                 {
-                    foreach (Transform child in player.transform)
+                    if (player != null)
                     {
-                        if (child.CompareTag("HitDetector") && !player.GetComponent<CharacterDeath>().isDead)
+                        foreach (Transform child in player.transform)
                         {
-                            float distance = Vector3.Distance(transform.position, player.transform.position);
-                            if (distance < minDistance) 
+                            if (child.CompareTag("HitDetector") && !player.GetComponent<CharacterDeath>().isDead)
                             {
-                                minDistance = distance;
-                                target = player.transform;
+                                float distance = Vector3.Distance(transform.position, player.transform.position);
+                                if (distance < minDistance) 
+                                {
+                                    minDistance = distance;
+                                    target = player.transform;
+                                }
                             }
-                        }
-                        else if (child.CompareTag("Minion"))
-                        {
-                            float distance = Vector3.Distance(transform.position, player.transform.position);
-                            if (distance < minDistance) 
+                            else if (child.CompareTag("Minion"))
                             {
-                                minDistance = distance;
-                                target = player.transform;
+                                float distance = Vector3.Distance(transform.position, player.transform.position);
+                                if (distance < minDistance) 
+                                {
+                                    minDistance = distance;
+                                    target = player.transform;
+                                }
                             }
                         }
                     }

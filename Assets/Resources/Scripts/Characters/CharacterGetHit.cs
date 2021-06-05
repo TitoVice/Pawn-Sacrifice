@@ -55,9 +55,7 @@ public class CharacterGetHit : MonoBehaviour
 
     public void CureHealth()
     {
-        print(transform.name+": "+life);
         life = initialLife;
-        print(transform.name+": "+life);
     }
 
     public void Revived()

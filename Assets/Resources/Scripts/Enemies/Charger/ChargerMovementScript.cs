@@ -6,12 +6,12 @@ using UnityEngine.AI;
 public class ChargerMovementScript : EnemyMoveScript
 {
     public float walkingSpeed = 4.0f;
-    public float chargingSpeed = 15.0f;
+    public float chargingSpeed = 12.0f;
     private Vector3 selectedPosition;
     private bool charging = false, walking = false;
     public LayerMask layerMask;
     private float waitTimer = 0.0f;
-    private float waitTime = 1.0f;
+    private float waitTime = 0.5f;
 
     public override void movement(float time)
     {
@@ -34,7 +34,7 @@ public class ChargerMovementScript : EnemyMoveScript
             if (!walking && !charging) 
             { 
                 waitTimer += time;
-                if (waitTimer >= waitTime) { waitTimer = 0.0f; getTarget(null);  }
+                if (waitTimer >= waitTime) { waitTimer = 0.0f; getTarget(null); }
             }
 
             lookDirection(selectedPosition);
@@ -51,45 +51,51 @@ public class ChargerMovementScript : EnemyMoveScript
         {
             foreach (GameObject player in characters)
             {
-                foreach (Transform child in player.transform)
+                if (player != null)
                 {
-                    if (child.CompareTag("HitDetector"))
+                    foreach (Transform child in player.transform)
                     {
-                        float distance = Vector3.Distance(transform.position, player.transform.position);
-                        if (distance < minDistance) 
+                        if (child.CompareTag("HitDetector"))
                         {
-                            RaycastHit2D hit;
-                            hit = Physics2D.Raycast(transform.position, (player.transform.position - transform.position), Mathf.Infinity, layerMask);
-                            
-                            if (hit.collider != null && !hit.transform.CompareTag("Background") && !hit.transform.CompareTag("Enemy"))//raycasts directly to a player or companion
+                            float distance = Vector3.Distance(transform.position, player.transform.position);
+                            if (distance < minDistance) 
                             {
-                                selected = true;
-                                charging = true;
-                                walking = false;
-                                selectedPosition = new Vector3(player.transform.position.x*1.2f, player.transform.position.y*1.2f, player.transform.position.z);
-                                minDistance = distance;
+                                RaycastHit2D hit;
+                                hit = Physics2D.Raycast(transform.position, (player.transform.position - transform.position), Mathf.Infinity, layerMask);
+                                
+                                if (hit.collider != null && !hit.transform.CompareTag("Background") && !hit.transform.CompareTag("Enemy"))//raycasts directly to a player or companion
+                                {
+                                    selected = true;
+                                    charging = true;
+                                    walking = false;
+                                    selectedPosition = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
+                                    minDistance = distance;
+                                    target = player.transform;
+                                }
                             }
                         }
-                    }
-                    else if (child.CompareTag("Minion"))
-                    {
-                        float distance = Vector3.Distance(transform.position, player.transform.position);
-                        if (distance < minDistance) 
+                        else if (child.CompareTag("Minion"))
                         {
-                            RaycastHit2D hit;
-                            hit = Physics2D.Raycast(transform.position, (player.transform.position - transform.position), Mathf.Infinity, layerMask);
-                            
-                            if (hit.collider != null && !hit.transform.CompareTag("Background") && !hit.transform.CompareTag("Enemy"))//raycasts directly to a player or companion
+                            float distance = Vector3.Distance(transform.position, player.transform.position);
+                            if (distance < minDistance) 
                             {
-                                selected = true;
-                                charging = true;
-                                walking = false;
-                                selectedPosition = new Vector3(player.transform.position.x*1.2f, player.transform.position.y*1.2f, player.transform.position.z);
-                                minDistance = distance;
+                                RaycastHit2D hit;
+                                hit = Physics2D.Raycast(transform.position, (player.transform.position - transform.position), Mathf.Infinity, layerMask);
+                                
+                                if (hit.collider != null && !hit.transform.CompareTag("Background") && !hit.transform.CompareTag("Enemy"))//raycasts directly to a player or companion
+                                {
+                                    selected = true;
+                                    charging = true;
+                                    walking = false;
+                                    selectedPosition = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
+                                    minDistance = distance;
+                                    target = player.transform;
+                                }
                             }
                         }
                     }
                 }
+                
             }
             if (!selected && !walking) 
             {

@@ -17,9 +17,10 @@ public class SlimeMovementScript : EnemyMoveScript
         if (charAttack) { base.movement(time); }
         else if (!charAttack && target != null) { agent.SetDestination(target.position); }
 
-        lookDirection(target.position);
         if (target != null && !animating)
         {
+            lookDirection(target.position);
+
             fusionTimer += time;
             if (Vector3.Distance(transform.position, target.position) < distance && fusionTimer >= launchTime)
             {
@@ -34,22 +35,15 @@ public class SlimeMovementScript : EnemyMoveScript
             animating = false;
             charAttack = true;
             gameObject.GetComponent<EnemyMoveScript>().enabled = true;
-            gameObject.GetComponent<SlimeMovementScript>().enabled = false;
+            Destroy(this);
         }
     }
-
-    /*public override void getTarget(Transform objective)
-    {
-        print("ho intenta, "+objective.name);
-        target = objective;
-    }*/
 
     public void fusion()
     {
         //Pre: ---
         //Post: fusions two slimes
         
-        //RoomBehavior roomBehavior = transform.parent.parent.GetComponent<RoomBehavior>();
         if (fusioner)
         {
             Destroy(target.gameObject);
@@ -64,7 +58,7 @@ public class SlimeMovementScript : EnemyMoveScript
 
             getBigHit.life -= 2*(getHit.familyTree-1);
             getBigHit.familyTree = getHit.familyTree;
-            //roomBehavior.EnemyListChange();
+
             Destroy(gameObject);
         }
     }

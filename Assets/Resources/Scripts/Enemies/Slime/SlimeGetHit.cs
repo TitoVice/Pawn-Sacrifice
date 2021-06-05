@@ -122,6 +122,7 @@ public class SlimeGetHit : EnemyGetHit
         SMscript.enabled = true;
         SMscript.characters = GetComponent<EnemyMoveScript>().characters;
         //SMscript.getTarget(other);
+        SMscript.getTarget(toFollow);
         GetComponent<EnemyMoveScript>().enabled = false;
         toFollow = other;
     }
