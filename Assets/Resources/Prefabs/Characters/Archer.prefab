@@ -261,7 +261,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76113c3897465b64d941ef9290f8a8ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterDeath: {fileID: 5807903000387692048}
 --- !u!95 &3260507867922977624
 Animator:
   serializedVersion: 3
@@ -364,6 +363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3260507867922977624}
+  sprite: {fileID: 5230148287084222428}
   navMeshAgent: {fileID: -9091677525227794864}
   agentScript: {fileID: 670619876258213884}
   rb2: {fileID: 77797840924947820}

@@ -7,7 +7,7 @@ public class RoomBehavior : MonoBehaviour
     private GameObject team;
     public GameObject enemies;
     private List<GameObject> listEnemies = new List<GameObject>();
-    private List<AgentScript> companions = new List<AgentScript>();
+    private List<GameObject> companions = new List<GameObject>();
     public GameObject doors;
     private bool roomFinished = false;
 
@@ -46,9 +46,18 @@ public class RoomBehavior : MonoBehaviour
             int i = 0;
             foreach (Transform child in team.transform)
             {
-                if (!child.CompareTag("Player")) {  companions.Add(child.GetComponent<AgentScript>());  companions[i].getEnemies(listEnemies); i++; }
-                child.GetComponent<CharacterDeath>().PassRoom();
                 if (child.GetComponent<SpawnMinionBehaviour>()) { child.GetComponent<SpawnMinionBehaviour>().Spawn(); }
+                if (!child.CompareTag("Player")) 
+                {  
+                    companions.Add(child.gameObject);
+                    if (companions[i].GetComponent<AgentScript>()) { companions[i].GetComponent<AgentScript>().getEnemies(listEnemies); } //companions, it already passes the info to the minion
+                    i++; 
+                }
+                else 
+                {
+                    if (child.GetComponent<SpawnMinionBehaviour>()) { child.GetComponent<SpawnMinionBehaviour>().GiveMinionEnemies(listEnemies); } //if the player spawns a minion
+                }
+                if (child.GetComponent<CharacterDeath>()) { child.GetComponent<CharacterDeath>().PassRoom(); }
                 foreach (Transform grandchild in child.transform)
                 {
                     if (grandchild.CompareTag("Shield")) { grandchild.GetComponent<ShieldBehaviour>().enterRoom(); }
@@ -68,9 +77,9 @@ public class RoomBehavior : MonoBehaviour
             listEnemies.Add(child.gameObject);
         }
 
-        foreach (AgentScript agent in companions)
+        foreach (GameObject agent in companions)
         {
-            agent.getEnemies(listEnemies);
+            if (agent.GetComponent<AgentScript>()) { agent.GetComponent<AgentScript>().getEnemies(listEnemies); }
         }
     }
 

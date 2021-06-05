@@ -66,12 +66,12 @@ public class AgentScript : MonoBehaviour
                 if (listEnemies[i] != null)
                 {
                     float distance = Vector3.Distance(listEnemies[i].transform.position, transform.position);
-                if (distance < minDistance)
-                {
-                    minDistance = distance;
-                    target = listEnemies[i].transform;
-                    targetIsPlayer = false;
-                }
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        target = listEnemies[i].transform;
+                        targetIsPlayer = false;
+                    }
                 }
             }
         }
@@ -111,6 +111,10 @@ public class AgentScript : MonoBehaviour
     public void getEnemies(List<GameObject> enemies)
     {
         listEnemies = enemies;
+        if (GetComponent<SpawnMinionBehaviour>()) 
+        {
+            GetComponent<SpawnMinionBehaviour>().GiveMinionEnemies(listEnemies);
+        }
     }
 
     public Vector3 giveTarget()

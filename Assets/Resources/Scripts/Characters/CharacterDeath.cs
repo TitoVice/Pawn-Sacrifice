@@ -8,6 +8,7 @@ public class CharacterDeath : MonoBehaviour
     private bool isPlayer;
     private GameObject winLoseMenu;
     public Animator animator;
+    public SpriteRenderer sprite;
     public NavMeshAgent navMeshAgent;
     public AgentScript agentScript;
     public Rigidbody2D rb2;
@@ -28,20 +29,36 @@ public class CharacterDeath : MonoBehaviour
 
     public void Death()
     {
-        animator.SetBool("dead", true);
-        isDead = true;
-        SetActivity(false);
+        foreach (Transform child in transform.parent)
+        {
+            if (child.GetComponent<ReviveBehaviour>())
+            {
+                ReviveBehaviour  revive = child.GetComponent<ReviveBehaviour>();
+                if (!revive.usedInFloor) //can be revived
+                {
+                    Revived();
+                    revive.usedInFloor = true;
+                    StartCoroutine("Flash");
+                }
+                else //it dies
+                {
+                    animator.SetBool("dead", true);
+                    isDead = true;
+                    SetActivity(false);
 
-        if (isPlayer)
-        {
-            GetComponent<PlayerMovement>().Immobilize();
-        }
-        else
-        {
-            boxCollider2D.enabled = false;
-            navMeshAgent.enabled = false;
-            agentScript.enabled = false;
-            rb2.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+                    if (isPlayer)
+                    {
+                        GetComponent<PlayerMovement>().Immobilize();
+                    }
+                    else
+                    {
+                        boxCollider2D.enabled = false;
+                        navMeshAgent.enabled = false;
+                        agentScript.enabled = false;
+                        rb2.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+                    }
+                }
+            }
         }
     }
 
@@ -107,5 +124,16 @@ public class CharacterDeath : MonoBehaviour
     public void getMenu(GameObject menu)
     {
         winLoseMenu = menu;
+    }
+
+    IEnumerator Flash()
+    {
+        //coroutine to flash the ally as it was revived by an ability
+        for (int i = 0; i < 3; i++){
+            sprite.color = Color.green;
+            yield return new WaitForSeconds(0.1f);
+            sprite.color = Color.white;
+            yield return new WaitForSeconds(0.1f);  
+        }
     }
 }

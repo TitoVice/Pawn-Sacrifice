@@ -3,12 +3,12 @@ using UnityEngine;
 public class ReviveBehaviour : MonoBehaviour
 {
     private CharacterDeath[] characters = new CharacterDeath[4];
-    private bool usedInFloor = false;
+    public bool usedInFloor = false;
 
     void Start()
     {
         int i = 0;
-        foreach (Transform character in transform.parent.transform)
+        foreach (Transform character in transform.parent)
         {
             characters[i] = character.GetComponent<CharacterDeath>();
             i++;

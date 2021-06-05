@@ -34,7 +34,7 @@ public class MinionGetHit : MonoBehaviour
         if (!damaged)
         {
             life -= 1;
-            if (life <= 0) { transform.parent.GetComponent<Animator>().SetBool("dead", true); Destroy(gameObject); }
+            if (life <= 0) { transform.parent.GetComponent<Animator>().SetBool("dead", true); }
             else { StartCoroutine("Flash"); }
             
             damaged = true;

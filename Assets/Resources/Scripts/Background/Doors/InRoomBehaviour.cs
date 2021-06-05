@@ -38,8 +38,8 @@ public class InRoomBehaviour : MonoBehaviour
         {
             numEnemies++;
             child.GetComponent<EnemyWaiting>().stopWaiting();
-            if (child.GetComponent<EnemyMoveScript>() != null) { child.GetComponent<EnemyMoveScript>().getCharacters(team); }
-            else if (child.GetComponent<ChargerMovementScript>() != null) { child.GetComponent<ChargerMovementScript>().getCharacters(team); }
+            if (child.GetComponent<EnemyMoveScript>()) { child.GetComponent<EnemyMoveScript>().getCharacters(team); }
+            else if (child.GetComponent<ChargerMovementScript>()) { child.GetComponent<ChargerMovementScript>().getCharacters(team); }
         }
         if (numEnemies > 0)
         {

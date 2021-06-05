@@ -1,23 +1,20 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class MinionMovement : MonoBehaviour
 {
-    public GameObject[] enemies; //al final sera l'objecte team passat per les portes, agafa els fills(jugadors)
     public Transform target = null;
     public NavMeshAgent agent;
     public Animator animator;
     private SpriteRenderer sprite;
+    private List<GameObject> listEnemies = new List<GameObject>();
 
     private float timer = 2.5f;
     private float targetTimer = 2.0f;
 
     void Awake()
     {
-        if (target == null) { getTarget(); }
-
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
@@ -42,13 +39,20 @@ public class MinionMovement : MonoBehaviour
         
         float minDistance = 1000.0f;
 
-        foreach (GameObject enemy in enemies)
+        if (listEnemies == null || listEnemies.Count == 0) { target = transform; }
+        else
         {
-            float distance = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distance < minDistance) 
+            for (int i = 0; i < listEnemies.Count; i++)
             {
-                minDistance = distance;
-                target = enemy.transform;
+                if (listEnemies[i] != null)
+                {
+                    float distance = Vector3.Distance(listEnemies[i].transform.position, transform.position);
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        target = listEnemies[i].transform;
+                    }
+                }
             }
         }
     }
@@ -56,7 +60,7 @@ public class MinionMovement : MonoBehaviour
     public virtual void movement(float time)
     {
 
-        if (timer >= targetTimer) { getTarget(); }
+        if (timer >= targetTimer || target == null) { getTarget(); }
         agent.SetDestination(target.position);
 
         lookDirection(target.position);
@@ -81,11 +85,19 @@ public class MinionMovement : MonoBehaviour
         return target.x - itself.x;
     }
 
+    public void getEnemies(List<GameObject> enemies)
+    {
+        listEnemies = enemies;
+    }
+
     public void Kill()
     {
-        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        Destroy(gameObject);
+        /*gameObject.transform.GetChild(0).gameObject.SetActive(false);
         agent.enabled = false;
         GetComponent<BoxCollider2D>().enabled = false;
         transform.position = new Vector3(transform.position.x, transform.position.y, 0.1f);
+        transform.parent = null;
+        this.enabled = false;*/
     }
 }

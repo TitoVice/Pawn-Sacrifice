@@ -7,9 +7,11 @@ public class SpawnMinionBehaviour : MonoBehaviour
 {
     public GameObject minionPrefab;
     private GameObject minion;
+    private CharacterDeath characterDeath;
 
     void Start()
     {
+        characterDeath = GetComponent<CharacterDeath>();
         minionPrefab = Resources.Load<GameObject>("Prefabs/Abilities/minion");
     }
 
@@ -18,7 +20,10 @@ public class SpawnMinionBehaviour : MonoBehaviour
         //Pre: ---
         //Post: spawns a minion next to his master
 
-        minion = Instantiate(minionPrefab, RandomPosition(), Quaternion.identity, transform);
+        if (!characterDeath.isDead)
+        {
+            minion = Instantiate(minionPrefab, RandomPosition(), Quaternion.identity, transform.parent);
+        }
     }
 
     public void Kill() // es fa quan una habitació s'ha acabat
@@ -26,7 +31,12 @@ public class SpawnMinionBehaviour : MonoBehaviour
         //Pre: ---
         //Post: destroys the minion at the end of a room
 
-        if (minion != null) { Destroy(minion); }
+        if (minion != null) { minion.GetComponent<Animator>().SetBool("dead", true); }
+    }
+
+    public void GiveMinionEnemies(List<GameObject> enemies)
+    {
+        if (minion != null) { minion.GetComponent<MinionMovement>().getEnemies(enemies); }
     }
 
     private Vector3 RandomPosition()
@@ -34,12 +44,13 @@ public class SpawnMinionBehaviour : MonoBehaviour
         //Pre: ---
         //Post: gets a valid random position in the NavMesh
 
-        Vector3 randomPos = Random.insideUnitCircle * 0.5f;
+        Vector3 randomPos = Random.insideUnitCircle * 0.7f;
         randomPos += transform.position;
         NavMeshHit pos;
         Vector3 finalPos = Vector3.zero;
 
-        if (NavMesh.SamplePosition(randomPos, out pos, 3, 1)) { finalPos = pos.position; }
+        bool placed = false;
+        while (!placed) { placed = NavMesh.SamplePosition(randomPos, out pos, 3, 1); finalPos = pos.position; }
 
         return finalPos;
     }

@@ -121,9 +121,16 @@ public class EnemyMoveScript : MonoBehaviour
 
     public void getCharacters(GameObject team)
     {
+        StartCoroutine(WaitTime(team));
+    }
+
+    IEnumerator WaitTime(GameObject team)
+    {
+        //coroutine so the enemies does not move immediatly
+        yield return new WaitForSeconds(0.5f);
         foreach (Transform child in team.transform)
         {
             characters.Add(child.gameObject);
-        }
+        } 
     }
 }
