@@ -13,6 +13,8 @@ public class TeamWorldInteraction : MonoBehaviour
     private int spawnSeparation = 1;
     private int tpDistance = 1;
 
+    public LifeManager lifeManager;
+
     void Start()
     {
         teamList = new List<GameObject>();
@@ -35,6 +37,7 @@ public class TeamWorldInteraction : MonoBehaviour
                 DestroyImmediate(teamList[i].GetComponent<PlayerMovement>());
             }
         }
+        lifeManager.RefreshLifes();// gets the life of every character for the first time
     }
 
     private void chosenTeam()
@@ -83,6 +86,7 @@ public class TeamWorldInteraction : MonoBehaviour
     {
         teamList.Remove(characterToDelete);
         Destroy(characterToDelete);
+        lifeManager.RefreshLifes();
     }
 
     public void roomPass(Vector3 doorPos, bool isVertical, bool isTop, bool isRight)

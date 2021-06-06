@@ -7,9 +7,9 @@ public class CharacterGetHit : MonoBehaviour
     public int initialLife = 5;
     public int life = 5;
     public CapsuleCollider2D capsColider;
-    public GameObject winLoseMenu;
     private CharacterStats stats;
     private CharacterDeath characterDeath;
+    private LifeDisplayer displayer;
     private SpriteRenderer sprite;
     private bool damaged = false;
     private float damageTimer = 0.0f;
@@ -20,7 +20,6 @@ public class CharacterGetHit : MonoBehaviour
         stats = transform.parent.GetComponent<CharacterStats>();
         sprite = transform.parent.GetComponent<SpriteRenderer>();
         characterDeath = transform.parent.GetComponent<CharacterDeath>();
-        winLoseMenu = GameObject.Find("DeathWinMenu");                      //no val aixo
     }
 
     void Update()
@@ -46,6 +45,7 @@ public class CharacterGetHit : MonoBehaviour
             else
             {
                 life -= 1;
+                displayer.ChangeLife(-1);
                 if (life <= 0) { characterDeath.Death(); }
                 else { StartCoroutine("Flash"); }
             }
@@ -61,6 +61,12 @@ public class CharacterGetHit : MonoBehaviour
     public void Revived()
     {
         life = initialLife/2;
+        displayer.ChangeLife(life);
+    }
+
+    public void GetDisplayer(LifeDisplayer disp)
+    {
+        displayer = disp;
     }
 
     IEnumerator Flash()
