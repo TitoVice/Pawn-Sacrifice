@@ -130,7 +130,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.03
-  m_Speed: 4
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 10
   m_AngularSpeed: 360
@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028911440e683ab44b3d59e780d10ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   targetIsPlayer: 1
   characterName: Chivalry
   ranged: 0
@@ -593,4 +594,3 @@ MonoBehaviour:
   initialLife: 5
   life: 5
   capsColider: {fileID: 840013477106948054}
-  winLoseMenu: {fileID: 0}

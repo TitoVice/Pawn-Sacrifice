@@ -6,7 +6,7 @@ public class BossMeleeAttack : MonoBehaviour
 {
     private bool canAttack = true;
     private bool going = true;
-    private float cooldownTimer = 0.0f, cooldownTime = 1.5f;
+    private float cooldownTimer = 0.0f, cooldownTime = 2.0f;
     public BoxCollider2D meleeCollider;
     public Transform initialPos, finalPos;
 

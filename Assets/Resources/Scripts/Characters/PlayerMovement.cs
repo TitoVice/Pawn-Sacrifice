@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
+    private float actualMoveSpeed;
     private Animator animator;
     private SpriteRenderer sprite;
     private Rigidbody2D RB2;
@@ -18,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
         player = GetComponent<Transform>();
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
+
+        actualMoveSpeed = moveSpeed;
     }
 
     void Update()
@@ -43,8 +46,18 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!stopped)
         {
-            RB2.MovePosition(RB2.position + movement * moveSpeed * Time.fixedDeltaTime);
+            RB2.MovePosition(RB2.position + movement * actualMoveSpeed * Time.fixedDeltaTime);
         }
+    }
+
+    public void SpeedDown()
+    {
+        actualMoveSpeed = moveSpeed/2;
+    }
+
+    public void SpeedUp()
+    {
+        actualMoveSpeed = moveSpeed;
     }
 
     public void Immobilize()

@@ -86,7 +86,7 @@ public class TeamWorldInteraction : MonoBehaviour
     {
         teamList.Remove(characterToDelete);
         Destroy(characterToDelete);
-        lifeManager.RefreshLifes();
+        StartCoroutine("RefreshUI"); //waits 0.3 seconds to process the destroy
     }
 
     public void roomPass(Vector3 doorPos, bool isVertical, bool isTop, bool isRight)
@@ -113,5 +113,11 @@ public class TeamWorldInteraction : MonoBehaviour
                 teamList[i].GetComponent<AgentScript>().Mobilize();
             }
         }
+    }
+
+    IEnumerator RefreshUI()
+    {
+        yield return new WaitForSeconds(0.3f);
+        lifeManager.RefreshLifes();
     }
 }

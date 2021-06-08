@@ -182,8 +182,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: QUIT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: efd733f0184e48641b6643702cff4e33, type: 2}
+  m_sharedMaterial: {fileID: -7262352714209049220, guid: efd733f0184e48641b6643702cff4e33,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -207,10 +208,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46.8
-  m_fontSizeBase: 46.8
+  m_fontSize: 36
+  m_fontSizeBase: 30
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -243,7 +244,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 9.203827, w: 0}
+  m_margin: {x: 0, y: 0, z: -0.23123169, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -723,8 +724,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: PLAY
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: efd733f0184e48641b6643702cff4e33, type: 2}
+  m_sharedMaterial: {fileID: -7262352714209049220, guid: efd733f0184e48641b6643702cff4e33,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -748,10 +750,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 75
-  m_fontSizeBase: 75
+  m_fontSize: 52.65
+  m_fontSizeBase: 45
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -784,7 +786,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 9.203827, w: 0}
+  m_margin: {x: 0, y: 0, z: 0.2929077, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

@@ -56,6 +56,7 @@ public class CharacterGetHit : MonoBehaviour
     public void CureHealth()
     {
         life = initialLife;
+        displayer.FullHealth(life);
     }
 
     public void Revived()

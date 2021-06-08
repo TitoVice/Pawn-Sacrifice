@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class LifeDisplayer : MonoBehaviour
 {
-    private bool hasChange = false;
-    private int lifes;
+    public int lifes = 5;
     private CharacterGetHit characterGetHit;
     private List<Texture2D> drawList;
     public Texture2D heart, icon;
-    public RectTransform rect;
+    private float texWidth, texHeight;
+    private float faceHeight, faceWidth, xPosFace, yPosFace;
+
+    void Start()
+    {
+        texWidth = heart.width*2;
+        texHeight = heart.height*2;
+    }
 
     public void Refresh(GameObject character, Texture2D texture)
     {
@@ -17,11 +23,15 @@ public class LifeDisplayer : MonoBehaviour
         //Post: refresh the character
 
         icon = texture;
+        faceWidth = icon.width*1.5f;
+        faceHeight = icon.height*1.5f;
+        xPosFace = transform.position.x;
+        yPosFace = transform.position.y;
+
         foreach (Transform child in character.transform)
         {
             if (child.CompareTag("HitDetector")) { characterGetHit = child.GetComponent<CharacterGetHit>(); lifes = characterGetHit.life; }
         }
-        hasChange = true;
         Connect();
     }
 
@@ -31,7 +41,11 @@ public class LifeDisplayer : MonoBehaviour
         //Post: change the life +-changed
 
         lifes += changed;
-        hasChange = true;
+    }
+
+    public void FullHealth(int fullHealth)
+    {
+        lifes = fullHealth;
     }
 
     private void Connect()
@@ -48,25 +62,18 @@ public class LifeDisplayer : MonoBehaviour
     }
 
     void OnGUI()
-    {
-        if (hasChange)
-        {
-            //Rect posRect = new Rect(rect.transform.position.x, rect.transform.position.y, heart.width / 5 * lifes, heart.height);
-            //Rect texRect = new Rect(0,0,1.0f / 5 * lifes, 1.0f);
-            Rect posRect = new Rect(transform.position.x, transform.position.y, icon.width, icon.height);
-            int width;
+    {  
+        
+        Rect posRectFace = new Rect(xPosFace, yPosFace,faceWidth, faceHeight);
+        Rect texRectFace = new Rect(0,0,1.0f, 1.0f);
+        GUI.DrawTextureWithTexCoords(posRectFace, icon, texRectFace);
 
-            Rect textureIcon = new Rect(10, 0, icon.width, icon.height); //for the icon
-            width = icon.width + 20;
-            GUI.DrawTextureWithTexCoords(posRect, icon, textureIcon);
-
-            for (int i = 0; i < lifes; i++)
-            {
-                Rect textureHeart = new Rect(width * (i+1), 0, heart.width, heart.height);
-                width = heart.width;
-                GUI.DrawTextureWithTexCoords(posRect, heart, textureHeart);
-            }
-            hasChange = false;
+        if (lifes > 0) {
+            
+            Rect posRect = new Rect(xPosFace + 50,yPosFace, texWidth / 5 * lifes, texHeight);
+            Rect texRect = new Rect(0,0,(1.0f / 5) * lifes, 1.0f);
+            GUI.DrawTextureWithTexCoords(posRect, heart, texRect);
         }
+
     }
 }

@@ -42,9 +42,11 @@
      <Compile Include="Assets\Resources\Scripts\Enemies\EnemyMoveScript.cs" />
      <Compile Include="Assets\Resources\Scripts\Enemies\Bomber\BomberExplode.cs" />
      <Compile Include="Assets\Resources\Scripts\Abilities\ShieldBehaviour.cs" />
+     <Compile Include="Assets\Resources\Scripts\UI\LifeDisplayer\LifeDisplayer.cs" />
      <Compile Include="Assets\Resources\Scripts\UI\MiniMap\MiniMapCamera.cs" />
      <Compile Include="Assets\Resources\Scripts\UI\Menus\InitialMenu.cs" />
      <Compile Include="Assets\Resources\Scripts\Dungeon_Generator\NextLevel.cs" />
+     <Compile Include="Assets\Resources\Scripts\UI\LifeDisplayer\LifeManager.cs" />
      <Compile Include="Assets\Resources\Scripts\Abilities\ReviveBehaviour.cs" />
      <Compile Include="Assets\Resources\Scripts\Characters\CharacterStats.cs" />
      <Compile Include="Assets\Resources\Scripts\Enemies\Slime\SlimeGetHit.cs" />
@@ -90,8 +92,6 @@
      <Compile Include="Assets\Resources\Scripts\Weapons\Projectiles\ProjectileHit.cs" />
      <Compile Include="Assets\Resources\Scripts\Weapons\Projectiles\ProjectileMovement.cs" />
      <Compile Include="Assets\Resources\Scripts\Enemies\FinalBoss\BossMeleeAttack.cs" />
-     <Compile Include="Assets\Resources\Scripts\UI\LifeDisplayer\LifeManager.cs" />
-     <Compile Include="Assets\Resources\Scripts\UI\LifeDisplayer\LifeDisplayer.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

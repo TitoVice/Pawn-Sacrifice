@@ -9,6 +9,7 @@ public class WeaponAttack : MonoBehaviour
     public auxDictionary[] dictionary;
 
     private CharacterStats playerStats;
+    private PlayerMovement playerMovement;
     private WeaponMovement movement;
     private BoxCollider2D meleeCollider;
     private float damage;
@@ -31,11 +32,13 @@ public class WeaponAttack : MonoBehaviour
 
     void Start()
     {
-        playerStats = transform.parent.transform.parent.GetComponent<CharacterStats>();
+        playerStats = transform.parent.parent.GetComponent<CharacterStats>();
         movement = GetComponent<WeaponMovement>();
         damage = playerStats.attackDamage;
         attackSpeed = playerStats.attackSpeed;
         isPlayer = player.CompareTag("Player");
+
+        if (isPlayer) { playerMovement = transform.parent.parent.GetComponent<PlayerMovement>(); }
 
         for (int i = 0; i < dictionary.Length; i++)
         {
@@ -55,11 +58,8 @@ public class WeaponAttack : MonoBehaviour
 
     void Update()
     {
-        if (!shooted && ableToAttack && !cooldown)
-        {
-            if (isPlayer) { PlayerAttack(); }
-            else { AIAttack(); }
-        }
+        if (isPlayer) { PlayerAttack(); }
+        else { AIAttack(); }
 
         if (shooted && timer < attackSpeed) 
         { 
@@ -97,24 +97,28 @@ public class WeaponAttack : MonoBehaviour
         //Pre: ---
         //Post: the player tries to attack
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
-            Attack();
+            if (!shooted && ableToAttack && !cooldown) { Attack(); }
+            playerMovement.SpeedDown();
         }
+        if (Input.GetButtonUp("Fire1")) { playerMovement.SpeedUp(); }
     }
 
     private void AIAttack()
     {
         //Pre: ---
         //Post: AI tries to attack
-
-        if (!agentScript.targetIsPlayer)//we don't attack the player
+        if (!shooted && ableToAttack && !cooldown)
         {
-            if (distanceAttack) { shoot(); shooted = true;}
-            else
+            if (!agentScript.targetIsPlayer)//we don't attack the player
             {
-                float distanceToTarget = Vector3.Distance(agentScript.giveTarget(), finalPos.position);
-                if (distanceToTarget <= 2.0f) { meleeAttack();  ableToAttack = false; }
+                if (distanceAttack) { shoot(); shooted = true;}
+                else
+                {
+                    float distanceToTarget = Vector3.Distance(agentScript.giveTarget(), finalPos.position);
+                    if (distanceToTarget <= 2.0f) { meleeAttack();  ableToAttack = false; }
+                }
             }
         }
     }

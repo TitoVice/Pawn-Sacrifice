@@ -16,7 +16,7 @@ public class FloorGenerator : MonoBehaviour
     private RoomDoors[,] preRoomGrid;
     private GameObject[,] roomGrid;
 
-    private int[] initialRoom = { 2, 2 };
+    private int[] initialRoom = { 4, 4 };
     private int[] finalRoom = { 0, 0 };
     private List <RoomDoors> possibleEndRooms;
 
