@@ -21,7 +21,7 @@ public class SelectStat : MonoBehaviour
         ui = uiToWork;
         selectedStat = stat;
 
-        GetComponentInChildren<Text>().text = stat;
+        GetComponentInChildren<Text>().text = stat.ToUpper();
     }
 
     private void Select()

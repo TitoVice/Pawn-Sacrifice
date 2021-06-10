@@ -60,7 +60,6 @@ public class SlimeGetHit : EnemyGetHit
             slimePrefab = Resources.Load<GameObject>("Prefabs/Enemies/Slime");
             if (slimePrefab.GetComponent<SlimeGetHit>().life-2*familyTree > 0)//limit of times a slime can fuse
             {
-                //Vector3 target = GetComponent<EnemyMoveScript>().target.position;
                 Vector3 direction = new Vector3(transform.position.x - hitPosition.x, transform.position.y - hitPosition.y, transform.position.z).normalized;
                 int rotation = 100;
                 GameObject firstRegenerator = null;
@@ -97,11 +96,9 @@ public class SlimeGetHit : EnemyGetHit
                         }
                         else { firstRegenerator = miniSlime; } //gets the first slime who wants wants to generate a bigger slime
                     }
-                    //else { miniSlime.GetComponent<EnemyMoveScript>().getTarget(null); }
                 }
             }
         }
-        //roomBehaviour.EnemyListChange();
         Destroy(gameObject);
     }
 
@@ -121,7 +118,7 @@ public class SlimeGetHit : EnemyGetHit
         SlimeMovementScript SMscript = GetComponent<SlimeMovementScript>();
         SMscript.enabled = true;
         SMscript.characters = GetComponent<EnemyMoveScript>().characters;
-        //SMscript.getTarget(other);
+
         SMscript.getTarget(toFollow);
         GetComponent<EnemyMoveScript>().enabled = false;
         toFollow = other;

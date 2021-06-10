@@ -10,8 +10,8 @@ public class ChargerMovementScript : EnemyMoveScript
     private Vector3 selectedPosition;
     private bool charging = false, walking = false;
     public LayerMask layerMask;
-    private float waitTimer = 0.0f;
-    private float waitTime = 0.5f;
+    private float waitTimer = 1.0f;
+    private float waitTime = 1.5f;
 
     public override void movement(float time)
     {
@@ -21,14 +21,13 @@ public class ChargerMovementScript : EnemyMoveScript
             {
                 agent.speed = walkingSpeed;
                 agent.SetDestination(selectedPosition);
-                getTarget(null);
-                if (Vector3.Distance(transform.position, selectedPosition) < 1f) { walking = false; }
+                if (Vector3.Distance(transform.position, selectedPosition) < 0.5f) { walking = false; }
             }
             else if (charging)
             {
                 agent.speed = chargingSpeed;
                 agent.SetDestination(selectedPosition);
-                if (Vector3.Distance(transform.position, selectedPosition) < 1f) { charging = false; }
+                if (Vector3.Distance(transform.position, selectedPosition) < 0.5f) { charging = false; }
             }
 
             if (!walking && !charging) 
@@ -55,7 +54,7 @@ public class ChargerMovementScript : EnemyMoveScript
                 {
                     foreach (Transform child in player.transform)
                     {
-                        if (child.CompareTag("HitDetector"))
+                        if (child.CompareTag("HitDetector") && !player.GetComponent<CharacterDeath>().isDead)
                         {
                             float distance = Vector3.Distance(transform.position, player.transform.position);
                             if (distance < minDistance) 
@@ -113,7 +112,6 @@ public class ChargerMovementScript : EnemyMoveScript
         Vector3 randomPos = Random.insideUnitCircle;// * 0.5f;
         
         randomPos += transform.position;
-        Debug.DrawLine(transform.position, randomPos, Color.red, 2.0f);
         NavMeshHit pos;
         Vector3 finalPos = Vector3.zero;
 

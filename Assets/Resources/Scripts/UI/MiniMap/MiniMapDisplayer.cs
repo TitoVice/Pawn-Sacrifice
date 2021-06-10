@@ -7,7 +7,6 @@ public class MiniMapDisplayer : MonoBehaviour
     private class miniRoom{
         public string doors; //XXXX == LRDT, If 1 it has a door in that side
         public bool visited = false;
-        public bool nextToVisited = false;
         public  GameObject roomSprite = null;
         public List<Vector2> bigRoomsNexts = new List<Vector2>();
     }

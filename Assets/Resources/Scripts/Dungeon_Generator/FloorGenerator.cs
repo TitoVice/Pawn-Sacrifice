@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 public class FloorGenerator : MonoBehaviour
 {
-    public GameObject basicRoom;
     public GameObject bossRoom;
     public GameObject roomTemplates;
     public GameObject end;

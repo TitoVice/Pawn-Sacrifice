@@ -1301,9 +1301,9 @@ GameObject:
   - component: {fileID: 2870740056807137896}
   - component: {fileID: 8729497862201803376}
   - component: {fileID: 1100314634410061313}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tilemap_obstacles
-  m_TagString: Untagged
+  m_TagString: Background
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

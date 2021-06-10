@@ -45,7 +45,7 @@
      <Compile Include="Assets\Resources\Scripts\UI\LifeDisplayer\LifeDisplayer.cs" />
      <Compile Include="Assets\Resources\Scripts\UI\MiniMap\MiniMapCamera.cs" />
      <Compile Include="Assets\Resources\Scripts\UI\Menus\InitialMenu.cs" />
-     <Compile Include="Assets\Resources\Scripts\Dungeon_Generator\NextLevel.cs" />
+     <Compile Include="Assets\Resources\Scripts\Background\NextLevel.cs" />
      <Compile Include="Assets\Resources\Scripts\UI\LifeDisplayer\LifeManager.cs" />
      <Compile Include="Assets\Resources\Scripts\Abilities\ReviveBehaviour.cs" />
      <Compile Include="Assets\Resources\Scripts\Characters\CharacterStats.cs" />

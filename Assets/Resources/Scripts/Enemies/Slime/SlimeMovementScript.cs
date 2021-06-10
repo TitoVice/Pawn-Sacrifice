@@ -14,8 +14,8 @@ public class SlimeMovementScript : EnemyMoveScript
 
     public override void movement(float time)
     {
-        if (charAttack) { base.movement(time); }
-        else if (!charAttack && target != null) { agent.SetDestination(target.position); }
+        
+        if (!charAttack && target != null) { agent.SetDestination(target.position); }
 
         if (target != null && !animating)
         {

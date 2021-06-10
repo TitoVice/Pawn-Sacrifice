@@ -13,6 +13,9 @@ public class LifeDisplayer : MonoBehaviour
 
     void Start()
     {
+        xPosFace = transform.position.x;
+        yPosFace = transform.position.y;
+
         texWidth = heart.width*2;
         texHeight = heart.height*2;
     }
@@ -25,8 +28,6 @@ public class LifeDisplayer : MonoBehaviour
         icon = texture;
         faceWidth = icon.width*1.5f;
         faceHeight = icon.height*1.5f;
-        xPosFace = transform.position.x;
-        yPosFace = transform.position.y;
 
         foreach (Transform child in character.transform)
         {
@@ -63,13 +64,12 @@ public class LifeDisplayer : MonoBehaviour
 
     void OnGUI()
     {  
-        
         Rect posRectFace = new Rect(xPosFace, yPosFace,faceWidth, faceHeight);
         Rect texRectFace = new Rect(0,0,1.0f, 1.0f);
+        
         GUI.DrawTextureWithTexCoords(posRectFace, icon, texRectFace);
 
         if (lifes > 0) {
-            
             Rect posRect = new Rect(xPosFace + 50,yPosFace, texWidth / 5 * lifes, texHeight);
             Rect texRect = new Rect(0,0,(1.0f / 5) * lifes, 1.0f);
             GUI.DrawTextureWithTexCoords(posRect, heart, texRect);

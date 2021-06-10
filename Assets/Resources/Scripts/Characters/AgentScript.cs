@@ -110,7 +110,6 @@ public class AgentScript : MonoBehaviour
             }
             agent.SetDestination(destiny);
         }
-        
     }
 
     public void getEnemies(List<GameObject> enemies)

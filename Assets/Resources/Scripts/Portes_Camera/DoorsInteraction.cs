@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DoorsInteraction : MonoBehaviour
 {
-    private GameObject camera;
+    private GameObject mainCamera;
     private RoomDoors parent;
     private PlayerMovement player = null;
     private CameraFreeMovement cameraScript;
@@ -27,9 +27,9 @@ public class DoorsInteraction : MonoBehaviour
 
     void Start()
     {
-        camera = GameObject.FindGameObjectWithTag("MainCamera");
-        cameraScript = camera.GetComponent<CameraFreeMovement>();
-        parent = transform.parent.transform.parent.GetComponent<RoomDoors>();
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        cameraScript = mainCamera.GetComponent<CameraFreeMovement>();
+        parent = transform.parent.parent.GetComponent<RoomDoors>();
         team = GameObject.Find("Team").GetComponent<TeamWorldInteraction>();
         inroomBehaviour = GetComponent<InRoomBehaviour>();
     }
@@ -39,7 +39,7 @@ public class DoorsInteraction : MonoBehaviour
         if (hasToMove && t <= 1)
         {
             t += Time.fixedDeltaTime * rateMoving;
-            camera.transform.position = Vector3.Lerp(startPos, endPos, t);
+            mainCamera.transform.position = Vector3.Lerp(startPos, endPos, t);
         }
         else if (t >= 1.0f) 
         { 
@@ -56,8 +56,6 @@ public class DoorsInteraction : MonoBehaviour
         {
             if (player == null) { player = collision.gameObject.GetComponent<PlayerMovement>(); }
 
-            parent.enterRoom();
-
             enterPosition.x = collision.gameObject.transform.position.x;
             enterPosition.y = collision.gameObject.transform.position.y;
         }
@@ -73,14 +71,14 @@ public class DoorsInteraction : MonoBehaviour
             {
                 if (Mathf.Abs(exitPosition.x - enterPosition.x) > offset)//change of room
                 {
-                    if (parent.leaveRoom()){ moveCamera(collision); inroomBehaviour.TeamInRoom(collision.transform.parent.gameObject); }
+                    if (parent.leaveRoom()){ moveCamera(collision); inroomBehaviour.TeamInRoom(collision.transform.parent.gameObject); parent.enterRoom();}
                 }
             }
             else
             {
                 if (Mathf.Abs(exitPosition.y - enterPosition.y) > offset)//change of room
                 {
-                    if (parent.leaveRoom()){ moveCamera(collision); inroomBehaviour.TeamInRoom(collision.transform.parent.gameObject); }
+                    if (parent.leaveRoom()){ moveCamera(collision); inroomBehaviour.TeamInRoom(collision.transform.parent.gameObject); parent.enterRoom();}
                 }
             }
         }
@@ -88,19 +86,19 @@ public class DoorsInteraction : MonoBehaviour
 
     private void moveCamera(Collider2D objective)
     {
-        startPos = camera.transform.position;
+        startPos = mainCamera.transform.position;
         player.Immobilize();
         hasToMove = true;
         freeCamera = false;
 
         if (parent.bigger)//the camera follows the player
         {
-            endPos = new Vector3(objective.gameObject.transform.position.x, objective.gameObject.transform.position.y, camera.transform.position.z);
+            endPos = new Vector3(objective.gameObject.transform.position.x, objective.gameObject.transform.position.y, mainCamera.transform.position.z);
             freeCamera = true;
         }
         else //the camera is still
         { 
-            endPos = new Vector3(parent.transform.position.x, parent.transform.position.y, camera.transform.position.z);
+            endPos = new Vector3(parent.transform.position.x, parent.transform.position.y, mainCamera.transform.position.z);
         }
 
         if (parent.inRoom)//when enters another room move the partners

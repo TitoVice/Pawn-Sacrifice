@@ -86,8 +86,15 @@ public class EnemyMoveScript : MonoBehaviour
     {
         if (characters.Count > 0)
         {
-            if (timer >= targetTimer || target == null) { getTarget(null); }
-            else if (target.gameObject.GetComponent<CharacterDeath>()) { if (target.gameObject.GetComponent<CharacterDeath>().isDead) { getTarget(null); } }
+            timer += time;
+            if (timer >= targetTimer || target == null) { getTarget(null); timer = 0.0f; }
+            else if (target.gameObject.GetComponent<CharacterDeath>()) 
+            { 
+                if (target.gameObject.GetComponent<CharacterDeath>().isDead)
+                { 
+                    getTarget(null); 
+                } 
+            }
             agent.SetDestination(target.position);
 
             lookDirection(target.position);

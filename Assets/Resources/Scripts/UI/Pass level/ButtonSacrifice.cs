@@ -21,7 +21,7 @@ public class ButtonSacrifice : MonoBehaviour
         team = teamToNotificate;
         ui = uiToWork;
 
-        GetComponentInChildren<Text>().text = character.GetComponent<AgentScript>().characterName;
+        GetComponentInChildren<Text>().text = character.GetComponent<AgentScript>().characterName.ToUpper();
     }
 
     private void Sacrifice()
@@ -65,6 +65,5 @@ public class ButtonSacrifice : MonoBehaviour
 
         team.Reorganize(character);
         ui.getStats(perk1, perk2);
-        //ui.Close();
     }
 }

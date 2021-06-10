@@ -48,7 +48,7 @@ public class WeaponAttack : MonoBehaviour
             }
         }
 
-        if (GetComponent<MeleeWeaponAttack>() != null) 
+        if (GetComponent<MeleeWeaponAttack>()) 
         { 
             meleeCollider = GetComponent<BoxCollider2D>();
             meleeCollider.enabled = false;
