@@ -29,36 +29,43 @@ public class CharacterDeath : MonoBehaviour
 
     public void Death()
     {
+        bool revived = false;
+
         foreach (Transform child in transform.parent)
         {
             if (child.GetComponent<ReviveBehaviour>())
             {
                 ReviveBehaviour  revive = child.GetComponent<ReviveBehaviour>();
+
                 if (!revive.usedInFloor) //can be revived
                 {
                     Revived();
                     revive.usedInFloor = true;
+                    revived = true;
                     StartCoroutine("Flash");
                 }
-                else //it dies
-                {
-                    animator.SetBool("dead", true);
-                    isDead = true;
-                    SetActivity(false);
-
-                    if (isPlayer)
-                    {
-                        GetComponent<PlayerMovement>().Immobilize();
-                    }
-                    else
-                    {
-                        boxCollider2D.enabled = false;
-                        navMeshAgent.enabled = false;
-                        agentScript.enabled = false;
-                        rb2.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
-                    }
-                }
+                break;
             }
+        }
+        if (!revived) { DeathTransition(); }
+    }
+
+    private void DeathTransition()
+    {
+        animator.SetBool("dead", true);
+        isDead = true;
+        SetActivity(false);
+
+        if (isPlayer)
+        {
+            GetComponent<PlayerMovement>().Immobilize();
+        }
+        else
+        {
+            boxCollider2D.enabled = false;
+            navMeshAgent.enabled = false;
+            agentScript.enabled = false;
+            rb2.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
         }
     }
 
@@ -82,8 +89,13 @@ public class CharacterDeath : MonoBehaviour
         if (isDead)
         {
             roomsPassed++;
-            if (roomsPassed >= 5) { roomsPassed = 0; Revived(); }
+            if (roomsPassed >= 4) { roomsPassed = 0; Revived(); }
         }
+    }
+
+    public void RestartCounter()
+    {
+        roomsPassed = 0;
     }
 
     public void Revived()
@@ -107,7 +119,7 @@ public class CharacterDeath : MonoBehaviour
             rb2.constraints = RigidbodyConstraints2D.None;
         }
 
-        getHit.Revived();
+        getHit.CureHealth();
     }
 
     private void SetActivity(bool what)

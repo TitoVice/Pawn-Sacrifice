@@ -35,6 +35,7 @@ public class NextLevel : MonoBehaviour
                 if (child.CompareTag("HitDetector")) { child.GetComponent<CharacterGetHit>().CureHealth(); break; }
             }
             
+            character.GetComponent<CharacterDeath>().RestartCounter();
             if (character.GetComponent<ReviveBehaviour>()) { character.GetComponent<ReviveBehaviour>().Refull(); } //revive ability
             if (character.GetComponent<ShieldBehaviour>()) { character.GetComponent<ShieldBehaviour>().Activate(); } //revive ability
         }

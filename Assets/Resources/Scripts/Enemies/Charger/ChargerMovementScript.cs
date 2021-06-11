@@ -10,8 +10,8 @@ public class ChargerMovementScript : EnemyMoveScript
     private Vector3 selectedPosition;
     private bool charging = false, walking = false;
     public LayerMask layerMask;
-    private float waitTimer = 1.0f;
-    private float waitTime = 1.5f;
+    private float waitTimer = 0.5f;
+    private float waitTime = 0.8f;
 
     public override void movement(float time)
     {

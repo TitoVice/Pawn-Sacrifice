@@ -58,7 +58,7 @@ public class SlimeGetHit : EnemyGetHit
         {
             GetComponent<BoxCollider2D>().enabled = false;
             slimePrefab = Resources.Load<GameObject>("Prefabs/Enemies/Slime");
-            if (slimePrefab.GetComponent<SlimeGetHit>().life-2*familyTree > 0)//limit of times a slime can fuse
+            if (slimePrefab.GetComponent<SlimeGetHit>().life-1*familyTree > 0)//limit of times a slime can fuse
             {
                 Vector3 direction = new Vector3(transform.position.x - hitPosition.x, transform.position.y - hitPosition.y, transform.position.z).normalized;
                 int rotation = 100;
@@ -81,7 +81,7 @@ public class SlimeGetHit : EnemyGetHit
 
                     miniHit.splited = true;
                     miniHit.canSplit = false;
-                    miniHit.life -= 2*familyTree; 
+                    miniHit.life -= 1*familyTree; 
                     miniHit.familyTree = familyTree + 1;
 
                     if (i == 0) { rotation += 70; }

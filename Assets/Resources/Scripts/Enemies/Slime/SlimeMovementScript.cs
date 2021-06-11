@@ -56,7 +56,7 @@ public class SlimeMovementScript : EnemyMoveScript
             SlimeGetHit getBigHit = bigSlime.GetComponent<SlimeGetHit>();
             SlimeGetHit getHit = GetComponent<SlimeGetHit>();
 
-            getBigHit.life -= 2*(getHit.familyTree-1);
+            getBigHit.life -= 1*(getHit.familyTree-1);
             getBigHit.familyTree = getHit.familyTree;
 
             Destroy(gameObject);

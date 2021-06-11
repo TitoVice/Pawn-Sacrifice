@@ -43,6 +43,11 @@ public class MiniMapDisplayer : MonoBehaviour
                     auxRoom.roomSprite = Instantiate(auxRoom.roomSprite, new Vector3((pos[0] * roomSize)-10, (pos[1] * roomSize)-10, 0), Quaternion.identity, transform);
                     miniMapGrid[pos[0], pos[1]] = auxRoom;
                     endRoom = auxRoom;
+
+                    foreach (Transform child in team.transform)
+                    {
+                        if (child.GetComponent<CharacterStats>().playerAbilities["vision"]) { showEndRoom(); }
+                    }
                 }
             }
             

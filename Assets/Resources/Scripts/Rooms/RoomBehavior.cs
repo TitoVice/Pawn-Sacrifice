@@ -57,7 +57,7 @@ public class RoomBehavior : MonoBehaviour
                 {
                     if (child.GetComponent<SpawnMinionBehaviour>()) { child.GetComponent<SpawnMinionBehaviour>().GiveMinionEnemies(listEnemies); } //if the player spawns a minion
                 }
-                if (child.GetComponent<CharacterDeath>()) { child.GetComponent<CharacterDeath>().PassRoom(); }
+                
                 foreach (Transform grandchild in child.transform)
                 {
                     if (grandchild.CompareTag("Shield")) { grandchild.GetComponent<ShieldBehaviour>().enterRoom(); }
@@ -83,7 +83,14 @@ public class RoomBehavior : MonoBehaviour
             {
                 if (agent.GetComponent<AgentScript>()) { agent.GetComponent<AgentScript>().getEnemies(listEnemies); }
             }
-            
+        }
+
+        if (listEnemies.Count == 0)
+        {
+            foreach (Transform child in team.transform)
+            {
+                if (child.GetComponent<CharacterDeath>()) { child.GetComponent<CharacterDeath>().PassRoom(); }
+            }
         }
     }
 

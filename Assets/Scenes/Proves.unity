@@ -932,6 +932,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3260507867922977629, guid: 83c9e9889bc920c4991762703fa6e424,
+        type: 3}
+      propertyPath: dictionary.Array.data[3].used
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3931591997863639139, guid: 83c9e9889bc920c4991762703fa6e424,
         type: 3}
       propertyPath: m_Enabled
@@ -1105,7 +1110,7 @@ PrefabInstance:
     - target: {fileID: 2443364832683480749, guid: b63f4aa640d4a754fa51bb74d65b4b73,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2443364832683480750, guid: b63f4aa640d4a754fa51bb74d65b4b73,
         type: 3}
@@ -1125,7 +1130,7 @@ PrefabInstance:
     - target: {fileID: 3897764417540884899, guid: b63f4aa640d4a754fa51bb74d65b4b73,
         type: 3}
       propertyPath: m_Speed
-      value: 15
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3897764417540884899, guid: b63f4aa640d4a754fa51bb74d65b4b73,
         type: 3}
@@ -1135,7 +1140,7 @@ PrefabInstance:
     - target: {fileID: 3897764417540884899, guid: b63f4aa640d4a754fa51bb74d65b4b73,
         type: 3}
       propertyPath: m_Acceleration
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b63f4aa640d4a754fa51bb74d65b4b73, type: 3}
@@ -1473,7 +1478,7 @@ PrefabInstance:
     - target: {fileID: 3766037670663534659, guid: 61b4bc3b1e197034d9cbf36259e3b5af,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3766037670663534662, guid: 61b4bc3b1e197034d9cbf36259e3b5af,
         type: 3}
